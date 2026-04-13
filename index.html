@@ -3,725 +3,592 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bra-FitGym Solo No Funciona</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>BraFit — Estados WhatsApp</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-
+ 
 body {
-  background: #050810;
+  background: #0a0a0a;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px 20px 60px;
   gap: 0;
-}
-
-.viewer { width: 540px; position: relative; user-select: none; }
-
-.overflow-wrap {
-  width: 540px; overflow: hidden;
-  box-shadow: 0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.15);
-}
-
-.track {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.77,0,0.18,1);
-}
-
-.slide {
-  width: 540px; height: 540px;
-  flex-shrink: 0; position: relative; overflow: hidden;
   font-family: 'Inter', sans-serif;
 }
-
-/* ── shared ── */
-.brand-chip {
-  position: absolute; bottom: 22px; left: 24px;
+ 
+/* ── VIEWER ── */
+.viewer { width: 360px; position: relative; user-select: none; }
+ 
+.overflow-wrap {
+  width: 360px; overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.9), 0 0 0 1px rgba(201,168,76,0.2);
+}
+ 
+.track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.77,0,0.18,1);
+}
+ 
+/* Formato Story: 360×640 (9:16) */
+.slide {
+  width: 360px; height: 640px;
+  flex-shrink: 0; position: relative; overflow: hidden;
+}
+ 
+/* ── progreso superior ── */
+.progress-bar {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; z-index: 20;
+  display: flex; gap: 3px; padding: 10px 14px 0;
+}
+.prog-seg {
+  flex: 1; height: 3px; border-radius: 2px;
+  background: rgba(255,255,255,0.25);
+}
+.prog-seg.done { background: rgba(255,255,255,0.9); }
+.prog-seg.active { background: rgba(201,168,76,0.9); }
+ 
+/* ── brand top ── */
+.story-brand {
+  position: absolute; top: 20px; left: 14px;
   display: flex; align-items: center; gap: 8px; z-index: 10;
 }
-.brand-chip .bf {
-  width: 28px; height: 28px; border-radius: 50%;
+.story-brand .avatar {
+  width: 34px; height: 34px; border-radius: 50%;
   background: linear-gradient(135deg,#C9A84C,#E8D18A);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue'; font-size: 12px; color: #0D1B3E; letter-spacing: 0.5px;
+  font-family: 'Bebas Neue'; font-size: 13px; color: #0D1B3E;
+  border: 2px solid rgba(201,168,76,0.5);
 }
-.brand-chip .name {
-  font-family: 'Oswald'; font-weight: 600; font-size: 13px;
-  color: rgba(201,168,76,0.7); letter-spacing: 2px; text-transform: uppercase;
+.story-brand .info { }
+.story-brand .bname {
+  font-family: 'Oswald'; font-size: 13px; font-weight: 600;
+  color: #FFFFFF; letter-spacing: 1px;
 }
-.pg {
-  position: absolute; bottom: 28px; right: 24px;
-  font-family: 'Oswald'; font-size: 13px; font-weight: 300;
-  color: rgba(255,255,255,0.2); letter-spacing: 1px; z-index: 10;
+.story-brand .btime {
+  font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 1px;
 }
-
-/* ══════════════════════════
-   SLIDE 1 — PORTADA PROVOCADORA
-══════════════════════════ */
+ 
+/* ══════════════════════
+   ESTADO 1 — GANCHO
+══════════════════════ */
 .s1 { background: #060B18; }
-
-.s1 .bg-lines {
+ 
+.s1 .grid-bg {
   position: absolute; inset: 0;
   background-image:
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 59px,
-      rgba(201,168,76,0.03) 59px,
-      rgba(201,168,76,0.03) 60px
-    );
+    repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(201,168,76,0.03) 35px, rgba(201,168,76,0.03) 36px),
+    repeating-linear-gradient(0deg,  transparent, transparent 35px, rgba(201,168,76,0.03) 35px, rgba(201,168,76,0.03) 36px);
 }
-
-.s1 .x-mark {
-  position: absolute; right: 30px; top: 30px;
-  width: 140px; height: 140px; opacity: 0.07;
-}
-.s1 .x-mark::before,
-.s1 .x-mark::after {
-  content: '';
-  position: absolute; top: 50%; left: 0; right: 0;
-  height: 18px; background: #C9A84C; border-radius: 4px;
-}
-.s1 .x-mark::before { transform: rotate(45deg); }
-.s1 .x-mark::after  { transform: rotate(-45deg); }
-
-.s1 .gold-slash {
+ 
+.s1 .slash {
   position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-  background: linear-gradient(180deg, transparent, #C9A84C 25%, #E8D18A 50%, #C9A84C 75%, transparent);
+  background: linear-gradient(180deg, transparent, #C9A84C 30%, #E8D18A 50%, #C9A84C 70%, transparent);
 }
-
+ 
+.s1 .content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; padding: 90px 28px 100px;
+}
+ 
 .s1 .tag {
-  position: absolute; top: 30px; left: 28px;
-  background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35);
-  color: #C9A84C; font-family: 'Oswald'; font-size: 11px; font-weight: 600;
-  letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px;
-}
-
-.s1 .main { position: absolute; left: 28px; top: 72px; right: 28px; }
-
-.s1 .myth-tag {
   display: inline-block;
-  background: rgba(200,50,50,0.15); border: 1px solid rgba(200,80,80,0.3);
-  color: #e07070; font-family: 'Oswald'; font-size: 11px; font-weight: 600;
+  background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+  color: #C9A84C; font-family: 'Oswald'; font-size: 10px; font-weight: 600;
   letter-spacing: 3px; text-transform: uppercase; padding: 5px 14px;
-  margin-bottom: 14px;
+  margin-bottom: 24px; align-self: flex-start;
 }
-
-.s1 .line1 {
-  font-family: 'Anton'; font-size: 75px; line-height: 0.88;
-  color: rgba(255,255,255,0.9); letter-spacing: -1px;
+ 
+.s1 .l1 { font-family: 'Anton'; font-size: 68px; line-height: 0.88; color: #FFFFFF; letter-spacing: -1px; }
+.s1 .l2 { font-family: 'Anton'; font-size: 68px; line-height: 0.88; color: #FFFFFF; letter-spacing: -1px; }
+.s1 .l3 {
+  font-family: 'Anton'; font-size: 68px; line-height: 0.88; letter-spacing: -1px;
+  background: linear-gradient(90deg,#C9A84C,#E8D18A);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 24px;
 }
-.s1 .line2 {
-  font-family: 'Anton'; font-size: 75px; line-height: 0.88;
-  color: rgba(255,255,255,0.9); letter-spacing: -1px;
-}
-.s1 .line3 {
-  font-family: 'Anton'; font-size: 75px; line-height: 0.88;
-  color: #C9A84C; letter-spacing: -1px;
-}
-.s1 .line4 {
-  font-family: 'Anton'; font-size: 40px; line-height: 1;
-  color: rgba(255,255,255,0.2); letter-spacing: 0; margin-top: 4px;
-}
-
-.s1 .sep { width: 55px; height: 2px; background: #C9A84C; margin: 16px 0; }
-
+.s1 .bar { width: 44px; height: 3px; background: #C9A84C; margin-bottom: 20px; }
 .s1 .sub {
-  font-family: 'Inter'; font-size: 14px; font-weight: 300; line-height: 1.6;
-  color: rgba(255,255,255,0.45); max-width: 340px;
+  font-size: 15px; font-weight: 300; line-height: 1.65;
+  color: rgba(255,255,255,0.5); margin-bottom: 32px;
 }
-.s1 .sub b { color: rgba(255,255,255,0.8); font-weight: 500; }
-
-.s1 .swipe {
-  position: absolute; bottom: 26px; right: 24px;
+.s1 .sub b { color: rgba(255,255,255,0.85); font-weight: 500; }
+ 
+.s1 .swipe-hint {
+  display: flex; align-items: center; gap: 8px;
+  color: rgba(201,168,76,0.5);
   font-family: 'Oswald'; font-size: 11px; font-weight: 400;
   letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(201,168,76,0.45);
 }
-
-/* ══════════════════════════
-   SLIDE 2 — EL DATO DEL GYM
-══════════════════════════ */
-.s2 { background: #07090F; }
-
-.s2 .vert { position: absolute; left: 24px; top: 0; bottom: 0; width: 3px;
-  background: linear-gradient(180deg, transparent, #C9A84C 25%, #E8D18A 50%, #C9A84C 75%, transparent); }
-
+ 
+/* ══════════════════════
+   ESTADO 2 — DATO
+══════════════════════ */
+.s2 { background: #04070E; }
+ 
+.s2 .vert {
+  position: absolute; left: 22px; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, transparent, #C9A84C 25%, #E8D18A 50%, #C9A84C 75%, transparent);
+}
 .s2 .ghost {
-  position: absolute; right: -15px; top: 50%; transform: translateY(-52%);
-  font-family: 'Anton'; font-size: 220px; color: rgba(201,168,76,0.05);
-  line-height: 1; pointer-events: none; white-space: nowrap; letter-spacing: -4px;
-}
-
-.s2 .content { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); right: 24px; }
-
-.s2 .lbl { font-family: 'Oswald'; font-size: 11px; font-weight: 400; letter-spacing: 4px;
-  text-transform: uppercase; color: #C9A84C; opacity: 0.7; margin-bottom: 12px; }
-
-.s2 .stat { font-family: 'Anton'; font-size: 116px; line-height: 1; color: #C9A84C; letter-spacing: -2px; }
-.s2 .stat-sub { font-family: 'Oswald'; font-size: 26px; font-weight: 300;
-  color: rgba(255,255,255,0.55); margin-bottom: 18px; line-height: 1.2; }
-
-.s2 .divline { width: 50px; height: 2px; background: rgba(201,168,76,0.4); margin-bottom: 18px; }
-
-.s2 .body { font-family: 'Inter'; font-size: 15px; font-weight: 300; line-height: 1.65;
-  color: rgba(255,255,255,0.5); max-width: 380px; }
-.s2 .body b { color: rgba(255,255,255,0.85); font-weight: 500; }
-
-/* ══════════════════════════
-   SLIDE 3 — LAS 3 MENTIRAS
-══════════════════════════ */
-.s3 { background: #060A16; }
-
-.s3 .header { position: absolute; top: 22px; left: 28px; right: 28px; }
-.s3 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
-  text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 4px; }
-.s3 .title { font-family: 'Anton'; font-size: 28px; color: #FFFFFF; letter-spacing: 0; line-height: 1.1; }
-.s3 .title em { color: #C9A84C; font-style: normal; }
-
-.s3 .myths { position: absolute; top: 125px; left: 22px; right: 22px; bottom: 54px;
-  display: flex; flex-direction: column; gap: 10px; }
-
-.s3 .myth {
-  display: flex; align-items: flex-start; gap: 16px;
-  border: 1px solid rgba(200,70,70,0.2); border-left: 3px solid rgba(200,70,70,0.6);
-  background: rgba(200,50,50,0.05); padding: 14px 18px;
-  position: relative;
-}
-
-.s3 .x-badge {
-  width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%;
-  background: rgba(200,70,70,0.15); border: 1px solid rgba(200,80,80,0.4);
-  display: flex; align-items: center; justify-content: center;
-  color: #e07070; font-size: 14px; font-weight: 700; margin-top: 1px;
-}
-
-.s3 .myth-content { flex: 1; }
-.s3 .myth-title {
-  font-family: 'Oswald'; font-size: 15px; font-weight: 600;
-  color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
-}
-.s3 .myth-truth {
-  font-family: 'Inter'; font-size: 12px; font-weight: 300; line-height: 1.5;
-  color: rgba(255,255,255,0.4);
-}
-.s3 .myth-truth b { color: rgba(201,168,76,0.85); font-weight: 500; }
-
-/* ══════════════════════════
-   SLIDE 4 — LO QUE SÍ NECESITAS  (split)
-══════════════════════════ */
-.s4 { background: #07090F; }
-
-.s4 .left {
-  position: absolute; left: 0; top: 0; bottom: 0; width: 50%;
-  background: rgba(200,50,50,0.07);
-  border-right: 3px solid rgba(200,80,80,0.3);
-  display: flex; flex-direction: column; justify-content: center; padding: 30px 26px;
-}
-.s4 .right {
-  position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
-  background: rgba(201,168,76,0.05);
-  border-left: 3px solid rgba(201,168,76,0.3);
-  display: flex; flex-direction: column; justify-content: center; padding: 30px 26px;
-}
-
-.s4 .side-tag {
-  font-family: 'Oswald'; font-size: 10px; font-weight: 700; letter-spacing: 3px;
-  text-transform: uppercase; margin-bottom: 18px; padding: 5px 12px;
-  display: inline-block;
-}
-.s4 .tag-red { background: rgba(200,70,70,0.15); color: #e07070; border: 1px solid rgba(200,70,70,0.3); }
-.s4 .tag-gold { background: rgba(201,168,76,0.12); color: #C9A84C; border: 1px solid rgba(201,168,76,0.3); }
-
-.s4 .side-title { font-family: 'Anton'; font-size: 44px; line-height: 0.9;
-  letter-spacing: -1px; margin-bottom: 20px; }
-.s4 .red-txt { color: rgba(200,80,80,0.7); }
-.s4 .gold-txt { color: #C9A84C; }
-
-.s4 .items { display: flex; flex-direction: column; gap: 10px; }
-.s4 .it {
-  display: flex; align-items: flex-start; gap: 10px;
-  font-family: 'Inter'; font-size: 12px; font-weight: 300; line-height: 1.45;
-  color: rgba(255,255,255,0.5);
-}
-.s4 .it b { color: rgba(255,255,255,0.8); font-weight: 500; }
-.s4 .dot-r { width: 6px; height: 6px; border-radius: 50%; background: rgba(200,80,80,0.5); flex-shrink: 0; margin-top: 5px; }
-.s4 .dot-g { width: 6px; height: 6px; border-radius: 50%; background: #C9A84C; flex-shrink: 0; margin-top: 5px; }
-
-/* ══════════════════════════
-   SLIDE 5 — EL HOMBRE REAL
-══════════════════════════ */
-.s5 { background: #04070F; }
-
-.s5 .stripe { position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: linear-gradient(90deg, #C9A84C, #E8D18A, #C9A84C); }
-
-.s5 .watermark {
-  position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
-  font-family: 'Anton'; font-size: 180px; color: rgba(255,255,255,0.02);
+  position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+  font-family: 'Anton'; font-size: 200px; color: rgba(201,168,76,0.04);
   line-height: 1; pointer-events: none; white-space: nowrap;
 }
-
-.s5 .content { position: absolute; left: 28px; top: 50%; transform: translateY(-50%); right: 28px; }
-
-.s5 .eyebrow { font-family: 'Oswald'; font-size: 11px; font-weight: 400; letter-spacing: 4px;
-  text-transform: uppercase; color: rgba(201,168,76,0.6); margin-bottom: 16px; }
-
-.s5 .line1 { font-family: 'Anton'; font-size: 68px; line-height: 0.9; color: rgba(255,255,255,0.9); letter-spacing: -1px; }
-.s5 .line2 {
-  font-family: 'Anton'; font-size: 68px; line-height: 0.9; letter-spacing: -1px;
+.s2 .content {
+  position: absolute; left: 44px; right: 22px; top: 50%; transform: translateY(-50%);
+}
+.s2 .lbl {
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: #C9A84C; opacity: 0.7; margin-bottom: 10px;
+}
+.s2 .num { font-family: 'Anton'; font-size: 110px; line-height: 1; color: #C9A84C; letter-spacing: -2px; }
+.s2 .numlab {
+  font-family: 'Oswald'; font-size: 22px; font-weight: 300;
+  color: rgba(255,255,255,0.55); margin-bottom: 16px; line-height: 1.3;
+}
+.s2 .div { width: 44px; height: 2px; background: rgba(201,168,76,0.4); margin-bottom: 16px; }
+.s2 .body {
+  font-size: 15px; font-weight: 300; line-height: 1.65; color: rgba(255,255,255,0.5);
+}
+.s2 .body b { color: rgba(255,255,255,0.85); font-weight: 500; }
+ 
+/* ══════════════════════
+   ESTADO 3 — ESPEJO
+══════════════════════ */
+.s3 { background: #060A16; }
+ 
+.s3 .stripe {
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg,#C9A84C,#E8D18A,#C9A84C);
+}
+.s3 .content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; padding: 90px 28px 100px;
+}
+.s3 .eyebrow {
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: rgba(201,168,76,0.6); margin-bottom: 20px;
+}
+.s3 .title {
+  font-family: 'Anton'; font-size: 54px; line-height: 0.9; color: #FFFFFF;
+  letter-spacing: -1px; margin-bottom: 28px;
+}
+.s3 .title em {
   background: linear-gradient(90deg,#C9A84C,#E8D18A);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  margin-bottom: 20px;
+  font-style: normal;
 }
-
-.s5 .bar { width: 50px; height: 3px; background: #C9A84C; margin-bottom: 18px; }
-
-.s5 .quote-box {
-  background: rgba(201,168,76,0.06); border-left: 3px solid #C9A84C; padding: 16px 20px;
-  margin-bottom: 16px;
+.s3 .checks { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.s3 .chk-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: rgba(201,168,76,0.05); border-left: 3px solid #C9A84C; padding: 12px 14px;
 }
-.s5 .quote {
-  font-family: 'Inter'; font-size: 15px; font-weight: 300; line-height: 1.65;
-  color: rgba(255,255,255,0.6); font-style: italic;
-}
-.s5 .quote b { color: rgba(255,255,255,0.9); font-weight: 500; font-style: normal; }
-.s5 .attr { font-family: 'Oswald'; font-size: 11px; letter-spacing: 2px; color: rgba(201,168,76,0.5); margin-top: 8px; }
-
-.s5 .body { font-family: 'Inter'; font-size: 13px; font-weight: 300; line-height: 1.6;
-  color: rgba(255,255,255,0.4); }
-.s5 .body b { color: rgba(255,255,255,0.75); font-weight: 500; }
-
-/* ══════════════════════════
-   SLIDE 6 — EL TRIÁNGULO
-══════════════════════════ */
-.s6 { background: #060B18; }
-
-.s6 .header { position: absolute; top: 26px; left: 28px; right: 28px; }
-.s6 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
-  text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 6px; }
-.s6 .title { font-family: 'Anton'; font-size: 36px; color: #FFFFFF; }
-.s6 .title em { color: #C9A84C; font-style: normal; }
-
-/* MODIFICADO: triángulo más abajo y con más espacio */
-.s6 .tri-area { position: absolute; top: 145px; left: 50%; transform: translateX(-50%); width: 320px; height: 300px; }
-
-/* MODIFICADO: corner-cards reposicionadas con más separación */
-.s6 .corner-card {
-  position: absolute; width: 150px;
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.15);
-  border-top: 3px solid #C9A84C; padding: 14px 14px;
-}
-.s6 .corner-card.top { top: 0; left: 50%; transform: translateX(-50%); }
-.s6 .corner-card.bot-l { bottom: 0; left: 0; }
-.s6 .corner-card.bot-r { bottom: 0; right: 0; }
-
-.s6 .c-num { font-family: 'Anton'; font-size: 40px; color: rgba(201,168,76,0.15); line-height: 1; }
-.s6 .c-title { font-family: 'Oswald'; font-size: 13px; font-weight: 600; color: #C9A84C;
-  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-.s6 .c-desc { font-family: 'Inter'; font-size: 11px; font-weight: 300;
-  color: rgba(255,255,255,0.4); line-height: 1.4; }
-
-/* MODIFICADO: center-dot bajado un poco más (60% en lugar de 50%) */
-.s6 .center-dot {
-  position: absolute; top: 60%; left: 50%; transform: translate(-50%,-50%);
-  width: 50px; height: 50px; border-radius: 50%;
-  border: 2px solid rgba(201,168,76,0.3); background: rgba(201,168,76,0.06);
+.s3 .chk-dot {
+  width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.5); background: rgba(201,168,76,0.1);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue'; font-size: 11px; color: #C9A84C; letter-spacing: 1px; text-align: center;
-  line-height: 1.2;
+  color: #C9A84C; font-size: 10px; font-weight: 700; margin-top: 1px;
 }
-
-.s6 .bottom-note {
-  position: absolute; bottom: 56px; left: 24px; right: 24px;
-  background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.15); padding: 12px 18px;
-  text-align: center;
+.s3 .chk-text {
+  font-size: 13px; font-weight: 300; line-height: 1.45; color: rgba(255,255,255,0.6);
 }
-.s6 .bottom-note p { font-family: 'Inter'; font-size: 13px; font-weight: 300;
-  color: rgba(255,255,255,0.5); }
-.s6 .bottom-note p b { color: #C9A84C; font-weight: 600; }
-
-/* ══════════════════════════
-   SLIDE 7 — SEÑALES QUE EL GYM SOLO NO BASTA
-══════════════════════════ */
-.s7 { background: #060A16; }
-
-.s7 .header { position: absolute; top: 26px; left: 28px; right: 28px; }
-.s7 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
-  text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 6px; }
-.s7 .title { font-family: 'Anton'; font-size: 34px; color: #FFFFFF; }
-.s7 .title em { color: #C9A84C; font-style: normal; }
-
-.s7 .list { position: absolute; top: 145px; left: 22px; right: 22px; bottom: 54px;
-  display: flex; flex-direction: column; gap: 10px; }
-
-.s7 .item { display: flex; align-items: flex-start; gap: 14px;
-  background: rgba(255,255,255,0.025); border: 1px solid rgba(201,168,76,0.1);
-  border-left: 3px solid #C9A84C; padding: 12px 16px; }
-
-.s7 .chk { width: 24px; height: 24px; flex-shrink: 0; border-radius: 50%;
-  border: 1px solid rgba(201,168,76,0.5); background: rgba(201,168,76,0.08);
-  display: flex; align-items: center; justify-content: center;
-  color: #C9A84C; font-size: 12px; font-weight: 700; margin-top: 1px; }
-
-.s7 .txt { font-family: 'Inter'; font-size: 13px; font-weight: 300; line-height: 1.45;
-  color: rgba(255,255,255,0.55); }
-.s7 .txt b { color: rgba(255,255,255,0.9); font-weight: 500; }
-
-/* ══════════════════════════
-   SLIDE 8 — EL PLAN BRAFIT
-══════════════════════════ */
-.s8 { background: #07090F; }
-
-.s8 .gold-right { position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
-  background: linear-gradient(180deg, transparent, #C9A84C 25%, #E8D18A 50%, #C9A84C 75%, transparent); }
-
-.s8 .header { position: absolute; top: 26px; left: 28px; }
-.s8 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
-  text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 6px; }
-.s8 .title { font-family: 'Anton'; font-size: 34px; color: #FFFFFF; }
-.s8 .title em { color: #C9A84C; font-style: normal; }
-
-.s8 .steps { position: absolute; top: 150px; left: 22px; right: 28px; bottom: 56px;
-  display: flex; flex-direction: column; gap: 10px; }
-
-.s8 .step { display: flex; align-items: flex-start; gap: 16px; }
-.s8 .num { font-family: 'Anton'; font-size: 44px; color: rgba(201,168,76,0.2);
-  line-height: 1; flex-shrink: 0; width: 36px; }
-.s8 .sc { flex: 1; }
-.s8 .st { font-family: 'Oswald'; font-size: 15px; font-weight: 600; color: #FFFFFF;
-  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
-.s8 .sd { font-family: 'Inter'; font-size: 12px; font-weight: 300; line-height: 1.5; color: rgba(255,255,255,0.4); }
-.s8 .sd b { color: rgba(201,168,76,0.8); font-weight: 500; }
-.s8 .divider { height: 1px; background: rgba(201,168,76,0.07); }
-
-/* ══════════════════════════
-   SLIDE 9 — CTA
-══════════════════════════ */
-.s9 { background: #04070F; }
-
-.s9 .frame { position: absolute; inset: 20px; border: 1px solid rgba(201,168,76,0.12); }
-.s9 .frame::before { content: ''; position: absolute; top: -1px; left: 50px; right: 50px;
-  height: 3px; background: linear-gradient(90deg, transparent, #C9A84C, transparent); }
-.s9 .frame::after { content: ''; position: absolute; bottom: -1px; left: 50px; right: 50px;
-  height: 3px; background: linear-gradient(90deg, transparent, #C9A84C, transparent); }
-
-.s9 .content { position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; text-align: center; padding: 40px 40px 30px; }
-
-.s9 .badge { width: 64px; height: 64px; border-radius: 50%;
+.s3 .chk-text b { color: rgba(255,255,255,0.9); font-weight: 500; }
+ 
+/* ══════════════════════
+   ESTADO 4 — LA SOLUCIÓN
+══════════════════════ */
+.s4 { background: #07090F; }
+ 
+.s4 .gold-right {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(180deg, transparent, #C9A84C 25%, #E8D18A 50%, #C9A84C 75%, transparent);
+}
+.s4 .content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; padding: 90px 28px 100px;
+}
+.s4 .lbl {
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 14px;
+}
+.s4 .title {
+  font-family: 'Anton'; font-size: 46px; line-height: 0.9;
+  color: #FFFFFF; letter-spacing: -1px; margin-bottom: 28px;
+}
+.s4 .title em { color: #C9A84C; font-style: normal; }
+ 
+.s4 .pillars { display: flex; flex-direction: column; gap: 10px; }
+.s4 .pill {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(255,255,255,0.025); border: 1px solid rgba(201,168,76,0.12);
+  border-left: 3px solid #C9A84C; padding: 12px 16px;
+}
+.s4 .pill-ico { font-size: 20px; flex-shrink: 0; }
+.s4 .pill-info { }
+.s4 .pill-title {
+  font-family: 'Oswald'; font-size: 14px; font-weight: 600;
+  color: #C9A84C; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px;
+}
+.s4 .pill-desc {
+  font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.4); line-height: 1.4;
+}
+ 
+/* ══════════════════════
+   ESTADO 5 — CTA
+══════════════════════ */
+.s5 { background: #04070F; }
+ 
+.s5 .frame {
+  position: absolute; inset: 16px; border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 4px;
+}
+.s5 .frame::before {
+  content: ''; position: absolute; top: -1px; left: 40px; right: 40px;
+  height: 3px; background: linear-gradient(90deg,transparent,#C9A84C,transparent);
+}
+.s5 .frame::after {
+  content: ''; position: absolute; bottom: -1px; left: 40px; right: 40px;
+  height: 3px; background: linear-gradient(90deg,transparent,#C9A84C,transparent);
+}
+ 
+.s5 .content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 80px 32px;
+}
+ 
+.s5 .badge {
+  width: 70px; height: 70px; border-radius: 50%;
   background: linear-gradient(135deg,#C9A84C,#E8D18A);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue'; font-size: 22px; color: #0D1B3E; letter-spacing: 1px; margin-bottom: 14px; }
-
-.s9 .brand { font-family: 'Oswald'; font-size: 13px; font-weight: 600;
-  letter-spacing: 5px; color: #C9A84C; text-transform: uppercase; margin-bottom: 20px; opacity: 0.8; }
-
-.s9 .hl1 { font-family: 'Anton'; font-size: 52px; line-height: 0.9; color: #FFFFFF; letter-spacing: -1px; margin-bottom: 4px; }
-.s9 .hl2 {
-  font-family: 'Anton'; font-size: 52px; line-height: 0.9; letter-spacing: -1px;
+  font-family: 'Bebas Neue'; font-size: 24px; color: #0D1B3E;
+  margin-bottom: 16px;
+  box-shadow: 0 0 30px rgba(201,168,76,0.3);
+}
+ 
+.s5 .brand {
+  font-family: 'Oswald'; font-size: 13px; font-weight: 600;
+  letter-spacing: 5px; color: #C9A84C; text-transform: uppercase;
+  margin-bottom: 24px; opacity: 0.8;
+}
+ 
+.s5 .hl1 { font-family: 'Anton'; font-size: 44px; line-height: 0.9; color: #FFFFFF; letter-spacing: -1px; }
+.s5 .hl2 {
+  font-family: 'Anton'; font-size: 44px; line-height: 0.9; letter-spacing: -1px;
   background: linear-gradient(90deg,#C9A84C,#E8D18A);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
-
-.s9 .sub { font-family: 'Inter'; font-size: 13px; font-weight: 300; line-height: 1.6;
-  color: rgba(255,255,255,0.4); max-width: 360px; margin-bottom: 22px; }
-.s9 .sub b { color: rgba(201,168,76,0.9); font-weight: 500; }
-
-.s9 .cta-btn { background: linear-gradient(135deg,#C9A84C,#E8D18A); padding: 14px 36px; margin-bottom: 22px;
-  font-family: 'Oswald'; font-size: 16px; font-weight: 700; color: #0D1B3E;
-  letter-spacing: 2px; text-transform: uppercase; }
-
-.s9 .actions { display: flex; gap: 30px; align-items: center; }
-.s9 .act { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.s9 .act-ico { font-size: 18px; }
-.s9 .act-lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 400;
-  letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
-.s9 .act-div { width: 1px; height: 34px; background: rgba(201,168,76,0.15); }
-.s9 .tagline { position: absolute; bottom: 30px; font-family: 'Inter'; font-size: 11px;
-  font-style: italic; color: rgba(201,168,76,0.25); letter-spacing: 1px; }
-
-/* ─── NAV ─── */
-.nav { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
-.nav button { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
-  color: #C9A84C; padding: 10px 22px; font-family: 'Oswald'; font-size: 14px; font-weight: 600;
-  letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; border-radius: 2px; }
+ 
+.s5 .sub {
+  font-size: 14px; font-weight: 300; line-height: 1.65;
+  color: rgba(255,255,255,0.4); margin-bottom: 30px; max-width: 280px;
+}
+.s5 .sub b { color: rgba(201,168,76,0.9); font-weight: 600; }
+ 
+.s5 .cta {
+  background: linear-gradient(135deg,#C9A84C,#E8D18A);
+  padding: 16px 36px; margin-bottom: 24px;
+  font-family: 'Oswald'; font-size: 16px; font-weight: 700;
+  color: #0D1B3E; letter-spacing: 2px; text-transform: uppercase;
+  border-radius: 2px; width: 100%;
+}
+ 
+.s5 .hint {
+  font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.25);
+  letter-spacing: 1px; font-style: italic;
+}
+ 
+.s5 .tagline {
+  position: absolute; bottom: 34px;
+  font-family: 'Inter'; font-size: 11px; font-style: italic;
+  color: rgba(201,168,76,0.2); letter-spacing: 1px;
+}
+ 
+/* ── NAV ── */
+.nav {
+  display: flex; align-items: center; gap: 14px; margin-top: 20px;
+}
+.nav button {
+  background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
+  color: #C9A84C; padding: 10px 22px;
+  font-family: 'Oswald'; font-size: 14px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s; border-radius: 4px;
+}
 .nav button:hover { background: rgba(201,168,76,0.16); }
-.nav .counter { font-family: 'Bebas Neue'; font-size: 22px; letter-spacing: 3px;
-  color: rgba(201,168,76,0.4); min-width: 60px; text-align: center; }
-
-.dots { display: flex; gap: 6px; margin-top: 14px; }
+.nav .counter {
+  font-family: 'Bebas Neue'; font-size: 22px; letter-spacing: 3px;
+  color: rgba(201,168,76,0.4); min-width: 50px; text-align: center;
+}
+ 
+.dots { display: flex; gap: 6px; margin-top: 14px; justify-content: center; }
 .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,168,76,0.15); transition: all 0.3s; cursor: pointer; }
 .dot.active { background: #C9A84C; width: 18px; border-radius: 3px; }
-.tip { margin-top: 14px; font-family: 'Inter'; font-size: 11px; font-weight: 300;
-  color: rgba(255,255,255,0.18); letter-spacing: 1px; text-transform: uppercase; }
+ 
+.tip {
+  margin-top: 14px; font-family: 'Inter'; font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,0.18); letter-spacing: 1px; text-transform: uppercase;
+  text-align: center;
+}
+ 
+/* label de estado */
+.estado-label {
+  margin-bottom: 10px;
+  font-family: 'Oswald'; font-size: 11px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(201,168,76,0.4); text-align: center;
+}
 </style>
-<base target="_blank">
 </head>
 <body>
+ 
 <div class="viewer">
+ 
+  <div class="estado-label" id="elabel">Estado 1 de 5</div>
+ 
   <div class="overflow-wrap">
     <div class="track" id="track">
-
-      <!-- S1: PORTADA -->
+ 
+      <!-- ESTADO 1 — GANCHO -->
       <div class="slide s1">
-        <div class="bg-lines"></div>
-        <div class="x-mark"></div>
-        <div class="gold-slash"></div>
-        <div class="tag">El mito que te tiene atrapado</div>
-        <div class="main">
-          <div class="myth-tag">✕ Mito popular</div>
-          <div class="line1">EL GYM</div>
-          <div class="line2">SOLO</div>
-          <div class="line3">NO BASTA.</div>
-          <div class="line4">Y nadie te lo ha dicho.</div>
-          <div class="sep"></div>
-          <div class="sub">Si tienes más de 35 años, jornadas largas y <b>estrés acumulado</b>, hay razones biológicas por las que el gym solo no mueve la aguja.</div>
+        <div class="grid-bg"></div>
+        <div class="slash"></div>
+        <div class="progress-bar">
+          <div class="prog-seg active"></div>
+          <div class="prog-seg"></div>
+          <div class="prog-seg"></div>
+          <div class="prog-seg"></div>
+          <div class="prog-seg"></div>
         </div>
-        <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
-        <div class="swipe">Desliza →</div>
+        <div class="story-brand">
+          <div class="avatar">BF</div>
+          <div class="info">
+            <div class="bname">BraFit</div>
+            <div class="btime">Ahora</div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="tag">Para ti que lo has intentado</div>
+          <div class="l1">NO ES</div>
+          <div class="l2">FALTA DE</div>
+          <div class="l3">VOLUNTAD.</div>
+          <div class="bar"></div>
+          <div class="sub">Si trabajas 10+ horas y <b>no bajas de peso sin importar lo que hagas</b>... hay una razón biológica exacta.</div>
+          <div class="swipe-hint">👆 Toca para ver por qué</div>
+        </div>
       </div>
-
-      <!-- S2: DATO -->
+ 
+      <!-- ESTADO 2 — DATO IMPACTO -->
       <div class="slide s2">
         <div class="vert"></div>
-        <div class="ghost">GYM</div>
-        <div class="content">
-          <div class="lbl">El dato incómodo</div>
-          <div class="stat">8 de 10</div>
-          <div class="stat-sub">hombres que van al gym<br>no bajan de peso en 6 meses</div>
-          <div class="divline"></div>
-          <div class="body">No porque sean vagos. Sino porque <b>el gym ataca solo uno de los cinco factores</b> que controlan el peso en hombres mayores de 35 con estrés crónico.</div>
+        <div class="ghost">300</div>
+        <div class="progress-bar">
+          <div class="prog-seg done"></div>
+          <div class="prog-seg active"></div>
+          <div class="prog-seg"></div>
+          <div class="prog-seg"></div>
+          <div class="prog-seg"></div>
         </div>
-        <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
-        <div class="pg">02 / 09</div>
+        <div class="story-brand">
+          <div class="avatar">BF</div>
+          <div class="info">
+            <div class="bname">BraFit</div>
+            <div class="btime">Ahora</div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="lbl">El dato que nadie te dice</div>
+          <div class="num">+300%</div>
+          <div class="numlab">más cortisol produce<br>tu cuerpo bajo estrés</div>
+          <div class="div"></div>
+          <div class="body">Ese cortisol le ordena a tu cuerpo <b>almacenar grasa abdominal.</b><br><br>No es tu culpa. Es química.</div>
+        </div>
       </div>
-
-      <!-- S3: LAS 3 MENTIRAS -->
+ 
+      <!-- ESTADO 3 — ESPEJO / IDENTIFICACIÓN -->
       <div class="slide s3">
-        <div class="header">
-          <div class="lbl">Lo que te vendieron</div>
-          <div class="title">Las <em>3 mentiras</em> del gym tradicional</div>
-        </div>
-        <div class="myths">
-          <div class="myth">
-            <div class="x-badge">✕</div>
-            <div class="myth-content">
-              <div class="myth-title">"Entrena más y bajarás de peso"</div>
-              <div class="myth-truth">Con cortisol elevado, más ejercicio intenso <b>aumenta el cortisol y bloquea la pérdida de grasa.</b></div>
-            </div>
-          </div>
-          <div class="myth">
-            <div class="x-badge">✕</div>
-            <div class="myth-content">
-              <div class="myth-title">"El cardio quema la grasa abdominal"</div>
-              <div class="myth-truth">El cardio excesivo en hombres estresados <b>eleva el cortisol todavía más.</b> Resultado: más grasa acumulada.</div>
-            </div>
-          </div>
-          <div class="myth">
-            <div class="x-badge">✕</div>
-            <div class="myth-content">
-              <div class="myth-title">"Solo necesitas disciplina y constancia"</div>
-              <div class="myth-truth">La disciplina no regula hormonas. <b>Sin un plan hormonal, la constancia no alcanza.</b></div>
-            </div>
-          </div>
-        </div>
-        <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
-        <div class="pg">03 / 09</div>
-      </div>
-
-      <!-- S4: NO vs SÍ -->
-      <div class="slide s4">
-        <div class="left">
-          <div class="side-tag tag-red">✕ Lo que no funciona</div>
-          <div class="side-title red-txt">SIN<br>PLAN</div>
-          <div class="items">
-            <div class="it"><div class="dot-r"></div><div><b>Gym sin estrategia</b> → más cortisol</div></div>
-            <div class="it"><div class="dot-r"></div><div><b>Dieta restrictiva</b> → más ansiedad</div></div>
-            <div class="it"><div class="dot-r"></div><div><b>Cardio excesivo</b> → agotamiento</div></div>
-            <div class="it"><div class="dot-r"></div><div><b>Fuerza de voluntad</b> → sin resultados</div></div>
-            <div class="it"><div class="dot-r"></div><div><b>Mismo ciclo</b> → frustración</div></div>
-          </div>
-        </div>
-        <div class="right">
-          <div class="side-tag tag-gold">✓ Lo que sí funciona</div>
-          <div class="side-title gold-txt">CON<br>PLAN</div>
-          <div class="items">
-            <div class="it"><div class="dot-g"></div><div><b>Entrenamiento corto</b> + inteligente</div></div>
-            <div class="it"><div class="dot-g"></div><div><b>Nutrición adaptada</b> a tu estrés</div></div>
-            <div class="it"><div class="dot-g"></div><div><b>Descanso optimizado</b> para perder grasa</div></div>
-            <div class="it"><div class="dot-g"></div><div><b>Gestión del cortisol</b> primero</div></div>
-            <div class="it"><div class="dot-g"></div><div><b>Sistema sostenible</b> → resultados reales</div></div>
-          </div>
-        </div>
-        <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
-        <div class="pg">04 / 09</div>
-      </div>
-
-      <!-- S5: EL HOMBRE REAL -->
-      <div class="slide s5">
         <div class="stripe"></div>
-        <div class="watermark">REAL</div>
+        <div class="progress-bar">
+          <div class="prog-seg done"></div>
+          <div class="prog-seg done"></div>
+          <div class="prog-seg active"></div>
+          <div class="prog-seg"></div>
+          <div class="prog-seg"></div>
+        </div>
+        <div class="story-brand">
+          <div class="avatar">BF</div>
+          <div class="info">
+            <div class="bname">BraFit</div>
+            <div class="btime">Ahora</div>
+          </div>
+        </div>
         <div class="content">
-          <div class="eyebrow">Historia real — anónima</div>
-          <div class="line1">12 MESES</div>
-          <div class="line2">EN EL GYM.</div>
-          <div class="bar"></div>
-          <div class="quote-box">
-            <div class="quote">"Iba 4 veces por semana. Comía mejor que nunca. <b>Subí 3 kilos.</b> Mi médico me dijo que era normal a los 47. Yo sabía que algo estaba mal."</div>
-            <div class="attr">— Ejecutivo, 47 años, Bogotá</div>
+          <div class="eyebrow">¿Te suena familiar?</div>
+          <div class="title">Esto te<br>pasa a <em>ti</em></div>
+          <div class="checks">
+            <div class="chk-item">
+              <div class="chk-dot">✓</div>
+              <div class="chk-text"><b>Comes bien</b> pero no bajas ni un gramo</div>
+            </div>
+            <div class="chk-item">
+              <div class="chk-dot">✓</div>
+              <div class="chk-text"><b>Grasa abdominal</b> que no cede con nada</div>
+            </div>
+            <div class="chk-item">
+              <div class="chk-dot">✓</div>
+              <div class="chk-text"><b>Ansiedad por comer</b> en la noche después del estrés</div>
+            </div>
+            <div class="chk-item">
+              <div class="chk-dot">✓</div>
+              <div class="chk-text"><b>Te despiertas agotado</b> aunque hayas dormido</div>
+            </div>
           </div>
-          <div class="body">El problema no era él. Era que <b>nadie había atacado el cortisol, el estrés y el descanso</b> al mismo tiempo. Solo el gym.</div>
         </div>
-        <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
-        <div class="pg">05 / 09</div>
       </div>
-
-      <!-- S6: TRIÁNGULO -->
-      <div class="slide s6">
-        <div class="header">
-          <div class="lbl">El enfoque correcto</div>
-          <div class="title">Los <em>3 frentes</em> que hay que atacar juntos</div>
-        </div>
-        <div class="tri-area">
-          <div class="corner-card top">
-            <div class="c-num">01</div>
-            <div class="c-title">Cuerpo</div>
-            <div class="c-desc">Entrenamiento adaptado a tu energía real y tiempo disponible</div>
-          </div>
-          <div class="corner-card bot-l">
-            <div class="c-num">02</div>
-            <div class="c-title">Hormonas</div>
-            <div class="c-desc">Regular cortisol con nutrición, descanso y manejo del estrés</div>
-          </div>
-          <div class="corner-card bot-r">
-            <div class="c-num">03</div>
-            <div class="c-title">Mente</div>
-            <div class="c-desc">Cambiar cómo te hablas y cómo procesas el estrés diario</div>
-          </div>
-          <div class="center-dot">EL<br>PLAN</div>
-        </div>
-        <div class="bottom-note">
-          <p>El gym toca <b>solo el 33%</b> del problema. BraFit ataca los tres.</p>
-        </div>
-        <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
-        <div class="pg">06 / 09</div>
-      </div>
-
-      <!-- S7: SEÑALES -->
-      <div class="slide s7">
-        <div class="header">
-          <div class="lbl">¿Te identificas?</div>
-          <div class="title">Señales de que el gym <em>solo no basta</em></div>
-        </div>
-        <div class="list">
-          <div class="item"><div class="chk">✓</div><div class="txt"><b>Llevas meses en el gym</b> y la balanza no baja o incluso sube</div></div>
-          <div class="item"><div class="chk">✓</div><div class="txt"><b>Entrenar te deja más agotado</b> que energizado al final del día</div></div>
-          <div class="item"><div class="chk">✓</div><div class="txt"><b>Comes bien durante la semana</b> pero el fin de semana lo arruinas todo</div></div>
-          <div class="item"><div class="chk">✓</div><div class="txt"><b>Tu grasa abdominal no cede</b> sin importar cuánto cardio hagas</div></div>
-          <div class="item"><div class="chk">✓</div><div class="txt"><b>Has pensado que simplemente</b> "ya no es como antes" y resignado</div></div>
-        </div>
-        <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
-        <div class="pg">07 / 09</div>
-      </div>
-
-      <!-- S8: PLAN -->
-      <div class="slide s8">
+ 
+      <!-- ESTADO 4 — LA SOLUCIÓN -->
+      <div class="slide s4">
         <div class="gold-right"></div>
-        <div class="header">
-          <div class="lbl">El método BraFit</div>
-          <div class="title">Más allá del gym: <em>el sistema completo</em></div>
+        <div class="progress-bar">
+          <div class="prog-seg done"></div>
+          <div class="prog-seg done"></div>
+          <div class="prog-seg done"></div>
+          <div class="prog-seg active"></div>
+          <div class="prog-seg"></div>
         </div>
-        <div class="steps">
-          <div class="step">
-            <div class="num">1</div>
-            <div class="sc">
-              <div class="st">Evaluación hormonal y de estilo de vida</div>
-              <div class="sd">Entendemos por qué el gym solo no te ha funcionado. <b>Sin juicios.</b></div>
-            </div>
-          </div>
-          <div class="divider"></div>
-          <div class="step">
-            <div class="num">2</div>
-            <div class="sc">
-              <div class="st">Entrenamiento anti-cortisol</div>
-              <div class="sd">Corto, preciso y adaptado a tus niveles de estrés. <b>Máximo 30 min.</b></div>
-            </div>
-          </div>
-          <div class="divider"></div>
-          <div class="step">
-            <div class="num">3</div>
-            <div class="sc">
-              <div class="st">Nutrición que regula, no restringe</div>
-              <div class="sd">Protocolos de alimentación que <b>bajan el cortisol</b> y queman grasa real.</div>
-            </div>
-          </div>
-          <div class="divider"></div>
-          <div class="step">
-            <div class="num">4</div>
-            <div class="sc">
-              <div class="st">Gestión del estrés integrada</div>
-              <div class="sd">Herramientas concretas para el hombre ocupado que <b>no tiene tiempo de meditar 1 hora.</b></div>
-            </div>
+        <div class="story-brand">
+          <div class="avatar">BF</div>
+          <div class="info">
+            <div class="bname">BraFit</div>
+            <div class="btime">Ahora</div>
           </div>
         </div>
-        <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
-        <div class="pg">08 / 09</div>
+        <div class="content">
+          <div class="lbl">Lo que sí funciona</div>
+          <div class="title">El plan que<br>tu cuerpo <em>necesita</em></div>
+          <div class="pillars">
+            <div class="pill">
+              <div class="pill-ico">⚡</div>
+              <div class="pill-info">
+                <div class="pill-title">Entrenamiento corto</div>
+                <div class="pill-desc">15-30 min adaptados a tu energía real</div>
+              </div>
+            </div>
+            <div class="pill">
+              <div class="pill-ico">🥗</div>
+              <div class="pill-info">
+                <div class="pill-title">Nutrición anti-cortisol</div>
+                <div class="pill-desc">Que regula hormones y quema grasa real</div>
+              </div>
+            </div>
+            <div class="pill">
+              <div class="pill-ico">🌙</div>
+              <div class="pill-info">
+                <div class="pill-title">Descanso optimizado</div>
+                <div class="pill-desc">La herramienta más ignorada para bajar de peso</div>
+              </div>
+            </div>
+            <div class="pill">
+              <div class="pill-ico">🎯</div>
+              <div class="pill-info">
+                <div class="pill-title">Estrategia, no azar</div>
+                <div class="pill-desc">Un sistema que funciona con tu vida real</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <!-- S9: CTA -->
-      <div class="slide s9">
+ 
+      <!-- ESTADO 5 — CTA -->
+      <div class="slide s5">
         <div class="frame"></div>
+        <div class="progress-bar">
+          <div class="prog-seg done"></div>
+          <div class="prog-seg done"></div>
+          <div class="prog-seg done"></div>
+          <div class="prog-seg done"></div>
+          <div class="prog-seg active"></div>
+        </div>
+        <div class="story-brand">
+          <div class="avatar">BF</div>
+          <div class="info">
+            <div class="bname">BraFit</div>
+            <div class="btime">Ahora</div>
+          </div>
+        </div>
         <div class="content">
           <div class="badge">BF</div>
           <div class="brand">BraFit</div>
-          <div class="hl1">¿SIGUES YENDO</div>
-          <div class="hl2">SIN RESULTADOS?</div>
-          <div class="sub">Escríbeme <b>"GYM"</b> al DM y analizamos por qué no está funcionando y qué cambiar.</div>
-          <div class="cta-btn">💬 Escríbeme "GYM" al DM</div>
-          <div class="actions">
-            <div class="act"><div class="act-ico">🔖</div><div class="act-lbl">Guarda</div></div>
-            <div class="act-div"></div>
-            <div class="act"><div class="act-ico">📤</div><div class="act-lbl">Comparte</div></div>
-            <div class="act-div"></div>
-            <div class="act"><div class="act-ico">👥</div><div class="act-lbl">Etiqueta</div></div>
-          </div>
-          <div class="tagline">No es azar, es estrategia. Alcánzalo.</div>
+          <div class="hl1">¿LISTO PARA</div>
+          <div class="hl2">ENTENDER TU CUERPO?</div>
+          <div class="sub">Escríbeme <b>"HOLA"</b> por WhatsApp y te cuento cómo funciona el plan para tu caso.</div>
+          <div class="cta">💬 Escríbeme "HOLA"</div>
+          <div class="hint">Respondo en menos de 24 horas</div>
         </div>
+        <div class="tagline">No es azar, es estrategia. Alcánzalo.</div>
       </div>
-
+ 
     </div>
   </div>
-
+ 
   <div class="dots" id="dots"></div>
+ 
   <div class="nav">
     <button onclick="prev()">← Ant</button>
-    <div class="counter" id="counter">1 / 9</div>
+    <div class="counter" id="counter">1 / 5</div>
     <button onclick="next()">Sig →</button>
   </div>
-  <div class="tip">← → teclado · dots · screenshot por slide</div>
+ 
+  <div class="tip">← → teclado · screenshot cada estado (360×640)</div>
+ 
 </div>
-
+ 
 <script>
-let cur=0; const total=9;
-const track=document.getElementById('track');
-const counter=document.getElementById('counter');
-const dotsEl=document.getElementById('dots');
+let cur = 0; const total = 5;
+const track = document.getElementById('track');
+const counter = document.getElementById('counter');
+const dotsEl = document.getElementById('dots');
+const elabel = document.getElementById('elabel');
+ 
+const labels = [
+  'Estado 1 de 5 — Gancho',
+  'Estado 2 de 5 — Dato impacto',
+  'Estado 3 de 5 — Espejo / identificación',
+  'Estado 4 de 5 — La solución',
+  'Estado 5 de 5 — CTA'
+];
+ 
 for(let i=0;i<total;i++){
-  const d=document.createElement('div');
-  d.className='dot'+(i===0?' active':'');
-  d.onclick=()=>goTo(i); dotsEl.appendChild(d);
+  const d = document.createElement('div');
+  d.className = 'dot' + (i===0?' active':'');
+  d.onclick = ()=>goTo(i);
+  dotsEl.appendChild(d);
 }
+ 
 function goTo(n){
-  cur=Math.max(0,Math.min(total-1,n));
-  track.style.transform=`translateX(-${cur*540}px)`;
-  counter.textContent=`${cur+1} / ${total}`;
-  document.querySelectorAll('.dot').forEach((d,i)=>{d.className='dot'+(i===cur?' active':'');});
+  cur = Math.max(0,Math.min(total-1,n));
+  track.style.transform = `translateX(-${cur*360}px)`;
+  counter.textContent = `${cur+1} / ${total}`;
+  elabel.textContent = labels[cur];
+  document.querySelectorAll('.dot').forEach((d,i)=>{
+    d.className = 'dot'+(i===cur?' active':'');
+  });
 }
-function next(){goTo(cur+1);} function prev(){goTo(cur-1);}
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev();});
+function next(){ goTo(cur+1); }
+function prev(){ goTo(cur-1); }
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight') next();
+  if(e.key==='ArrowLeft') prev();
+});
 </script>
 </body>
-<
+</html>
