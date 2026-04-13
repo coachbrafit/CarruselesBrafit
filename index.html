@@ -1,13 +1,13 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BraFit- Gym Solo No Funciona</title>
+<title>BraFit  Gym Solo No Funciona</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
- 
+
 body {
   background: #050810;
   display: flex;
@@ -16,25 +16,25 @@ body {
   padding: 30px 20px 60px;
   gap: 0;
 }
- 
+
 .viewer { width: 540px; position: relative; user-select: none; }
- 
+
 .overflow-wrap {
   width: 540px; overflow: hidden;
   box-shadow: 0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.15);
 }
- 
+
 .track {
   display: flex;
   transition: transform 0.5s cubic-bezier(0.77,0,0.18,1);
 }
- 
+
 .slide {
   width: 540px; height: 540px;
   flex-shrink: 0; position: relative; overflow: hidden;
   font-family: 'Inter', sans-serif;
 }
- 
+
 /* ── shared ── */
 .brand-chip {
   position: absolute; bottom: 22px; left: 24px;
@@ -55,12 +55,12 @@ body {
   font-family: 'Oswald'; font-size: 13px; font-weight: 300;
   color: rgba(255,255,255,0.2); letter-spacing: 1px; z-index: 10;
 }
- 
+
 /* ══════════════════════════
    SLIDE 1 — PORTADA PROVOCADORA
 ══════════════════════════ */
 .s1 { background: #060B18; }
- 
+
 .s1 .bg-lines {
   position: absolute; inset: 0;
   background-image:
@@ -72,7 +72,7 @@ body {
       rgba(201,168,76,0.03) 60px
     );
 }
- 
+
 .s1 .x-mark {
   position: absolute; right: 30px; top: 30px;
   width: 140px; height: 140px; opacity: 0.07;
@@ -85,21 +85,21 @@ body {
 }
 .s1 .x-mark::before { transform: rotate(45deg); }
 .s1 .x-mark::after  { transform: rotate(-45deg); }
- 
+
 .s1 .gold-slash {
   position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
   background: linear-gradient(180deg, transparent, #C9A84C 25%, #E8D18A 50%, #C9A84C 75%, transparent);
 }
- 
+
 .s1 .tag {
   position: absolute; top: 30px; left: 28px;
   background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35);
   color: #C9A84C; font-family: 'Oswald'; font-size: 11px; font-weight: 600;
   letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px;
 }
- 
+
 .s1 .main { position: absolute; left: 28px; top: 72px; right: 28px; }
- 
+
 .s1 .myth-tag {
   display: inline-block;
   background: rgba(200,50,50,0.15); border: 1px solid rgba(200,80,80,0.3);
@@ -107,7 +107,7 @@ body {
   letter-spacing: 3px; text-transform: uppercase; padding: 5px 14px;
   margin-bottom: 14px;
 }
- 
+
 .s1 .line1 {
   font-family: 'Anton'; font-size: 75px; line-height: 0.88;
   color: rgba(255,255,255,0.9); letter-spacing: -1px;
@@ -124,79 +124,79 @@ body {
   font-family: 'Anton'; font-size: 40px; line-height: 1;
   color: rgba(255,255,255,0.2); letter-spacing: 0; margin-top: 4px;
 }
- 
+
 .s1 .sep { width: 55px; height: 2px; background: #C9A84C; margin: 16px 0; }
- 
+
 .s1 .sub {
   font-family: 'Inter'; font-size: 14px; font-weight: 300; line-height: 1.6;
   color: rgba(255,255,255,0.45); max-width: 340px;
 }
 .s1 .sub b { color: rgba(255,255,255,0.8); font-weight: 500; }
- 
+
 .s1 .swipe {
   position: absolute; bottom: 26px; right: 24px;
   font-family: 'Oswald'; font-size: 11px; font-weight: 400;
   letter-spacing: 2px; text-transform: uppercase;
   color: rgba(201,168,76,0.45);
 }
- 
+
 /* ══════════════════════════
    SLIDE 2 — EL DATO DEL GYM
 ══════════════════════════ */
 .s2 { background: #07090F; }
- 
+
 .s2 .vert { position: absolute; left: 24px; top: 0; bottom: 0; width: 3px;
   background: linear-gradient(180deg, transparent, #C9A84C 25%, #E8D18A 50%, #C9A84C 75%, transparent); }
- 
+
 .s2 .ghost {
   position: absolute; right: -15px; top: 50%; transform: translateY(-52%);
   font-family: 'Anton'; font-size: 220px; color: rgba(201,168,76,0.05);
   line-height: 1; pointer-events: none; white-space: nowrap; letter-spacing: -4px;
 }
- 
+
 .s2 .content { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); right: 24px; }
- 
+
 .s2 .lbl { font-family: 'Oswald'; font-size: 11px; font-weight: 400; letter-spacing: 4px;
   text-transform: uppercase; color: #C9A84C; opacity: 0.7; margin-bottom: 12px; }
- 
+
 .s2 .stat { font-family: 'Anton'; font-size: 116px; line-height: 1; color: #C9A84C; letter-spacing: -2px; }
 .s2 .stat-sub { font-family: 'Oswald'; font-size: 26px; font-weight: 300;
   color: rgba(255,255,255,0.55); margin-bottom: 18px; line-height: 1.2; }
- 
+
 .s2 .divline { width: 50px; height: 2px; background: rgba(201,168,76,0.4); margin-bottom: 18px; }
- 
+
 .s2 .body { font-family: 'Inter'; font-size: 15px; font-weight: 300; line-height: 1.65;
   color: rgba(255,255,255,0.5); max-width: 380px; }
 .s2 .body b { color: rgba(255,255,255,0.85); font-weight: 500; }
- 
+
 /* ══════════════════════════
    SLIDE 3 — LAS 3 MENTIRAS
 ══════════════════════════ */
 .s3 { background: #060A16; }
- 
-.s3 .header { position: absolute; top: 26px; left: 28px; right: 28px; }
+
+.s3 .header { position: absolute; top: 22px; left: 28px; right: 28px; }
 .s3 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
-  text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 6px; }
-.s3 .title { font-family: 'Anton'; font-size: 38px; color: #FFFFFF; letter-spacing: 0; }
+  text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 4px; }
+.s3 .title { font-family: 'Anton'; font-size: 28px; color: #FFFFFF; letter-spacing: 0; line-height: 1.1; }
 .s3 .title em { color: #C9A84C; font-style: normal; }
- 
-.s3 .myths { position: absolute; top: 108px; left: 22px; right: 22px; bottom: 56px;
-  display: flex; flex-direction: column; gap: 12px; }
- 
+
+.s3 .myths { position: absolute; top: 115px; left: 22px; right: 22px; bottom: 54px;
+  display: flex; flex-direction: column; gap: 10px; }
+
 .s3 .myth {
   display: flex; align-items: flex-start; gap: 16px;
   border: 1px solid rgba(200,70,70,0.2); border-left: 3px solid rgba(200,70,70,0.6);
   background: rgba(200,50,50,0.05); padding: 14px 18px;
   position: relative;
 }
- 
+
 .s3 .x-badge {
   width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%;
   background: rgba(200,70,70,0.15); border: 1px solid rgba(200,80,80,0.4);
   display: flex; align-items: center; justify-content: center;
   color: #e07070; font-size: 14px; font-weight: 700; margin-top: 1px;
 }
- 
+
 .s3 .myth-content { flex: 1; }
 .s3 .myth-title {
   font-family: 'Oswald'; font-size: 15px; font-weight: 600;
@@ -207,12 +207,12 @@ body {
   color: rgba(255,255,255,0.4);
 }
 .s3 .myth-truth b { color: rgba(201,168,76,0.85); font-weight: 500; }
- 
+
 /* ══════════════════════════
    SLIDE 4 — LO QUE SÍ NECESITAS  (split)
 ══════════════════════════ */
 .s4 { background: #07090F; }
- 
+
 .s4 .left {
   position: absolute; left: 0; top: 0; bottom: 0; width: 50%;
   background: rgba(200,50,50,0.07);
@@ -225,7 +225,7 @@ body {
   border-left: 3px solid rgba(201,168,76,0.3);
   display: flex; flex-direction: column; justify-content: center; padding: 30px 26px;
 }
- 
+
 .s4 .side-tag {
   font-family: 'Oswald'; font-size: 10px; font-weight: 700; letter-spacing: 3px;
   text-transform: uppercase; margin-bottom: 18px; padding: 5px 12px;
@@ -233,12 +233,12 @@ body {
 }
 .s4 .tag-red { background: rgba(200,70,70,0.15); color: #e07070; border: 1px solid rgba(200,70,70,0.3); }
 .s4 .tag-gold { background: rgba(201,168,76,0.12); color: #C9A84C; border: 1px solid rgba(201,168,76,0.3); }
- 
+
 .s4 .side-title { font-family: 'Anton'; font-size: 44px; line-height: 0.9;
   letter-spacing: -1px; margin-bottom: 20px; }
 .s4 .red-txt { color: rgba(200,80,80,0.7); }
 .s4 .gold-txt { color: #C9A84C; }
- 
+
 .s4 .items { display: flex; flex-direction: column; gap: 10px; }
 .s4 .it {
   display: flex; align-items: flex-start; gap: 10px;
@@ -248,26 +248,26 @@ body {
 .s4 .it b { color: rgba(255,255,255,0.8); font-weight: 500; }
 .s4 .dot-r { width: 6px; height: 6px; border-radius: 50%; background: rgba(200,80,80,0.5); flex-shrink: 0; margin-top: 5px; }
 .s4 .dot-g { width: 6px; height: 6px; border-radius: 50%; background: #C9A84C; flex-shrink: 0; margin-top: 5px; }
- 
+
 /* ══════════════════════════
    SLIDE 5 — EL HOMBRE REAL
 ══════════════════════════ */
 .s5 { background: #04070F; }
- 
+
 .s5 .stripe { position: absolute; top: 0; left: 0; right: 0; height: 4px;
   background: linear-gradient(90deg, #C9A84C, #E8D18A, #C9A84C); }
- 
+
 .s5 .watermark {
   position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
   font-family: 'Anton'; font-size: 180px; color: rgba(255,255,255,0.02);
   line-height: 1; pointer-events: none; white-space: nowrap;
 }
- 
+
 .s5 .content { position: absolute; left: 28px; top: 50%; transform: translateY(-50%); right: 28px; }
- 
+
 .s5 .eyebrow { font-family: 'Oswald'; font-size: 11px; font-weight: 400; letter-spacing: 4px;
   text-transform: uppercase; color: rgba(201,168,76,0.6); margin-bottom: 16px; }
- 
+
 .s5 .line1 { font-family: 'Anton'; font-size: 68px; line-height: 0.9; color: rgba(255,255,255,0.9); letter-spacing: -1px; }
 .s5 .line2 {
   font-family: 'Anton'; font-size: 68px; line-height: 0.9; letter-spacing: -1px;
@@ -275,9 +275,9 @@ body {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   margin-bottom: 20px;
 }
- 
+
 .s5 .bar { width: 50px; height: 3px; background: #C9A84C; margin-bottom: 18px; }
- 
+
 .s5 .quote-box {
   background: rgba(201,168,76,0.06); border-left: 3px solid #C9A84C; padding: 16px 20px;
   margin-bottom: 16px;
@@ -288,25 +288,26 @@ body {
 }
 .s5 .quote b { color: rgba(255,255,255,0.9); font-weight: 500; font-style: normal; }
 .s5 .attr { font-family: 'Oswald'; font-size: 11px; letter-spacing: 2px; color: rgba(201,168,76,0.5); margin-top: 8px; }
- 
+
 .s5 .body { font-family: 'Inter'; font-size: 13px; font-weight: 300; line-height: 1.6;
   color: rgba(255,255,255,0.4); }
 .s5 .body b { color: rgba(255,255,255,0.75); font-weight: 500; }
- 
+
 /* ══════════════════════════
    SLIDE 6 — EL TRIÁNGULO
 ══════════════════════════ */
 .s6 { background: #060B18; }
- 
+
 .s6 .header { position: absolute; top: 26px; left: 28px; right: 28px; }
 .s6 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
   text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 6px; }
 .s6 .title { font-family: 'Anton'; font-size: 36px; color: #FFFFFF; }
 .s6 .title em { color: #C9A84C; font-style: normal; }
- 
-/* triángulo SVG centrado */
-.s6 .tri-area { position: absolute; top: 100px; left: 50%; transform: translateX(-50%); width: 320px; height: 240px; }
- 
+
+/* MODIFICADO: triángulo más abajo y con más espacio */
+.s6 .tri-area { position: absolute; top: 145px; left: 50%; transform: translateX(-50%); width: 320px; height: 300px; }
+
+/* MODIFICADO: corner-cards reposicionadas con más separación */
 .s6 .corner-card {
   position: absolute; width: 150px;
   background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.15);
@@ -315,22 +316,23 @@ body {
 .s6 .corner-card.top { top: 0; left: 50%; transform: translateX(-50%); }
 .s6 .corner-card.bot-l { bottom: 0; left: 0; }
 .s6 .corner-card.bot-r { bottom: 0; right: 0; }
- 
+
 .s6 .c-num { font-family: 'Anton'; font-size: 40px; color: rgba(201,168,76,0.15); line-height: 1; }
 .s6 .c-title { font-family: 'Oswald'; font-size: 13px; font-weight: 600; color: #C9A84C;
   text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
 .s6 .c-desc { font-family: 'Inter'; font-size: 11px; font-weight: 300;
   color: rgba(255,255,255,0.4); line-height: 1.4; }
- 
+
+/* MODIFICADO: center-dot bajado un poco más (60% en lugar de 50%) */
 .s6 .center-dot {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  position: absolute; top: 60%; left: 50%; transform: translate(-50%,-50%);
   width: 50px; height: 50px; border-radius: 50%;
   border: 2px solid rgba(201,168,76,0.3); background: rgba(201,168,76,0.06);
   display: flex; align-items: center; justify-content: center;
   font-family: 'Bebas Neue'; font-size: 11px; color: #C9A84C; letter-spacing: 1px; text-align: center;
   line-height: 1.2;
 }
- 
+
 .s6 .bottom-note {
   position: absolute; bottom: 56px; left: 24px; right: 24px;
   background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.15); padding: 12px 18px;
@@ -339,51 +341,51 @@ body {
 .s6 .bottom-note p { font-family: 'Inter'; font-size: 13px; font-weight: 300;
   color: rgba(255,255,255,0.5); }
 .s6 .bottom-note p b { color: #C9A84C; font-weight: 600; }
- 
+
 /* ══════════════════════════
    SLIDE 7 — SEÑALES QUE EL GYM SOLO NO BASTA
 ══════════════════════════ */
 .s7 { background: #060A16; }
- 
+
 .s7 .header { position: absolute; top: 26px; left: 28px; right: 28px; }
 .s7 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
   text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 6px; }
 .s7 .title { font-family: 'Anton'; font-size: 34px; color: #FFFFFF; }
 .s7 .title em { color: #C9A84C; font-style: normal; }
- 
-.s7 .list { position: absolute; top: 104px; left: 22px; right: 22px; bottom: 54px;
+
+.s7 .list { position: absolute; top: 125px; left: 22px; right: 22px; bottom: 54px;
   display: flex; flex-direction: column; gap: 10px; }
- 
+
 .s7 .item { display: flex; align-items: flex-start; gap: 14px;
   background: rgba(255,255,255,0.025); border: 1px solid rgba(201,168,76,0.1);
   border-left: 3px solid #C9A84C; padding: 12px 16px; }
- 
+
 .s7 .chk { width: 24px; height: 24px; flex-shrink: 0; border-radius: 50%;
   border: 1px solid rgba(201,168,76,0.5); background: rgba(201,168,76,0.08);
   display: flex; align-items: center; justify-content: center;
   color: #C9A84C; font-size: 12px; font-weight: 700; margin-top: 1px; }
- 
+
 .s7 .txt { font-family: 'Inter'; font-size: 13px; font-weight: 300; line-height: 1.45;
   color: rgba(255,255,255,0.55); }
 .s7 .txt b { color: rgba(255,255,255,0.9); font-weight: 500; }
- 
+
 /* ══════════════════════════
    SLIDE 8 — EL PLAN BRAFIT
 ══════════════════════════ */
 .s8 { background: #07090F; }
- 
+
 .s8 .gold-right { position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
   background: linear-gradient(180deg, transparent, #C9A84C 25%, #E8D18A 50%, #C9A84C 75%, transparent); }
- 
+
 .s8 .header { position: absolute; top: 26px; left: 28px; }
 .s8 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
   text-transform: uppercase; color: #C9A84C; opacity: 0.6; margin-bottom: 6px; }
 .s8 .title { font-family: 'Anton'; font-size: 34px; color: #FFFFFF; }
 .s8 .title em { color: #C9A84C; font-style: normal; }
- 
-.s8 .steps { position: absolute; top: 106px; left: 22px; right: 28px; bottom: 56px;
+
+.s8 .steps { position: absolute; top: 130px; left: 22px; right: 28px; bottom: 56px;
   display: flex; flex-direction: column; gap: 10px; }
- 
+
 .s8 .step { display: flex; align-items: flex-start; gap: 16px; }
 .s8 .num { font-family: 'Anton'; font-size: 44px; color: rgba(201,168,76,0.2);
   line-height: 1; flex-shrink: 0; width: 36px; }
@@ -393,29 +395,29 @@ body {
 .s8 .sd { font-family: 'Inter'; font-size: 12px; font-weight: 300; line-height: 1.5; color: rgba(255,255,255,0.4); }
 .s8 .sd b { color: rgba(201,168,76,0.8); font-weight: 500; }
 .s8 .divider { height: 1px; background: rgba(201,168,76,0.07); }
- 
+
 /* ══════════════════════════
    SLIDE 9 — CTA
 ══════════════════════════ */
 .s9 { background: #04070F; }
- 
+
 .s9 .frame { position: absolute; inset: 20px; border: 1px solid rgba(201,168,76,0.12); }
 .s9 .frame::before { content: ''; position: absolute; top: -1px; left: 50px; right: 50px;
   height: 3px; background: linear-gradient(90deg, transparent, #C9A84C, transparent); }
 .s9 .frame::after { content: ''; position: absolute; bottom: -1px; left: 50px; right: 50px;
   height: 3px; background: linear-gradient(90deg, transparent, #C9A84C, transparent); }
- 
+
 .s9 .content { position: absolute; inset: 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center; text-align: center; padding: 40px 40px 30px; }
- 
+
 .s9 .badge { width: 64px; height: 64px; border-radius: 50%;
   background: linear-gradient(135deg,#C9A84C,#E8D18A);
   display: flex; align-items: center; justify-content: center;
   font-family: 'Bebas Neue'; font-size: 22px; color: #0D1B3E; letter-spacing: 1px; margin-bottom: 14px; }
- 
+
 .s9 .brand { font-family: 'Oswald'; font-size: 13px; font-weight: 600;
   letter-spacing: 5px; color: #C9A84C; text-transform: uppercase; margin-bottom: 20px; opacity: 0.8; }
- 
+
 .s9 .hl1 { font-family: 'Anton'; font-size: 52px; line-height: 0.9; color: #FFFFFF; letter-spacing: -1px; margin-bottom: 4px; }
 .s9 .hl2 {
   font-family: 'Anton'; font-size: 52px; line-height: 0.9; letter-spacing: -1px;
@@ -423,15 +425,15 @@ body {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   margin-bottom: 18px;
 }
- 
+
 .s9 .sub { font-family: 'Inter'; font-size: 13px; font-weight: 300; line-height: 1.6;
   color: rgba(255,255,255,0.4); max-width: 360px; margin-bottom: 22px; }
 .s9 .sub b { color: rgba(201,168,76,0.9); font-weight: 500; }
- 
+
 .s9 .cta-btn { background: linear-gradient(135deg,#C9A84C,#E8D18A); padding: 14px 36px; margin-bottom: 22px;
   font-family: 'Oswald'; font-size: 16px; font-weight: 700; color: #0D1B3E;
   letter-spacing: 2px; text-transform: uppercase; }
- 
+
 .s9 .actions { display: flex; gap: 30px; align-items: center; }
 .s9 .act { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .s9 .act-ico { font-size: 18px; }
@@ -440,7 +442,7 @@ body {
 .s9 .act-div { width: 1px; height: 34px; background: rgba(201,168,76,0.15); }
 .s9 .tagline { position: absolute; bottom: 30px; font-family: 'Inter'; font-size: 11px;
   font-style: italic; color: rgba(201,168,76,0.25); letter-spacing: 1px; }
- 
+
 /* ─── NAV ─── */
 .nav { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
 .nav button { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
@@ -449,19 +451,20 @@ body {
 .nav button:hover { background: rgba(201,168,76,0.16); }
 .nav .counter { font-family: 'Bebas Neue'; font-size: 22px; letter-spacing: 3px;
   color: rgba(201,168,76,0.4); min-width: 60px; text-align: center; }
- 
+
 .dots { display: flex; gap: 6px; margin-top: 14px; }
 .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,168,76,0.15); transition: all 0.3s; cursor: pointer; }
 .dot.active { background: #C9A84C; width: 18px; border-radius: 3px; }
 .tip { margin-top: 14px; font-family: 'Inter'; font-size: 11px; font-weight: 300;
   color: rgba(255,255,255,0.18); letter-spacing: 1px; text-transform: uppercase; }
 </style>
+<base target="_blank">
 </head>
 <body>
 <div class="viewer">
   <div class="overflow-wrap">
     <div class="track" id="track">
- 
+
       <!-- S1: PORTADA -->
       <div class="slide s1">
         <div class="bg-lines"></div>
@@ -480,7 +483,7 @@ body {
         <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
         <div class="swipe">Desliza →</div>
       </div>
- 
+
       <!-- S2: DATO -->
       <div class="slide s2">
         <div class="vert"></div>
@@ -495,7 +498,7 @@ body {
         <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
         <div class="pg">02 / 09</div>
       </div>
- 
+
       <!-- S3: LAS 3 MENTIRAS -->
       <div class="slide s3">
         <div class="header">
@@ -528,7 +531,7 @@ body {
         <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
         <div class="pg">03 / 09</div>
       </div>
- 
+
       <!-- S4: NO vs SÍ -->
       <div class="slide s4">
         <div class="left">
@@ -556,7 +559,7 @@ body {
         <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
         <div class="pg">04 / 09</div>
       </div>
- 
+
       <!-- S5: EL HOMBRE REAL -->
       <div class="slide s5">
         <div class="stripe"></div>
@@ -575,7 +578,7 @@ body {
         <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
         <div class="pg">05 / 09</div>
       </div>
- 
+
       <!-- S6: TRIÁNGULO -->
       <div class="slide s6">
         <div class="header">
@@ -606,7 +609,7 @@ body {
         <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
         <div class="pg">06 / 09</div>
       </div>
- 
+
       <!-- S7: SEÑALES -->
       <div class="slide s7">
         <div class="header">
@@ -623,7 +626,7 @@ body {
         <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
         <div class="pg">07 / 09</div>
       </div>
- 
+
       <!-- S8: PLAN -->
       <div class="slide s8">
         <div class="gold-right"></div>
@@ -667,7 +670,7 @@ body {
         <div class="brand-chip"><div class="bf">BF</div><div class="name">BraFit</div></div>
         <div class="pg">08 / 09</div>
       </div>
- 
+
       <!-- S9: CTA -->
       <div class="slide s9">
         <div class="frame"></div>
@@ -688,10 +691,10 @@ body {
           <div class="tagline">No es azar, es estrategia. Alcánzalo.</div>
         </div>
       </div>
- 
+
     </div>
   </div>
- 
+
   <div class="dots" id="dots"></div>
   <div class="nav">
     <button onclick="prev()">← Ant</button>
@@ -700,7 +703,7 @@ body {
   </div>
   <div class="tip">← → teclado · dots · screenshot por slide</div>
 </div>
- 
+
 <script>
 let cur=0; const total=9;
 const track=document.getElementById('track');
@@ -721,4 +724,4 @@ function next(){goTo(cur+1);} function prev(){goTo(cur-1);}
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev();});
 </script>
 </body>
-</html>
+<
