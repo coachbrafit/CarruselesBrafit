@@ -1,260 +1,486 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRAFIT 7</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;.col-1 .metodo-title h3
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Historia — Método BTP95</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        :root {
-            --brafit-navy: #0d1b2a;
-            --brafit-navy-mid: #1b263b;
-            --brafit-navy-light: #415a77;
-            --brafit-gold: #c9a227;
-            --brafit-gold-light: #e0b840;
-            --brafit-cream: #e0e1dd;
-            --brafit-cream-light: #f5f5f0;
-        }
+  :root {
+    --black: #0a0a0a;
+    --dark: #111417;
+    --card: #161b20;
+    --accent: #C8972A;
+    --accent2: #e8b84b;
+    --text: #e8e2d6;
+    --muted: #8a8278;
+    --line: rgba(200,151,42,0.25);
+  }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: #222;
-            margin: 0;
-            padding: 20px;
-            overflow-x: auto;
-        }
+  html { scroll-behavior: smooth; }
 
-        .panoramic-container {
-            width: 1800px;
-            height: 700px;
-            background: linear-gradient(to bottom, 
-                var(--brafit-cream-light) 0%, 
-                var(--brafit-cream) 20%,
-                var(--brafit-navy-light) 60%,
-                var(--brafit-navy-mid) 80%,
-                var(--brafit-navy) 100%);
-            display: flex;
-            position: relative;
-            flex-shrink: 0;
-        }
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
 
-        .cut-line {
-            position: absolute;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background: rgba(201, 162, 39, 0.4);
-            z-index: 100;
-        }
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,151,42,0.12) 0%, transparent 70%),
+      var(--black);
+    overflow: hidden;
+  }
 
-        .cut-line-1 { left: 600px; }
-        .cut-line-2 { left: 1200px; }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(200,151,42,0.06) 80px),
+      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(200,151,42,0.06) 80px);
+    pointer-events: none;
+  }
 
-        .column {
-            width: 600px;
-            height: 100%;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 40px;
-            background: transparent;
-        }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
 
-        .sparkle {
-            position: absolute;
-            color: var(--brafit-gold);
-            font-size: 32px;
-            z-index: 10;
-        }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    line-height: 1.05;
+    max-width: 800px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
 
-        /* COLUMN 1 - Método */
-        .col-1 .sparkle { top: 50px; right: 50px; }
-        .col-1 { text-align: center; }
-        
-        .col-1 .metodo-title {
-            margin-bottom: 40px; 
-        }
-        /*logo de btp95*/
-        .logo-btp {
-            width: 310px;      /* ← Cambia este valor al tamaño deseado */
-            height: auto;
-        }
-        .col-1 .metodo-title h3 {
-            font-family: 'Tangerine', cursive;
-            font-size: 5rem;  /* Más grande por ser muy fina */
-            color: var(--brafit-navy);
-            font-weight: 700;  /* Bold para que se lea mejor */
-            margin-bottom: 5px;
-        }
-        .col-1 .metodo-title h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 5rem;
-            font-weight: 800;
-            color: var(--brafit-navy);
-            text-transform: uppercase;
-            line-height: 0.9;
-            letter-spacing: 5px;
-        }
-        .col-1 .metodo-title h4 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--brafit-gold);
-            text-transform: uppercase;
-            letter-spacing: 6px;
-        }
-        .col-1 .que-es-box {
-            background: rgba(13,27,42,0.9);
-            padding: 20px 15px;
-            border-radius: 10px;
-            transform: rotate(-2deg);
-            box-shadow: 5px 5px 20px rgba(13,27,42,0.5);
-            border: 2px solid var(--brafit-gold);
-        }
-        .col-1 .que-es-box p {
-           font-family: 'Cinzel Decorative', serif;
-            font-size: 2.8rem;
-            color: var(--brafit-navy);
-            font-weight: 80;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
 
-        /* COLUMN 2 - Quién Soy + Imagen */
-        .col-2 {
-            position: relative;
-            overflow: visible;;
-        }
-        .col-2 .sparkle-top { 
-            top: 50px; 
-            right: 50px; 
-        }
-        .image-wrapper {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 110%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-        }
-        .person-image {
-            width: 80%;
-            height: auto;          /* Altura automática, no corta */
-            object-fit: contain;   /* Muestra toda la imagen */
-            object-position: center;
-            display: block;
-        }
-        .quien-soy {
-            position: absolute;
-            top: 80px;
-            right: 80px;
-            text-align: center;
-            z-index: 20;
-        }
-        .quien-soy h2 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 2.8rem;
-            color: var(--brafit-navy);
-            font-weight: 700;
-            line-height: 1;
-        }
-        .quien-soy h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--brafit-gold);
-            text-transform: uppercase;
-        }
-        .arrow {
-            font-size: 3rem;
-            color: var(--brafit-gold);
-            margin-top: 10px;
-            font-weight: bold;
-        }
+  .hero-sub {
+    margin-top: 28px;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--muted);
+    max-width: 520px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.7s forwards;
+  }
 
-        /* COLUMN 3 - Transformaciones */
-        .col-3 .sparkle { top: 50px; left: 50px; }
-        .col-3 { text-align: center; }
-        .col-3 h2 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 3rem;
-            color: var(--brafit-cream-light);
-            font-weight: 400;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        .col-3 h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--brafit-cream-light);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            line-height: 1.1;
-        }
+  .scroll-cue {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s forwards;
+  }
 
-        /* Labels */
-        .labels {
-            display: flex;
-            width: 1800px;
-            justify-content: space-around;
-            margin-bottom: 10px;
-            color: var(--brafit-cream-light);
-            font-size: 16px;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .label {
-            width: 600px;
-            text-align: center;
-            background: var(--brafit-navy);
-            padding: 10px;
-            border: 2px solid var(--brafit-gold);
-        }
-    </style>
+  .scroll-cue span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── STORY SECTIONS ── */
+  .story {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 120px;
+  }
+
+  .chapter {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 32px;
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .chapter.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .chapter-num {
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6px;
+  }
+
+  .chapter-num .num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.8rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .chapter-num .vline {
+    width: 1px;
+    flex: 1;
+    background: var(--line);
+    margin-top: 12px;
+    min-height: 40px;
+  }
+
+  .chapter-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .chapter h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  .chapter p {
+    font-size: 1.05rem;
+    color: #b8b0a4;
+    margin-bottom: 18px;
+  }
+
+  .chapter p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .quote-block {
+    margin: 56px 0;
+    padding: 40px 48px;
+    border-left: 3px solid var(--accent);
+    background: var(--card);
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .quote-block.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .quote-block::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    color: var(--accent);
+    opacity: 0.2;
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    line-height: 1;
+  }
+
+  .quote-block blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  /* ── TURNING POINT ── */
+  .turning-point {
+    background: linear-gradient(135deg, rgba(200,151,42,0.12) 0%, transparent 60%);
+    border: 1px solid var(--line);
+    padding: 48px;
+    margin: 64px 0;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.97);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .turning-point.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .turning-point::after {
+    content: 'BTP';
+    position: absolute;
+    right: -20px;
+    bottom: -30px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 8rem;
+    color: rgba(200,151,42,0.05);
+    letter-spacing: -4px;
+  }
+
+  .turning-point .tp-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .turning-point h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    margin-bottom: 20px;
+  }
+
+  .turning-point p {
+    color: #b8b0a4;
+    font-size: 1.05rem;
+    max-width: 640px;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center;
+    padding: 100px 24px;
+    background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(200,151,42,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .cta-section.visible { opacity: 1; }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  .cta-section h2 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .cta-section p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 480px;
+    margin: 0 auto 40px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 18px 48px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .cta-btn:hover {
+    background: var(--accent2);
+    transform: translateY(-2px);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 64px 0;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  @media (max-width: 600px) {
+    .chapter { grid-template-columns: 48px 1fr; gap: 0 16px; }
+    .chapter-num .num { font-size: 1.8rem; }
+    .quote-block { padding: 28px 24px; }
+    .turning-point { padding: 28px 24px; }
+  }
+</style>
 </head>
 <body>
-    <div class="labels">
-        <div class="label">Post 1/3 - Método</div>
-        <div class="label">Post 2/3 - Quién Soy</div>
-        <div class="label">Post 3/3 - Transformaciones</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">La historia detrás del Método BTP95</p>
+  <h1>Nací para <em>ayudar</em><br>a quienes no tienen tiempo<br>de cuidarse</h1>
+  <p class="hero-sub">Esta no es solo mi historia. Es el origen de un método que ya está cambiando la vida de hombres como tú.</p>
+  <div class="scroll-cue">
+    <span>Continúa</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+
+  <!-- CAP 1 -->
+  <div class="chapter" data-animate>
+    <div class="chapter-num"><span class="num">01</span><div class="vline"></div></div>
+    <div>
+      <p class="chapter-label">El comienzo</p>
+      <h2>Lo vi de cerca desde siempre</h2>
+      <p>Crecí mirando algo que me dolía sin saber por qué: <strong>personas de mi familia consumidas por el cansancio, el sobrepeso y la falta de tiempo.</strong> Hombres trabajadores, dedicados, que daban todo en el trabajo y en casa… pero que no tenían nada para ellos mismos.</p>
+      <p>No era flojera. Era que el sistema no les dejaba espacio. Y yo, sin saberlo todavía, estaba tomando nota de cada uno de esos momentos.</p>
     </div>
+  </div>
 
-    <div class="panoramic-container">
+  <div class="quote-block" data-animate>
+    <blockquote>Desde niño supe que quería enseñar. Todavía no sabía qué. Pero sí a quién: a la gente que más lo necesitaba.</blockquote>
+  </div>
 
-        <!-- COLUMN 1: Método -->
-        <div class="column col-1">
-           
-            <div class="metodo-title">
-                
-                <!--<img src="data:image/png;base64,TU_LOGO_AQUI" alt="BTP 95 Logo" class="logo-btp">-->
-               
-            </div>
-            
-        </div>
-
-        <!-- COLUMN 2: Quién Soy + Imagen -->
-        <div class="column col-2">
-        </div>
-
-        <!-- COLUMN 3: Transformaciones -->
-        <div class="column col-3">
-            
-        </div>
+  <!-- CAP 2 -->
+  <div class="chapter" data-animate>
+    <div class="chapter-num"><span class="num">02</span><div class="vline"></div></div>
+    <div>
+      <p class="chapter-label">El fútbol y la identidad</p>
+      <h2>El campo fue mi primera aula</h2>
+      <p>El fútbol no fue solo un deporte para mí. Fue el lugar donde aprendí que <strong>la disciplina, la estrategia y el trabajo en equipo transforman personas.</strong> Participé en torneos nacionales, gané competencias… y cada vez que un equipo mejoraba bajo mi influencia, sentía algo que ningún trofeo podía explicar.</p>
+      <p>Sin embargo, mi familia seguía siendo ese espejo de la realidad: aún ocupados, aún cansados, aún dejándose para lo último. El contraste me marcó.</p>
     </div>
+  </div>
+
+  <!-- CAP 3 -->
+  <div class="chapter" data-animate>
+    <div class="chapter-num"><span class="num">03</span><div class="vline"></div></div>
+    <div>
+      <p class="chapter-label">La decisión</p>
+      <h2>Dos caminos. Una sola verdad.</h2>
+      <p>Al graduarme, la vida me puso ante una encrucijada: <strong>el fútbol profesional o la universidad.</strong> Elegí la Licenciatura en Educación Física, no por descarte, sino por convicción. Porque amo enseñar. Amo ver a alguien descubrir algo nuevo que le facilita la vida.</p>
+      <p>Esa decisión fue la primera en una larga lista de actos de valentía que definirían quién soy hoy.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CAP 4 -->
+  <div class="chapter" data-animate>
+    <div class="chapter-num"><span class="num">04</span><div class="vline"></div></div>
+    <div>
+      <p class="chapter-label">El giro inesperado</p>
+      <h2>Entré al gimnasio sin querer… y me quedé para siempre</h2>
+      <p>Mi primer trabajo como coach en un gimnasio lo tomé como algo temporal. Pensé que ese mundo era superficial, lleno de egos y vanidad. <strong>Estaba completamente equivocado.</strong></p>
+      <p>Cuando empecé a entrenar yo mismo, algo cambió en mí. Comprendí que el gimnasio no construye cuerpos. Construye personas. <strong>Fortalece el cuerpo, renueva el espíritu y reconstruye la confianza.</strong></p>
+      <p>Y cuando lo vi en mis clientes… no había vuelta atrás.</p>
+    </div>
+  </div>
+
+  <div class="quote-block" data-animate>
+    <blockquote>Vi hombres entrar cabizbajos y salir con una postura diferente. No solo física. Mental. Eso no se olvida jamás.</blockquote>
+  </div>
+
+  <!-- CAP 5 -->
+  <div class="chapter" data-animate>
+    <div class="chapter-num"><span class="num">05</span><div class="vline"></div></div>
+    <div>
+      <p class="chapter-label">El método nace</p>
+      <h2>Perfeccioné lo que nadie más estaba haciendo</h2>
+      <p>La mayoría de mis clientes no eran atletas. <strong>Eran profesionales con agendas imposibles, estrés acumulado y cuerpos que pedían auxilio.</strong> No podía darles el mismo programa que a un deportista de 25 años. Tenía que pensar diferente.</p>
+      <p>Empecé a construir sistemas que se adaptaran a ellos: a sus horarios, a su nivel de estrés, a su vida real. Sin dietas que los maten de hambre. Sin entrenamientos de 2 horas que nunca cumplirían.</p>
+      <p><strong>Resultados reales, en un tiempo real, para personas reales.</strong></p>
+    </div>
+  </div>
+
+  <!-- TURNING POINT -->
+  <div class="turning-point" data-animate>
+    <p class="tp-label">El momento que lo cambió todo</p>
+    <h3>Salir de mi zona de confort fue el mayor regalo</h3>
+    <p>Cambiar de gimnasio me aterrorizó. Me sentí vulnerable. Pero fue ahí, trabajando con nuevas personas, explorando metodologías funcionales y aeróbicas, donde todas las piezas encajaron. <strong>El Método BTP95 no se inventó. Se vivió.</strong> Es el resultado de años de observación, errores, aprendizajes y una misión que nunca cambió: ayudar a hombres ocupados a recuperar su mejor versión.</p>
+  </div>
+
+  <!-- CAP 6 -->
+  <div class="chapter" data-animate>
+    <div class="chapter-num"><span class="num">06</span><div class="vline"></div></div>
+    <div>
+      <p class="chapter-label">Hoy</p>
+      <h2>Esto no es mi profesión.<br>Es mi vocación.</h2>
+      <p>Hoy trabajo con hombres de +35 años, profesionales de alto rendimiento, que están hartos de verse al espejo y no reconocerse. Que quieren energía para sus hijos, claridad mental para sus decisiones y un cuerpo que esté a la altura de todo lo que ya construyeron.</p>
+      <p><strong>El Método BTP95 es el camino de 95 días que los lleva de vuelta a su pico.</strong> Sin excusas. Sin atajos. Con un sistema que respeta su tiempo y maximiza cada esfuerzo.</p>
+      <p>Porque ya saben lo que es rendir en todo lo demás.<br><strong>Ahora es su turno.</strong></p>
+    </div>
+  </div>
+
+</section>
+
+<!-- CTA -->
+<div class="cta-section" data-animate>
+  <h2>¿Listo para volver a tu <em>mejor versión</em>?</h2>
+  <p>95 días. Un método personalizado. Y alguien que ya vivió el camino para guiarte.</p>
+  <a class="cta-btn" href="#">Quiero empezar mi transformación</a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
