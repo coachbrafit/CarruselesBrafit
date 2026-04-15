@@ -131,7 +131,7 @@
         /* COLUMN 2 - Quién Soy + Imagen */
         .col-2 {
             position: relative;
-            overflow: hidden;
+            overflow: visible;;
         }
         .col-2 .sparkle-top { 
             top: 50px; 
@@ -150,9 +150,9 @@
         }
         .person-image {
             width: 50%;
-            height: 50%;
-            object-fit: cover;
-            object-position: center top;
+            height: auto;          /* Altura automática, no corta */
+            object-fit: contain;   /* Muestra toda la imagen */
+            object-position: center;
             display: block;
         }
         .quien-soy {
@@ -268,7 +268,9 @@
 
         <!-- COLUMN 3: Transformaciones -->
         <div class="column col-3">
-            
+            <div class="sparkle">✦</div>
+            <h2>Transformaciones y</h2>
+            <h3>TESTIMONIOS</h3>
         </div>
     </div>
 </body>
