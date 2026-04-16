@@ -9,14 +9,15 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --black: #0a0a0a;
-    --dark: #111417;
-    --card: #161b20;
-    --accent: #C8972A;
-    --accent2: #e8b84b;
-    --text: #e8e2d6;
-    --muted: #8a8278;
-    --line: rgba(200,151,42,0.25);
+    --black: #0d1828;
+    --dark: #112240;
+    --card: #162a4a;
+    --accent: #C8A84B;
+    --accent2: #F0C040;
+    --accent-blue: #4a7ab5;
+    --text: #f0f4ff;
+    --muted: #7a9cbf;
+    --line: rgba(200,168,75,0.28);
   }
 
   html { scroll-behavior: smooth; }
@@ -41,8 +42,8 @@
     padding: 60px 24px;
     position: relative;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,151,42,0.12) 0%, transparent 70%),
-      var(--black);
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,122,181,0.25) 0%, transparent 70%),
+      linear-gradient(160deg, #0d1828 0%, #1a3258 50%, #0d1828 100%);
     overflow: hidden;
   }
 
@@ -51,8 +52,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(200,151,42,0.06) 80px),
-      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(200,151,42,0.06) 80px);
+      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(74,122,181,0.08) 80px),
+      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(74,122,181,0.08) 80px);
     pointer-events: none;
   }
 
@@ -235,7 +236,7 @@
 
   /* ── TURNING POINT ── */
   .turning-point {
-    background: linear-gradient(135deg, rgba(200,151,42,0.12) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(74,122,181,0.15) 0%, transparent 60%);
     border: 1px solid var(--line);
     padding: 48px;
     margin: 64px 0;
@@ -259,7 +260,7 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
     font-size: 8rem;
-    color: rgba(200,151,42,0.05);
+    color: rgba(74,122,181,0.06);
     letter-spacing: -4px;
   }
 
@@ -288,7 +289,7 @@
   .cta-section {
     text-align: center;
     padding: 100px 24px;
-    background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(200,151,42,0.1) 0%, transparent 70%);
+    background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(74,122,181,0.18) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 1s ease;
   }
