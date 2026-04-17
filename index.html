@@ -3,509 +3,676 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mi Historia — Método BTP95</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+<title>BraFit — Ya lo intenté todo</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --beige:  #F2EBD9;
+  --beige2: #EAE0CA;
+  --beige3: #DDD0B8;
+  --navy:   #0D1B3E;
+  --navy2:  #162347;
+  --gold:   #C9A84C;
+  --gold2:  #E2C47A;
+}
+body {
+  background: #111; display: flex; flex-direction: column;
+  align-items: center; padding: 30px 20px 60px; gap: 0;
+}
+.viewer { width: 540px; position: relative; user-select: none; }
+.overflow-wrap {
+  width: 540px; overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.2);
+}
+.track { display: flex; transition: transform 0.5s cubic-bezier(0.77,0,0.18,1); }
+.slide {
+  width: 540px; height: 540px; flex-shrink: 0;
+  position: relative; overflow: hidden; font-family: 'Inter', sans-serif;
+}
 
-  :root {
-    --black: #0d1828;
-    --dark: #112240;
-    --card: #162a4a;
-    --accent: #C8A84B;
-    --accent2: #F0C040;
-    --accent-blue: #4a7ab5;
-    --text: #f0f4ff;
-    --muted: #7a9cbf;
-    --line: rgba(200,168,75,0.28);
-  }
+/* ── SHARED ── */
+.brand-chip {
+  position: absolute; bottom: 20px; left: 22px;
+  display: flex; align-items: center; gap: 8px; z-index: 10;
+}
+.brand-chip .bname {
+  font-family: 'Oswald'; font-weight: 700; font-size: 13px;
+  letter-spacing: 3px; text-transform: uppercase;
+}
+.pg {
+  position: absolute; bottom: 26px; right: 22px;
+  font-family: 'Oswald'; font-size: 12px; font-weight: 300;
+  letter-spacing: 1px; z-index: 10;
+}
+.logo-svg { width: 32px; height: 32px; }
 
-  html { scroll-behavior: smooth; }
+/* ── NOISE ── */
+.noise {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
 
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: 'Barlow', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+/* ══════════════
+   S1 — PORTADA
+══════════════ */
+.s1 { background: var(--navy); }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 60px 24px;
-    position: relative;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,122,181,0.25) 0%, transparent 70%),
-      linear-gradient(160deg, #0d1828 0%, #1a3258 50%, #0d1828 100%);
-    overflow: hidden;
-  }
+.s1 .rays {
+  position: absolute; left: -100px; bottom: -100px;
+  width: 700px; height: 700px;
+  background: conic-gradient(from 210deg at 25% 85%,
+    transparent 0deg, rgba(201,168,76,0.05) 20deg,
+    transparent 40deg, rgba(201,168,76,0.03) 60deg, transparent 80deg);
+}
+.s1 .gold-top {
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2), var(--gold));
+}
+.s1 .right-line {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(180deg, transparent, var(--gold) 25%, var(--gold2) 50%, var(--gold) 75%, transparent);
+}
+.s1 .content {
+  position: absolute; left: 36px; top: 50%; transform: translateY(-50%);
+  right: 36px;
+}
+.s1 .tag {
+  display: inline-block; background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3); color: var(--gold);
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 5px 14px; margin-bottom: 24px;
+}
+.s1 .l1 { font-family: 'Anton'; font-size: 78px; line-height: 0.88; color: var(--beige); letter-spacing: -1px; }
+.s1 .l2 { font-family: 'Anton'; font-size: 78px; line-height: 0.88; color: var(--beige); letter-spacing: -1px; }
+.s1 .l3 { font-family: 'Anton'; font-size: 78px; line-height: 0.88; color: var(--gold); letter-spacing: -1px; margin-bottom: 8px; }
+.s1 .l4 { font-family: 'Anton'; font-size: 38px; line-height: 1; color: rgba(242,235,217,0.2); margin-bottom: 22px; }
+.s1 .sep { width: 50px; height: 3px; background: var(--gold); margin-bottom: 18px; }
+.s1 .sub { font-size: 15px; font-weight: 300; line-height: 1.65; color: rgba(242,235,217,0.5); }
+.s1 .sub b { color: var(--beige); font-weight: 500; }
+.s1 .swipe {
+  position: absolute; bottom: 26px; right: 22px;
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; color: rgba(201,168,76,0.4);
+}
+.s1 .brand-chip .bname { color: var(--gold2); }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(74,122,181,0.08) 80px),
-      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(74,122,181,0.08) 80px);
-    pointer-events: none;
-  }
+/* ══════════════
+   S2 — TE ENTIENDO
+══════════════ */
+.s2 { background: var(--beige); }
 
-  .hero-eyebrow {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 28px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.2s forwards;
-  }
+.s2 .left-bar {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: linear-gradient(180deg, transparent, var(--navy) 15%, var(--navy) 85%, transparent);
+}
+.s2 .corner-br {
+  position: absolute; bottom: 0; right: 0;
+  width: 140px; height: 140px;
+  border-top: 1px solid rgba(13,27,62,0.07);
+  border-left: 1px solid rgba(13,27,62,0.07);
+}
+.s2 .content {
+  position: absolute; left: 36px; right: 36px; top: 50%; transform: translateY(-50%);
+}
+.s2 .eyebrow {
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 18px;
+}
+.s2 .big {
+  font-family: 'Anton'; font-size: 58px; line-height: 0.9;
+  color: var(--navy); letter-spacing: -1px; margin-bottom: 22px;
+}
+.s2 .big em { color: var(--gold); font-style: normal; }
+.s2 .sep { width: 50px; height: 3px; background: var(--gold); margin-bottom: 20px; }
+.s2 .body { font-size: 16px; font-weight: 300; line-height: 1.75; color: rgba(13,27,62,0.6); }
+.s2 .body b { color: var(--navy); font-weight: 600; }
+.s2 .brand-chip .bname { color: var(--navy); }
+.s2 .pg { color: rgba(13,27,62,0.25); }
 
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: clamp(2.8rem, 8vw, 6rem);
-    line-height: 1.05;
-    max-width: 800px;
-    opacity: 0;
-    animation: fadeUp 0.9s ease 0.4s forwards;
-  }
+/* ══════════════
+   S3 — LO QUE INTENTASTE
+══════════════ */
+.s3 { background: var(--beige2); }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
+.s3 .header { position: absolute; top: 26px; left: 28px; right: 28px; }
+.s3 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.s3 .title { font-family: 'Anton'; font-size: 30px; color: var(--navy); line-height: 1.05; }
+.s3 .title em { color: var(--gold); font-style: normal; }
 
-  .hero-sub {
-    margin-top: 28px;
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--muted);
-    max-width: 520px;
-    opacity: 0;
-    animation: fadeUp 0.9s ease 0.7s forwards;
-  }
+.s3 .list { position: absolute; top: 96px; left: 22px; right: 22px; bottom: 56px;
+  display: flex; flex-direction: column; gap: 9px; }
 
-  .scroll-cue {
-    position: absolute;
-    bottom: 36px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 1.2s forwards;
-  }
+.s3 .item {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(13,27,62,0.04); border: 1px solid rgba(13,27,62,0.08);
+  border-left: 3px solid var(--navy); padding: 13px 16px;
+}
+.s3 .ico { font-size: 20px; flex-shrink: 0; }
+.s3 .txt { font-size: 14px; font-weight: 300; color: rgba(13,27,62,0.65); line-height: 1.4; }
+.s3 .txt b { color: var(--navy); font-weight: 600; }
+.s3 .brand-chip .bname { color: var(--navy); }
+.s3 .pg { color: rgba(13,27,62,0.25); }
 
-  .scroll-cue span {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
+/* ══════════════
+   S4 — POR QUÉ NO FUNCIONÓ
+══════════════ */
+.s4 { background: var(--navy2); }
 
-  .scroll-line {
-    width: 1px;
-    height: 48px;
-    background: linear-gradient(to bottom, var(--accent), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
+.s4 .gold-bar {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: linear-gradient(180deg, transparent, var(--gold) 20%, var(--gold2) 50%, var(--gold) 80%, transparent);
+}
+.s4 .header { position: absolute; top: 26px; left: 34px; right: 28px; }
+.s4 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 4px; }
+.s4 .title { font-family: 'Anton'; font-size: 30px; color: var(--beige); line-height: 1.05; }
+.s4 .title em { color: var(--gold); font-style: normal; }
 
-  /* ── STORY SECTIONS ── */
-  .story {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 24px 120px;
-  }
+.s4 .reasons { position: absolute; top: 96px; left: 22px; right: 22px; bottom: 56px;
+  display: flex; flex-direction: column; gap: 10px; }
 
-  .chapter {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 0 32px;
-    margin-bottom: 80px;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
+.s4 .reason {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.12);
+  border-left: 3px solid var(--gold); padding: 13px 16px;
+}
+.s4 .r-num {
+  font-family: 'Anton'; font-size: 32px; color: rgba(201,168,76,0.2);
+  line-height: 1; flex-shrink: 0; width: 28px;
+}
+.s4 .r-content {}
+.s4 .r-title { font-family: 'Oswald'; font-size: 14px; font-weight: 600;
+  color: var(--gold2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+.s4 .r-desc { font-size: 12px; font-weight: 300; color: rgba(242,235,217,0.45); line-height: 1.5; }
+.s4 .r-desc b { color: rgba(242,235,217,0.8); font-weight: 500; }
+.s4 .brand-chip .bname { color: var(--gold2); }
+.s4 .pg { color: rgba(201,168,76,0.25); }
 
-  .chapter.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ══════════════
+   S5 — EL VERDADERO PROBLEMA
+══════════════ */
+.s5 { background: var(--beige); }
 
-  .chapter-num {
-    grid-row: 1 / 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 6px;
-  }
+.s5 .stripe {
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--navy), var(--navy2), var(--navy));
+}
+.s5 .ghost {
+  position: absolute; right: -15px; top: 50%; transform: translateY(-50%);
+  font-family: 'Anton'; font-size: 200px; color: rgba(13,27,62,0.04);
+  line-height: 1; pointer-events: none; white-space: nowrap;
+}
+.s5 .content {
+  position: absolute; left: 36px; right: 36px; top: 50%; transform: translateY(-50%);
+}
+.s5 .eyebrow { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.s5 .l1 { font-family: 'Anton'; font-size: 64px; line-height: 0.9; color: var(--navy); letter-spacing: -1px; }
+.s5 .l2 { font-family: 'Anton'; font-size: 64px; line-height: 0.9; color: var(--gold); letter-spacing: -1px; margin-bottom: 22px; }
+.s5 .sep { width: 50px; height: 3px; background: var(--navy); margin-bottom: 18px; }
+.s5 .box {
+  background: rgba(13,27,62,0.05); border-left: 4px solid var(--navy);
+  padding: 16px 20px;
+}
+.s5 .box-text { font-size: 15px; font-weight: 300; line-height: 1.7; color: rgba(13,27,62,0.65); }
+.s5 .box-text b { color: var(--navy); font-weight: 600; }
+.s5 .brand-chip .bname { color: var(--navy); }
+.s5 .pg { color: rgba(13,27,62,0.25); }
 
-  .chapter-num .num {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 2.8rem;
-    color: var(--accent);
-    line-height: 1;
-  }
+/* ══════════════
+   S6 — ESTO SÍ ES REAL
+══════════════ */
+.s6 { background: var(--navy); }
 
-  .chapter-num .vline {
-    width: 1px;
-    flex: 1;
-    background: var(--line);
-    margin-top: 12px;
-    min-height: 40px;
-  }
+.s6 .right-bar {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 5px;
+  background: linear-gradient(180deg, transparent, var(--gold) 20%, var(--gold2) 50%, var(--gold) 80%, transparent);
+}
+.s6 .content {
+  position: absolute; left: 36px; right: 42px; top: 50%; transform: translateY(-50%);
+}
+.s6 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 14px; }
+.s6 .title { font-family: 'Anton'; font-size: 46px; line-height: 0.9;
+  color: var(--beige); letter-spacing: -1px; margin-bottom: 28px; }
+.s6 .title em { color: var(--gold); font-style: normal; }
 
-  .chapter-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
+.s6 .truths { display: flex; flex-direction: column; gap: 12px; }
+.s6 .truth {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px;
+  background: rgba(242,235,217,0.04); border: 1px solid rgba(201,168,76,0.12);
+  border-left: 3px solid var(--gold);
+}
+.s6 .t-ico { font-size: 22px; flex-shrink: 0; }
+.s6 .t-text { font-size: 14px; font-weight: 300; line-height: 1.55; color: rgba(242,235,217,0.6); }
+.s6 .t-text b { color: var(--beige); font-weight: 500; }
+.s6 .brand-chip .bname { color: var(--gold2); }
+.s6 .pg { color: rgba(201,168,76,0.25); }
 
-  .chapter h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    color: var(--text);
-  }
+/* ══════════════
+   S7 — PARA TI QUE…
+══════════════ */
+.s7 { background: var(--beige2); }
 
-  .chapter p {
-    font-size: 1.05rem;
-    color: #b8b0a4;
-    margin-bottom: 18px;
-  }
+.s7 .left-bar {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: linear-gradient(180deg, transparent, var(--gold) 20%, var(--gold2) 50%, var(--gold) 80%, transparent);
+}
+.s7 .content {
+  position: absolute; left: 36px; right: 36px; top: 50%; transform: translateY(-50%);
+}
+.s7 .eyebrow { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+.s7 .title { font-family: 'Anton'; font-size: 52px; line-height: 0.9;
+  color: var(--navy); letter-spacing: -1px; margin-bottom: 24px; }
+.s7 .title em { color: var(--gold); font-style: normal; }
+.s7 .sep { width: 50px; height: 3px; background: var(--navy); margin-bottom: 22px; }
+.s7 .lines { display: flex; flex-direction: column; gap: 10px; }
+.s7 .line {
+  font-size: 15px; font-weight: 300; line-height: 1.55;
+  color: rgba(13,27,62,0.6); padding-left: 16px;
+  border-left: 2px solid rgba(201,168,76,0.4);
+}
+.s7 .line b { color: var(--navy); font-weight: 600; }
+.s7 .brand-chip .bname { color: var(--navy); }
+.s7 .pg { color: rgba(13,27,62,0.25); }
 
-  .chapter p strong {
-    color: var(--text);
-    font-weight: 600;
-  }
+/* ══════════════
+   S8 — EL PASO SIGUIENTE
+══════════════ */
+.s8 { background: var(--beige); }
 
-  /* ── QUOTE BLOCK ── */
-  .quote-block {
-    margin: 56px 0;
-    padding: 40px 48px;
-    border-left: 3px solid var(--accent);
-    background: var(--card);
-    position: relative;
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
+.s8 .noise { }
+.s8 .top-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2), var(--gold));
+}
+.s8 .content {
+  position: absolute; left: 36px; right: 36px; top: 50%; transform: translateY(-50%);
+}
+.s8 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.s8 .title { font-family: 'Anton'; font-size: 42px; line-height: 0.95;
+  color: var(--navy); letter-spacing: -1px; margin-bottom: 24px; }
+.s8 .title em { color: var(--gold); font-style: normal; }
 
-  .quote-block.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.s8 .steps { display: flex; flex-direction: column; gap: 10px; }
+.s8 .step { display: flex; align-items: flex-start; gap: 14px; }
+.s8 .n { font-family: 'Anton'; font-size: 40px; color: rgba(13,27,62,0.12);
+  line-height: 1; flex-shrink: 0; width: 32px; }
+.s8 .sc { flex: 1; padding-top: 4px; }
+.s8 .st { font-family: 'Oswald'; font-size: 15px; font-weight: 600;
+  color: var(--navy); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+.s8 .sd { font-size: 12px; font-weight: 300; color: rgba(13,27,62,0.5); line-height: 1.5; }
+.s8 .sd b { color: var(--gold); font-weight: 600; }
+.s8 .divider { height: 1px; background: rgba(13,27,62,0.07); }
+.s8 .brand-chip .bname { color: var(--navy); }
+.s8 .pg { color: rgba(13,27,62,0.25); }
 
-  .quote-block::before {
-    content: '"';
-    font-family: 'Playfair Display', serif;
-    font-size: 6rem;
-    color: var(--accent);
-    opacity: 0.2;
-    position: absolute;
-    top: -10px;
-    left: 16px;
-    line-height: 1;
-  }
+/* ══════════════
+   S9 — CTA EMOCIONAL
+══════════════ */
+.s9 { background: var(--navy); }
 
-  .quote-block blockquote {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: clamp(1.1rem, 3vw, 1.6rem);
-    line-height: 1.5;
-    color: var(--text);
-  }
+.s9 .frame { position: absolute; inset: 18px; border: 1px solid rgba(201,168,76,0.12); }
+.s9 .frame::before { content: ''; position: absolute; top: -1px; left: 40px; right: 40px;
+  height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.s9 .frame::after { content: ''; position: absolute; bottom: -1px; left: 40px; right: 40px;
+  height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
 
-  /* ── TURNING POINT ── */
-  .turning-point {
-    background: linear-gradient(135deg, rgba(74,122,181,0.15) 0%, transparent 60%);
-    border: 1px solid var(--line);
-    padding: 48px;
-    margin: 64px 0;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    transform: scale(0.97);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
+.s9 .content { position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; padding: 40px 36px; }
 
-  .turning-point.visible {
-    opacity: 1;
-    transform: scale(1);
-  }
+.s9 .logo-wrap { margin-bottom: 16px; }
 
-  .turning-point::after {
-    content: 'BTP';
-    position: absolute;
-    right: -20px;
-    bottom: -30px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 8rem;
-    color: rgba(74,122,181,0.06);
-    letter-spacing: -4px;
-  }
+.s9 .hl1 { font-family: 'Anton'; font-size: 52px; line-height: 0.9; color: var(--beige); letter-spacing: -1px; }
+.s9 .hl2 { font-family: 'Anton'; font-size: 52px; line-height: 0.9; color: var(--gold); letter-spacing: -1px; margin-bottom: 8px; }
+.s9 .hl3 { font-family: 'Anton'; font-size: 36px; line-height: 0.9; color: rgba(242,235,217,0.25); letter-spacing: -1px; margin-bottom: 20px; }
 
-  .turning-point .tp-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.35em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
+.s9 .sub { font-size: 14px; font-weight: 300; line-height: 1.65;
+  color: rgba(242,235,217,0.45); max-width: 340px; margin-bottom: 24px; }
+.s9 .sub b { color: var(--gold2); font-weight: 500; }
 
-  .turning-point h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    margin-bottom: 20px;
-  }
+.s9 .cta { background: linear-gradient(135deg, var(--gold), var(--gold2));
+  padding: 15px 36px; margin-bottom: 22px;
+  font-family: 'Oswald'; font-size: 16px; font-weight: 700;
+  color: var(--navy); letter-spacing: 2px; text-transform: uppercase; width: 100%; }
 
-  .turning-point p {
-    color: #b8b0a4;
-    font-size: 1.05rem;
-    max-width: 640px;
-  }
+.s9 .actions { display: flex; gap: 28px; align-items: center; }
+.s9 .act { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.s9 .act-ico { font-size: 18px; }
+.s9 .act-lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase; color: rgba(242,235,217,0.25); }
+.s9 .act-div { width: 1px; height: 32px; background: rgba(201,168,76,0.15); }
+.s9 .tagline { position: absolute; bottom: 30px; font-family: 'Inter'; font-size: 11px;
+  font-style: italic; color: rgba(201,168,76,0.2); letter-spacing: 1px; }
 
-  /* ── CTA ── */
-  .cta-section {
-    text-align: center;
-    padding: 100px 24px;
-    background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(74,122,181,0.18) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
-
-  .cta-section.visible { opacity: 1; }
-
-  .cta-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    font-weight: 900;
-    margin-bottom: 20px;
-  }
-
-  .cta-section h2 em {
-    color: var(--accent);
-    font-style: italic;
-  }
-
-  .cta-section p {
-    color: var(--muted);
-    font-size: 1.1rem;
-    max-width: 480px;
-    margin: 0 auto 40px;
-  }
-
-  .cta-btn {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--black);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 1rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 18px 48px;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.2s;
-    cursor: pointer;
-  }
-
-  .cta-btn:hover {
-    background: var(--accent2);
-    transform: translateY(-2px);
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    height: 1px;
-    background: var(--line);
-    margin: 64px 0;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.4; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.1); }
-  }
-
-  @media (max-width: 600px) {
-    .chapter { grid-template-columns: 48px 1fr; gap: 0 16px; }
-    .chapter-num .num { font-size: 1.8rem; }
-    .quote-block { padding: 28px 24px; }
-    .turning-point { padding: 28px 24px; }
-  }
+/* ── NAV ── */
+.nav { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
+.nav button { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
+  color: #C9A84C; padding: 10px 22px; font-family: 'Oswald'; font-size: 14px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; border-radius: 2px; }
+.nav button:hover { background: rgba(201,168,76,0.16); }
+.nav .counter { font-family: 'Bebas Neue'; font-size: 22px; letter-spacing: 3px;
+  color: rgba(201,168,76,0.4); min-width: 60px; text-align: center; }
+.dots { display: flex; gap: 6px; margin-top: 14px; justify-content: center; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,168,76,0.15); transition: all 0.3s; cursor: pointer; }
+.dot.active { background: #C9A84C; width: 18px; border-radius: 3px; }
+.tip { margin-top: 14px; font-family: 'Inter'; font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,0.18); letter-spacing: 1px; text-transform: uppercase; text-align: center; }
 </style>
 </head>
 <body>
+<div class="viewer">
+  <div class="overflow-wrap">
+    <div class="track" id="track">
 
-<!-- HERO -->
-<section class="hero">
-  <p class="hero-eyebrow">La historia detrás del Método BTP95</p>
-  <h1>Nací para <em>ayudar</em><br>a quienes no tienen tiempo<br>de cuidarse</h1>
-  <p class="hero-sub">Esta no es solo mi historia. Es el origen de un método que ya está cambiando la vida de hombres como tú.</p>
-  <div class="scroll-cue">
-    <span>Continúa</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
+      <!-- S1: PORTADA -->
+      <div class="slide s1">
+        <div class="rays"></div>
+        <div class="gold-top"></div>
+        <div class="right-line"></div>
+        <div class="content">
+          <div class="tag">Para quien ya no sabe qué más hacer</div>
+          <div class="l1">YA LO</div>
+          <div class="l2">INTENTÉ</div>
+          <div class="l3">TODO.</div>
+          <div class="l4">Y sigo igual.</div>
+          <div class="sep"></div>
+          <div class="sub">Si has probado dietas, gym y fuerza de voluntad y <b>nada ha funcionado</b>... este post es para ti.</div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#C9A84C"/>
+            <text x="6" y="24" font-family="Georgia,serif" font-weight="700" font-size="14" fill="#0D1B3E">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="swipe">Desliza →</div>
+      </div>
 
-<!-- STORY -->
-<section class="story">
+      <!-- S2: TE ENTIENDO -->
+      <div class="slide s2">
+        <div class="noise"></div>
+        <div class="left-bar"></div>
+        <div class="corner-br"></div>
+        <div class="content">
+          <div class="eyebrow">Primero lo primero</div>
+          <div class="big">Lo que<br>sientes es<br><em>real.</em></div>
+          <div class="sep"></div>
+          <div class="body">No estás exagerando.<br>No eres el problema.<br><br>Llevas años haciendo sacrificios y <b>el cuerpo no responde.</b> Eso agota. Eso frustra. Y tiene sentido que ya no confíes en nada.</div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <text x="6" y="24" font-family="Georgia,serif" font-weight="700" font-size="14" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">02 / 09</div>
+      </div>
 
-  <!-- CAP 1 -->
-  <div class="chapter" data-animate>
-    <div class="chapter-num"><span class="num">01</span><div class="vline"></div></div>
-    <div>
-      <p class="chapter-label">El comienzo</p>
-      <h2>Lo vi de cerca desde siempre</h2>
-      <p>Crecí mirando algo que me dolía sin saber por qué: <strong>personas de mi familia consumidas por el cansancio, el sobrepeso y la falta de tiempo.</strong> Hombres trabajadores, dedicados, que daban todo en el trabajo y en casa… pero que no tenían nada para ellos mismos.</p>
-      <p>No era flojera. Era que el sistema no les dejaba espacio. Y yo, sin saberlo todavía, estaba tomando nota de cada uno de esos momentos.</p>
+      <!-- S3: LO QUE INTENTASTE -->
+      <div class="slide s3">
+        <div class="noise"></div>
+        <div class="header">
+          <div class="lbl">Reconocemos tu esfuerzo</div>
+          <div class="title">Todo lo que <em>ya intentaste</em></div>
+        </div>
+        <div class="list">
+          <div class="item"><div class="ico">🥗</div><div class="txt"><b>Dietas</b> que duran 2 semanas y luego el cuerpo se rebela</div></div>
+          <div class="item"><div class="ico">🏋️</div><div class="txt"><b>Gym</b> durante meses con resultados mínimos o ninguno</div></div>
+          <div class="item"><div class="ico">⏰</div><div class="txt"><b>Madrugar</b> a entrenar sacrificando las pocas horas de sueño</div></div>
+          <div class="item"><div class="ico">📱</div><div class="txt"><b>Planes de internet</b> que funcionan para otros pero no para ti</div></div>
+          <div class="item"><div class="ico">💊</div><div class="txt"><b>Suplementos y productos</b> que prometían resultados rápidos</div></div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <text x="6" y="24" font-family="Georgia,serif" font-weight="700" font-size="14" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">03 / 09</div>
+      </div>
+
+      <!-- S4: POR QUÉ NO FUNCIONÓ -->
+      <div class="slide s4">
+        <div class="gold-bar"></div>
+        <div class="header">
+          <div class="lbl">La verdad incómoda</div>
+          <div class="title">Por qué nada <em>funcionó</em></div>
+        </div>
+        <div class="reasons">
+          <div class="reason">
+            <div class="r-num">1</div>
+            <div class="r-content">
+              <div class="r-title">No estaba hecho para ti</div>
+              <div class="r-desc">Todos esos planes son genéricos. <b>Ninguno consideró tu estrés, tus horas, tu biología de hombre de 40+.</b></div>
+            </div>
+          </div>
+          <div class="reason">
+            <div class="r-num">2</div>
+            <div class="r-content">
+              <div class="r-title">Atacaba solo una parte</div>
+              <div class="r-desc">Gym sin nutrición. Dieta sin descanso. <b>El cuerpo necesita los 3 frentes al mismo tiempo.</b></div>
+            </div>
+          </div>
+          <div class="reason">
+            <div class="r-num">3</div>
+            <div class="r-content">
+              <div class="r-title">Ignoró el cortisol</div>
+              <div class="r-desc">Con estrés crónico, <b>tu hormona del estrés bloquea activamente la pérdida de grasa.</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#C9A84C"/>
+            <text x="6" y="24" font-family="Georgia,serif" font-weight="700" font-size="14" fill="#0D1B3E">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">04 / 09</div>
+      </div>
+
+      <!-- S5: EL VERDADERO PROBLEMA -->
+      <div class="slide s5">
+        <div class="noise"></div>
+        <div class="ghost">PLAN</div>
+        <div class="content">
+          <div class="eyebrow">La raíz del problema</div>
+          <div class="l1">NUNCA TUVISTE</div>
+          <div class="l2">EL PLAN CORRECTO.</div>
+          <div class="sep"></div>
+          <div class="box">
+            <div class="box-text">No fallaste tú. <b>Fallaron los planes que te vendieron.</b><br><br>Ninguno fue diseñado para un hombre de 35-55 años, con trabajo exigente, estrés crónico y poco tiempo disponible. Ese plan no existía... hasta ahora.</div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <text x="6" y="24" font-family="Georgia,serif" font-weight="700" font-size="14" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">05 / 09</div>
+      </div>
+
+      <!-- S6: ESTO SÍ ES REAL -->
+      <div class="slide s6">
+        <div class="right-bar"></div>
+        <div class="content">
+          <div class="lbl">Lo que cambia con BraFit</div>
+          <div class="title">Esto es lo que <em>mereces</em> tener</div>
+          <div class="truths">
+            <div class="truth">
+              <div class="t-ico">✅</div>
+              <div class="t-text">Un plan que <b>respeta tus jornadas largas</b> y funciona en 20 minutos</div>
+            </div>
+            <div class="truth">
+              <div class="t-ico">✅</div>
+              <div class="t-text">Nutrición que <b>no te pide que dejes de vivir</b> para comer bien</div>
+            </div>
+            <div class="truth">
+              <div class="t-ico">✅</div>
+              <div class="t-text">Un método que <b>ataca el cortisol primero</b> — la causa raíz</div>
+            </div>
+            <div class="truth">
+              <div class="t-ico">✅</div>
+              <div class="t-text">Acompañamiento de alguien que <b>entiende tu mundo real</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#C9A84C"/>
+            <text x="6" y="24" font-family="Georgia,serif" font-weight="700" font-size="14" fill="#0D1B3E">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">06 / 09</div>
+      </div>
+
+      <!-- S7: PARA TI QUE -->
+      <div class="slide s7">
+        <div class="noise"></div>
+        <div class="left-bar"></div>
+        <div class="content">
+          <div class="eyebrow">Este mensaje es para ti</div>
+          <div class="title">Si ya<br>no crees<br>en <em>nada...</em></div>
+          <div class="sep"></div>
+          <div class="lines">
+            <div class="line">Te entiendo. Y no te voy a pedir fe ciega.</div>
+            <div class="line">Te voy a pedir <b>una conversación.</b></div>
+            <div class="line">Cuéntame tu caso. <b>Analizamos juntos</b> por qué no ha funcionado.</div>
+            <div class="line">Sin costo. Sin compromiso. <b>Solo honestidad.</b></div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <text x="6" y="24" font-family="Georgia,serif" font-weight="700" font-size="14" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">07 / 09</div>
+      </div>
+
+      <!-- S8: EL PASO SIGUIENTE -->
+      <div class="slide s8">
+        <div class="noise"></div>
+        <div class="top-bar"></div>
+        <div class="content">
+          <div class="lbl">El método BraFit</div>
+          <div class="title">El plan que <em>sí considera</em><br>tu vida real</div>
+          <div class="steps">
+            <div class="step">
+              <div class="n">1</div>
+              <div class="sc">
+                <div class="st">Diagnóstico sin juicios</div>
+                <div class="sd">Entendemos <b>exactamente por qué no ha funcionado</b> antes.</div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="step">
+              <div class="n">2</div>
+              <div class="sc">
+                <div class="st">Plan adaptado a ti</div>
+                <div class="sd">Entrenamiento corto + nutrición real + <b>gestión del cortisol.</b></div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="step">
+              <div class="n">3</div>
+              <div class="sc">
+                <div class="st">Resultados medibles</div>
+                <div class="sd">Ajustamos cada semana hasta que <b>tu cuerpo responda.</b></div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="step">
+              <div class="n">4</div>
+              <div class="sc">
+                <div class="st">Acompañamiento real</div>
+                <div class="sd">No estás solo. <b>Alguien que entiende tu mundo</b> está contigo.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <text x="6" y="24" font-family="Georgia,serif" font-weight="700" font-size="14" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">08 / 09</div>
+      </div>
+
+      <!-- S9: CTA -->
+      <div class="slide s9">
+        <div class="frame"></div>
+        <div class="content">
+          <div class="logo-wrap">
+            <svg width="80" height="94" viewBox="0 0 160 185" fill="none">
+              <circle cx="80" cy="80" r="72" fill="#0D1B3E"/>
+              <path d="M80 10 C120 10 148 40 148 80 C148 118 120 148 80 148" stroke="white" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+              <path d="M80 150 C40 150 12 120 12 80 C12 42 40 12 80 12" stroke="white" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+              <text x="28" y="100" font-family="Georgia,serif" font-weight="700" font-size="62" fill="#C9A84C" letter-spacing="-2">BF</text>
+              <text x="80" y="172" font-family="Oswald,sans-serif" font-weight="700" font-size="22" fill="#0D1B3E" text-anchor="middle" letter-spacing="4">BRAFIT</text>
+            </svg>
+          </div>
+          <div class="hl1">DALE UNA</div>
+          <div class="hl2">ÚLTIMA OPORTUNIDAD.</div>
+          <div class="hl3">Pero al plan correcto.</div>
+          <div class="sub">Escríbeme <b>"TODO"</b> al DM. Cuéntame tu caso y encontramos juntos qué cambiar.</div>
+          <div class="cta">💬 Escríbeme "TODO" al DM</div>
+          <div class="actions">
+            <div class="act"><div class="act-ico">🔖</div><div class="act-lbl">Guarda</div></div>
+            <div class="act-div"></div>
+            <div class="act"><div class="act-ico">📤</div><div class="act-lbl">Comparte</div></div>
+            <div class="act-div"></div>
+            <div class="act"><div class="act-ico">👥</div><div class="act-lbl">Etiqueta</div></div>
+          </div>
+        </div>
+        <div class="tagline">No es azar, es estrategia. Alcánzalo.</div>
+      </div>
+
     </div>
   </div>
 
-  <div class="quote-block" data-animate>
-    <blockquote>Desde niño supe que quería enseñar. Todavía no sabía qué. Pero sí a quién: a la gente que más lo necesitaba.</blockquote>
+  <div class="dots" id="dots"></div>
+  <div class="nav">
+    <button onclick="prev()">← Ant</button>
+    <div class="counter" id="counter">1 / 9</div>
+    <button onclick="next()">Sig →</button>
   </div>
-
-  <!-- CAP 2 -->
-  <div class="chapter" data-animate>
-    <div class="chapter-num"><span class="num">02</span><div class="vline"></div></div>
-    <div>
-      <p class="chapter-label">El fútbol y la identidad</p>
-      <h2>El campo fue mi primera aula</h2>
-      <p>El fútbol no fue solo un deporte para mí. Fue el lugar donde aprendí que <strong>la disciplina, la estrategia y el trabajo en equipo transforman personas.</strong> Participé en torneos nacionales, gané competencias… y cada vez que un equipo mejoraba bajo mi influencia, sentía algo que ningún trofeo podía explicar.</p>
-      <p>Sin embargo, mi familia seguía siendo ese espejo de la realidad: aún ocupados, aún cansados, aún dejándose para lo último. El contraste me marcó.</p>
-    </div>
-  </div>
-
-  <!-- CAP 3 -->
-  <div class="chapter" data-animate>
-    <div class="chapter-num"><span class="num">03</span><div class="vline"></div></div>
-    <div>
-      <p class="chapter-label">La decisión</p>
-      <h2>Dos caminos. Una sola verdad.</h2>
-      <p>Al graduarme, la vida me puso ante una encrucijada: <strong>el fútbol profesional o la universidad.</strong> Elegí la Licenciatura en Educación Física, no por descarte, sino por convicción. Porque amo enseñar. Amo ver a alguien descubrir algo nuevo que le facilita la vida.</p>
-      <p>Esa decisión fue la primera en una larga lista de actos de valentía que definirían quién soy hoy.</p>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- CAP 4 -->
-  <div class="chapter" data-animate>
-    <div class="chapter-num"><span class="num">04</span><div class="vline"></div></div>
-    <div>
-      <p class="chapter-label">El giro inesperado</p>
-      <h2>Entré al gimnasio sin querer… y me quedé para siempre</h2>
-      <p>Mi primer trabajo como coach en un gimnasio lo tomé como algo temporal. Pensé que ese mundo era superficial, lleno de egos y vanidad. <strong>Estaba completamente equivocado.</strong></p>
-      <p>Cuando empecé a entrenar yo mismo, algo cambió en mí. Comprendí que el gimnasio no construye cuerpos. Construye personas. <strong>Fortalece el cuerpo, renueva el espíritu y reconstruye la confianza.</strong></p>
-      <p>Y cuando lo vi en mis clientes… no había vuelta atrás.</p>
-    </div>
-  </div>
-
-  <div class="quote-block" data-animate>
-    <blockquote>Vi hombres entrar cabizbajos y salir con una postura diferente. No solo física. Mental. Eso no se olvida jamás.</blockquote>
-  </div>
-
-  <!-- CAP 5 -->
-  <div class="chapter" data-animate>
-    <div class="chapter-num"><span class="num">05</span><div class="vline"></div></div>
-    <div>
-      <p class="chapter-label">El método nace</p>
-      <h2>Perfeccioné lo que nadie más estaba haciendo</h2>
-      <p>La mayoría de mis clientes no eran atletas. <strong>Eran profesionales con agendas imposibles, estrés acumulado y cuerpos que pedían auxilio.</strong> No podía darles el mismo programa que a un deportista de 25 años. Tenía que pensar diferente.</p>
-      <p>Empecé a construir sistemas que se adaptaran a ellos: a sus horarios, a su nivel de estrés, a su vida real. Sin dietas que los maten de hambre. Sin entrenamientos de 2 horas que nunca cumplirían.</p>
-      <p><strong>Resultados reales, en un tiempo real, para personas reales.</strong></p>
-    </div>
-  </div>
-
-  <!-- TURNING POINT -->
-  <div class="turning-point" data-animate>
-    <p class="tp-label">El momento que lo cambió todo</p>
-    <h3>Salir de mi zona de confort fue el mayor regalo</h3>
-    <p>Cambiar de gimnasio me aterrorizó. Me sentí vulnerable. Pero fue ahí, trabajando con nuevas personas, explorando metodologías funcionales y aeróbicas, donde todas las piezas encajaron. <strong>El Método BTP95 no se inventó. Se vivió.</strong> Es el resultado de años de observación, errores, aprendizajes y una misión que nunca cambió: ayudar a hombres ocupados a recuperar su mejor versión.</p>
-  </div>
-
-  <!-- CAP 6 -->
-  <div class="chapter" data-animate>
-    <div class="chapter-num"><span class="num">06</span><div class="vline"></div></div>
-    <div>
-      <p class="chapter-label">Hoy</p>
-      <h2>Esto no es mi profesión.<br>Es mi vocación.</h2>
-      <p>Hoy trabajo con hombres de +35 años, profesionales de alto rendimiento, que están hartos de verse al espejo y no reconocerse. Que quieren energía para sus hijos, claridad mental para sus decisiones y un cuerpo que esté a la altura de todo lo que ya construyeron.</p>
-      <p><strong>El Método BTP95 es el camino de 95 días que los lleva de vuelta a su pico.</strong> Sin excusas. Sin atajos. Con un sistema que respeta su tiempo y maximiza cada esfuerzo.</p>
-      <p>Porque ya saben lo que es rendir en todo lo demás.<br><strong>Ahora es su turno.</strong></p>
-    </div>
-  </div>
-
-</section>
-
-<!-- CTA -->
-<div class="cta-section" data-animate>
-  <h2>¿Listo para volver a tu <em>mejor versión</em>?</h2>
-  <p>95 días. Un método personalizado. Y alguien que ya vivió el camino para guiarte.</p>
-  <a href="https://ig.me/m/brafit_09" target="_blank" class="instagram-dm-btn">
-   QUIERO EMPEZAR MI TRANSFORMACIÓN
- </a>
+  <div class="tip">← → teclado · screenshot cada slide · 540×540px</div>
 </div>
- 
-
-<style>
-.instagram-dm-btn {
-  background-color: #C9A44C; /* Color dorado de tu imagen */
-  color: #1a1a2e;
-  padding: 18px 40px;
-  text-decoration: none;
-  font-family: 'Oswald', sans-serif; /* O la fuente que uses */
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: inline-block;
-  transition: all 0.3s ease;
-}
-
-.instagram-dm-btn:hover {
-  background-color: #b8943f;
-  transform: translateY(-2px);
-}
-</style>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+let cur=0; const total=9;
+const track=document.getElementById('track');
+const counter=document.getElementById('counter');
+const dotsEl=document.getElementById('dots');
+for(let i=0;i<total;i++){
+  const d=document.createElement('div');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i); dotsEl.appendChild(d);
+}
+function goTo(n){
+  cur=Math.max(0,Math.min(total-1,n));
+  track.style.transform=`translateX(-${cur*540}px)`;
+  counter.textContent=`${cur+1} / ${total}`;
+  document.querySelectorAll('.dot').forEach((d,i)=>{d.className='dot'+(i===cur?' active':'');});
+}
+function next(){goTo(cur+1);} function prev(){goTo(cur-1);}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev();});
 </script>
 </body>
 </html>
