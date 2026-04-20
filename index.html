@@ -169,32 +169,62 @@ body {
 /* ══════════════════════
    SLIDE 2 — DATO
 ══════════════════════ */
-.s2 { background: var(--beige2); }
+.s2 { background: var(--beige); }
 
-.s2 .header { position: absolute; top: 24px; left: 28px; right: 28px; }
-.s2 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
-.s2 .title { font-family: 'Anton'; font-size: 28px; color: var(--navy); line-height: 1.1; }
-.s2 .title em { color: var(--gold); font-style: normal; }
-
-.s2 .myths { position: absolute; top: 90px; left: 22px; right: 22px; bottom: 54px;
-  display: flex; flex-direction: column; gap: 10px; }
-
-.s2 .myth {
-  display: flex; align-items: flex-start; gap: 14px;
-  background: rgba(13,27,62,0.04); border: 1px solid rgba(13,27,62,0.1);
-  border-left: 3px solid var(--navy); padding: 14px 16px;
+.s2 .navy-bar {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: linear-gradient(180deg, transparent, var(--navy) 20%, var(--navy) 80%, transparent);
 }
-.s2 .x-badge {
-  width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%;
-  background: rgba(13,27,62,0.08); border: 1px solid rgba(13,27,62,0.25);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--navy); font-size: 12px; font-weight: 700; margin-top: 2px;
+.s2 .gold-dots {
+  position: absolute; right: 30px; top: 30px;
+  display: grid; grid-template-columns: repeat(5,1fr); gap: 8px;
+  opacity: 0.18;
 }
-.s2 .myth-title { font-family: 'Oswald'; font-size: 14px; font-weight: 600;
-  color: var(--navy); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-.s2 .myth-truth { font-size: 12px; font-weight: 300; line-height: 1.5; color: rgba(13,27,62,0.55); }
-.s2 .myth-truth b { color: var(--gold); font-weight: 600; }
+.s2 .gold-dots span {
+  display: block; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--navy);
+}
+.s2 .corner-geo {
+  position: absolute; right: 0; bottom: 0;
+  width: 200px; height: 200px;
+  border-top: 1px solid rgba(13,27,62,0.08);
+  border-left: 1px solid rgba(13,27,62,0.08);
+}
+
+.s2 .tag {
+  position: absolute; top: 28px; left: 28px;
+  background: var(--navy); color: var(--gold2);
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px;
+}
+
+.s2 .logo-area {
+  position: absolute; right: 28px; top: 50%; transform: translateY(-54%);
+}
+
+.s2 .main {
+  position: absolute; left: 28px; top: 76px; right: 220px;
+  display: flex; flex-direction: column;
+}
+
+.s2 .l1 { font-family: 'Anton'; font-size: 80px; line-height: 0.88; color: var(--navy); letter-spacing: -1px; }
+.s2 .l2 { font-family: 'Anton'; font-size: 60px; line-height: 0.88; color: var(--navy); letter-spacing: -1px; }
+.s2 .l3 { font-family: 'Anton'; font-size: 60px; line-height: 0.88; color: var(--gold); letter-spacing: -1px; margin-bottom: 16px; }
+.s2 .l4 { font-family: 'Anton'; font-size: 30px; line-height: 1; color: rgba(13,27,62,0.25); letter-spacing: 0; margin-bottom: 20px; }
+
+.s2 .sep { width: 44px; height: 3px; background: var(--gold); margin-bottom: 16px; }
+
+.s2 .sub {
+  font-size: 13px; font-weight: 300; line-height: 1.65;
+  color: rgba(13,27,62,0.55);
+}
+.s2 .sub b { color: var(--navy); font-weight: 600; }
+
+.s2 .swipe {
+  position: absolute; bottom: 26px; right: 24px;
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; color: rgba(13,27,62,0.35);
+}
   
 /* ══════════════════════
    SLIDE 3 — MENTIRAS
@@ -458,7 +488,7 @@ body {
       <!-- S2: DATO (navy) -->
       <div class="slide s1">
         <div class="main">
-          <div class="l1">01.</div>
+          <div class="l1">01.🪫</div>
           <div class="l2">Despertar cansado</div>
           <div class="l3">aunque duermas</div>
           <div class="l4">8 horas</div>
