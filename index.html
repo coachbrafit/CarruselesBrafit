@@ -50,6 +50,33 @@ body {
 }
 .bf-logo svg { display: block; }
 
+/* LOGO GRANDE*/
+  .logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-main {
+  width: 160px;
+  height: 160px; /* solo el círculo */
+  background-image: url('data:image/png;base64,TU_CODIGO_BASE64_AQUI');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.logo-text {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #0D1B3E;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+  
+
 /* ── BRAND CHIP (esquina inferior izquierda) ── */
 .brand-chip {
   position: absolute; bottom: 20px; left: 22px;
@@ -407,19 +434,7 @@ body {
         <!--<div class="tag">Lo que tu médico no te ha dicho</div>-->
 
         <div class="logo-area">
-          <!-- Logo 1: círculo navy con BF dorado + BRAFIT -->
-          <svg width="160" height="185" viewBox="0 0 160 185" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Círculo exterior con swirl -->
-            <circle cx="80" cy="80" r="72" fill="#0D1B3E"/>
-            <!-- Swirl lines -->
-            <path d="M80 10 C120 10 148 40 148 80 C148 118 120 148 80 148" stroke="white" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
-            <path d="M80 14 C116 14 144 42 144 80 C144 116 116 144 80 144" stroke="white" stroke-width="1" fill="none" opacity="0.2" stroke-linecap="round"/>
-            <path d="M80 150 C40 150 12 120 12 80 C12 42 40 12 80 12" stroke="white" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
-            <!-- Letra B -->
-            <text x="28" y="100" font-family="Georgia, serif" font-weight="700" font-size="62" fill="#C9A84C" letter-spacing="-2">BF</text>
-            <!-- BRAFIT text -->
-            <text x="80" y="172" font-family="'Oswald', sans-serif" font-weight="700" font-size="22" fill="#0D1B3E" text-anchor="middle" letter-spacing="4">BRAFIT</text>
-          </svg>
+          <div class="logo-main"></div>
         </div>
 
         <div class="main">
