@@ -1,1879 +1,736 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> BraFitCoach </title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-      
-        :root {
-            /* Colores BRAFIT Principales */
-            --primary: #1a2744;        /* Azul marino */
-            --secondary: #c9a962;      /* Dorado */
-            --gold-light: #d4b896;     /* Dorado claro */
-            
-            /* Colores de Soporte */
-            --dark: #1a2744;           
-            --darker: #0f1729;         
-            --light: #c9a962;          
-            --success: #c9a962;        
-            --accent-blue: #2d3e5c;    
-            
-            /* Texto */
-            --text: #f5f5f5;           
-            --text-muted: #a0a0a0;     
-            --text-gold: #c9a962;      
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: #0f1729;
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-repeat: no-repeat;
-            background-position: center bottom;
-            background-size: 350px;
-        }
-        
-        /* Auth Section */
-        .auth-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f5f5dc 0%, #e8e4d9 100%);
-            position: relative;
-        }
-        
-        .auth-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-position: center 1%;
-            background-size: 300px;
-            opacity: 0.99;
-            pointer-events: none;
-        }
-
-        .auth-box {
-            background: rgba(26, 39, 68, 0.95);
-            border-radius: 20px;
-            padding: 2.5rem;
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid rgba(201, 169, 98, 0.3);
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 1;
-            margin: 80px auto 0 auto;
-        }
-
-        .auth-title {
-            font-size: 1.5rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-            font-weight: 700;
-        }
-
-        .auth-input {
-            width: 100%;
-            padding: 0.875rem;
-            margin-bottom: 1rem;
-            border-radius: 12px;
-            border: 2px solid rgba(201, 169, 98, 0.2);
-            background: rgba(0,0,0,0.3);
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .auth-input:focus {
-            outline: none;
-            border-color: var(--secondary);
-        }
-
-        .auth-btn {
-            width: 100%;
-            padding: 0.875rem;
-            border-radius: 12px;
-            border: none;
-            background: linear-gradient(135deg, var(--secondary), var(--gold-light));
-            color: var(--primary);
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .auth-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(201, 169, 98, 0.3);
-        }
-
-        .auth-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Header */
-        .header {
-            background: rgba(26, 39, 68, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 2px solid var(--secondary);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo-title {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-        
-        .header-logo {
-            width: 90px;
-            height: 90px;
-            object-fit: contain;
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            background: linear-gradient(45deg, var(--secondary), var(--gold-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 0;
-            font-weight: 800;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .sync-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: rgba(201, 169, 98, 0.2);
-            color: var(--secondary);
-            white-space: nowrap;
-        }
-
-        .sync-badge.offline {
-            background: rgba(26, 39, 68, 0.4);
-            color: var(--text-muted);
-        }
-
-        .sync-badge.loading {
-            background: rgba(201, 169, 98, 0.3);
-            color: var(--gold-light);
-        }
-
-        .logout-btn {
-            background: rgba(201, 169, 98, 0.1);
-            border: 1px solid rgba(201, 169, 98, 0.3);
-            color: var(--text);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: rgba(201, 169, 98, 0.2);
-            color: var(--secondary);
-        }
-
-        /* Navigation */
-        .nav-tabs {
-            display: flex;
-            gap: 0.5rem;
-            padding: 1rem;
-            overflow-x: auto;
-            background: rgba(0,0,0,0.2);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-tab {
-            padding: 0.75rem 1.25rem;
-            border-radius: 25px;
-            border: 2px solid transparent;
-            background: rgba(255,255,255,0.05);
-            color: var(--text-muted);
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .nav-tab:hover {
-            background: rgba(201, 169, 98, 0.1);
-            color: var(--secondary);
-        }
-
-        .nav-tab.active {
-            background: linear-gradient(135deg, var(--secondary), var(--gold-light));
-            color: var(--primary);
-            border-color: var(--secondary);
-            font-weight: 700;
-        }
-
-        /* Sections */
-        .section {
-            display: none;
-            padding: 1rem;
-            animation: fadeIn 0.4s ease;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Cards */
-        .card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(201, 169, 98, 0.2);
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-        }
-
-        /* Forms */
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 0.875rem;
-            border-radius: 12px;
-            border: 2px solid rgba(201, 169, 98, 0.2);
-            background: rgba(0,0,0,0.3);
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--secondary);
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 0.875rem 1.5rem;
-            border-radius: 12px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary), var(--gold-light));
-            color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(201, 169, 98, 0.3);
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: var(--text);
-            border: 2px solid rgba(201, 169, 98, 0.3);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(201, 169, 98, 0.1);
-            border-color: var(--secondary);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--secondary), var(--gold-light));
-            color: var(--primary);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #8b2635, #a03045);
-            color: white;
-        }
-
-        .btn-full {
-            width: 100%;
-        }
-
-        /* Exercise Cards */
-        .exercise-card {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.08), rgba(26, 39, 68, 0.4));
-            border-radius: 16px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--secondary);
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-            transition: all 0.3s ease;
-        }
-
-        .exercise-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 15px rgba(201, 169, 98, 0.2);
-        }
-
-        .exercise-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
-            object-fit: cover;
-            border: 2px solid rgba(201, 169, 98, 0.3);
-            background: rgba(0,0,0,0.3);
-            flex-shrink: 0;
-        }
-
-        .exercise-image-placeholder {
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
-            background: rgba(201, 169, 98, 0.1);
-            border: 2px dashed rgba(201, 169, 98, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            flex-shrink: 0;
-        }
-
-        .exercise-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .exercise-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 0.5rem;
-            gap: 1rem;
-        }
-
-        .exercise-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.25rem;
-        }
-
-        .exercise-description {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-            margin-bottom: 0.5rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .exercise-muscle {
-            font-size: 0.8rem;
-            color: var(--secondary);
-            background: rgba(201, 169, 98, 0.15);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            white-space: nowrap;
-            font-weight: 600;
-        }
-
-        .exercise-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .exercise-actions button {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .muscle-map {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .muscle-map {
-                display: flex !important;
-                flex-direction: column !important;
-            }
-        
-            .muscle-item {
-                width: 100% !important;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .muscle-map {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        .action-btn {
-            padding: 1.25rem;
-            border-radius: 16px;
-            background: rgba(255,255,255,0.05);
-            border: 2px solid rgba(201, 169, 98, 0.2);
-            color: var(--text);
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .action-btn:hover {
-            background: rgba(201, 169, 98, 0.15);
-            border-color: var(--secondary);
-            transform: translateY(-2px);
-        }
-
-        .action-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            background: var(--darker);
-            border-radius: 20px;
-            padding: 1.5rem;
-            width: 100%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 2px solid var(--secondary);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close-btn:hover {
-            color: var(--secondary);
-        }
-
-        /* Image Upload */
-        .image-upload-container {
-            border: 2px dashed rgba(201, 169, 98, 0.3);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            background: rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 1rem;
-        }
-
-        .image-upload-container:hover {
-            border-color: var(--secondary);
-            background: rgba(201, 169, 98, 0.05);
-        }
-
-        .image-upload-container.has-image {
-            border-style: solid;
-            border-color: var(--secondary);
-            padding: 1rem;
-        }
-
-        .image-upload-preview {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 12px;
-            margin-bottom: 0.5rem;
-        }
-
-        .image-upload-text {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .image-upload-hint {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-
-        #exerciseImageInput {
-            display: none;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-muted);
-        }
-
-        /* Loading */
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(201, 169, 98, 0.2);
-            border-top-color: var(--secondary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.2), rgba(201, 169, 98, 0.1));
-            border-radius: 16px;
-            padding: 1.25rem;
-            text-align: center;
-            border: 1px solid rgba(201, 169, 98, 0.3);
-        }
-
-        .stat-card.blue {
-            background: linear-gradient(135deg, rgba(26, 39, 68, 0.6), rgba(45, 62, 92, 0.4));
-            border-color: rgba(26, 39, 68, 0.5);
-        }
-
-        .stat-card.green {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.3), rgba(201, 169, 98, 0.15));
-            border-color: rgba(201, 169, 98, 0.4);
-        }
-
-        .stat-card-value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-            color: var(--secondary);
-        }
-
-        /* Muscle Map */
-        .muscle-map {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .muscle-map {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .muscle-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
-            border: 1px solid rgba(201, 169, 98, 0.1);
-        }
-
-        .muscle-bar {
-            width: 60px;
-            height: 6px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .muscle-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary), var(--gold-light));
-            border-radius: 3px;
-            transition: width 0.5s ease;
-        }
-
-        /* Workout Session */
-        .session-exercise {
-            background: rgba(0,0,0,0.3);
-            border-radius: 16px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            border: 2px solid rgba(201, 169, 98, 0.2);
-        }
-
-        .set-row {
-            display: grid;
-            grid-template-columns: 2rem 1fr 1fr auto;
-            gap: 0.5rem;
-            align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(201, 169, 98, 0.1);
-        }
-
-        .timer-display {
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            color: var(--secondary);
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 20px rgba(201, 169, 98, 0.5);
-            margin: 1rem 0;
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--secondary);
-            color: var(--primary);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            z-index: 2000;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        .toast.error {
-            background: #8b2635;
-            color: white;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Filters */
-        .filters-container {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-select {
-            flex: 1;
-            min-width: 120px;
-            padding: 0.5rem;
-            border-radius: 8px;
-            border: 2px solid rgba(201, 169, 98, 0.2);
-            background: rgba(0,0,0,0.3);
-            color: white;
-        }
-
-        /* Detail Modal */
-        .exercise-detail-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 1rem;
-            border: 2px solid rgba(201, 169, 98, 0.3);
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 0.5rem;
-        }
-
-        .difficulty-principiante {
-            background: rgba(76, 175, 80, 0.2);
-            color: #4caf50;
-        }
-
-        .difficulty-intermedio {
-            background: rgba(255, 152, 0, 0.2);
-            color: #ff9800;
-        }
-
-        .difficulty-avanzado {
-            background: rgba(244, 67, 54, 0.2);
-            color: #f44336;
-        }
-
-        .equipment-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .equipment-tag {
-            background: rgba(201, 169, 98, 0.1);
-            border: 1px solid rgba(201, 169, 98, 0.3);
-            padding: 0.25rem 0.5rem;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            color: var(--gold-light);
-        }
-
-        /* NUEVO: Estilos para Historial de Pesos */
-        .pr-badge {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.3), rgba(201, 169, 98, 0.1));
-            border: 2px solid var(--secondary);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .pr-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--secondary);
-            text-shadow: 0 0 10px rgba(201, 169, 98, 0.3);
-        }
-
-        .pr-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-        }
-
-        .chart-container {
-            background: rgba(0,0,0,0.3);
-            border-radius: 16px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(201, 169, 98, 0.2);
-        }
-
-        .chart-svg {
-            width: 100%;
-            height: 200px;
-        }
-
-        .history-list {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .history-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            background: rgba(0,0,0,0.2);
-            border-radius: 10px;
-            margin-bottom: 0.5rem;
-            border-left: 3px solid var(--secondary);
-        }
-
-        .history-item.pr-entry {
-            border-left-color: #4caf50;
-            background: rgba(76, 175, 80, 0.05);
-        }
-
-        .history-weight {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        .history-reps {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .history-date {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .pr-tag {
-            background: #4caf50;
-            color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-left: 0.5rem;
-        }
-
-        .stats-comparison {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .comparison-item {
-            text-align: center;
-            padding: 0.75rem;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-        }
-
-        .comparison-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        .comparison-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .trend-up {
-            color: #4caf50;
-        }
-
-        .trend-down {
-            color: #f44336;
-        }
-
-        .trend-same {
-            color: var(--text-muted);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BraFit — Carrusel Beige</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --beige:    #F2EBD9;
+  --beige2:   #EAE0CA;
+  --beige3:   #DDD0B8;
+  --navy:     #0D1B3E;
+  --navy2:    #162347;
+  --gold:     #C9A84C;
+  --gold2:    #E2C47A;
+  --gold3:    #F5E6C0;
+  --dark-txt: #0D1B3E;
+  --mid-txt:  #3A4F7A;
+  --soft-txt: #8A9BBE;
+}
+
+body {
+  background: #1a1a1a;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 30px 20px 60px; gap: 0;
+}
+
+.viewer { width: 540px; position: relative; user-select: none; }
+
+.overflow-wrap {
+  width: 540px; overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.3);
+}
+
+.track { display: flex; transition: transform 0.5s cubic-bezier(0.77,0,0.18,1); }
+
+.slide {
+  width: 540px; height: 540px;
+  flex-shrink: 0; position: relative; overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background: var(--beige);
+}
+
+/* ── LOGO SVG COMPONENT ── */
+.bf-logo {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+.bf-logo svg { display: block; }
+
+/* ── BRAND CHIP (esquina inferior izquierda) ── */
+.brand-chip {
+  position: absolute; bottom: 20px; left: 22px;
+  display: flex; align-items: center; gap: 10px; z-index: 10;
+}
+.brand-chip .logo-mini { width: 36px; height: 36px; }
+.brand-chip .bname {
+  font-family: 'Oswald'; font-weight: 700; font-size: 14px;
+  color: var(--navy); letter-spacing: 3px; text-transform: uppercase;
+}
+.pg {
+  position: absolute; bottom: 26px; right: 22px;
+  font-family: 'Oswald'; font-size: 13px; font-weight: 300;
+  color: rgba(13,27,62,0.3); letter-spacing: 1px; z-index: 10;
+}
+
+/* ── NOISE TEXTURE ── */
+.noise {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* ══════════════════════
+   SLIDE 1 — PORTADA
+══════════════════════ */
+.s1 { background: var(--beige); }
+
+.s1 .navy-bar {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: linear-gradient(180deg, transparent, var(--navy) 20%, var(--navy) 80%, transparent);
+}
+.s1 .gold-dots {
+  position: absolute; right: 30px; top: 30px;
+  display: grid; grid-template-columns: repeat(5,1fr); gap: 8px;
+  opacity: 0.18;
+}
+.s1 .gold-dots span {
+  display: block; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--navy);
+}
+.s1 .corner-geo {
+  position: absolute; right: 0; bottom: 0;
+  width: 200px; height: 200px;
+  border-top: 1px solid rgba(13,27,62,0.08);
+  border-left: 1px solid rgba(13,27,62,0.08);
+}
+
+.s1 .tag {
+  position: absolute; top: 28px; left: 28px;
+  background: var(--navy); color: var(--gold2);
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px;
+}
+
+.s1 .logo-area {
+  position: absolute; right: 28px; top: 50%; transform: translateY(-54%);
+}
+
+.s1 .main {
+  position: absolute; left: 28px; top: 76px; right: 220px;
+  display: flex; flex-direction: column;
+}
+
+.s1 .l1 { font-family: 'Anton'; font-size: 72px; line-height: 0.88; color: var(--navy); letter-spacing: -1px; }
+.s1 .l2 { font-family: 'Anton'; font-size: 72px; line-height: 0.88; color: var(--navy); letter-spacing: -1px; }
+.s1 .l3 { font-family: 'Anton'; font-size: 72px; line-height: 0.88; color: var(--gold); letter-spacing: -1px; margin-bottom: 16px; }
+.s1 .l4 { font-family: 'Anton'; font-size: 38px; line-height: 1; color: rgba(13,27,62,0.25); letter-spacing: 0; margin-bottom: 20px; }
+
+.s1 .sep { width: 44px; height: 3px; background: var(--gold); margin-bottom: 16px; }
+
+.s1 .sub {
+  font-size: 13px; font-weight: 300; line-height: 1.65;
+  color: rgba(13,27,62,0.55);
+}
+.s1 .sub b { color: var(--navy); font-weight: 600; }
+
+.s1 .swipe {
+  position: absolute; bottom: 26px; right: 24px;
+  font-family: 'Oswald'; font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; color: rgba(13,27,62,0.35);
+}
+
+/* ══════════════════════
+   SLIDE 2 — DATO
+══════════════════════ */
+.s2 { background: var(--navy); }
+
+.s2 .beige-bar {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: linear-gradient(180deg, transparent, var(--gold) 25%, var(--gold2) 50%, var(--gold) 75%, transparent);
+}
+.s2 .ghost {
+  position: absolute; right: -15px; top: 50%; transform: translateY(-52%);
+  font-family: 'Anton'; font-size: 220px; color: rgba(242,235,217,0.04);
+  line-height: 1; pointer-events: none; white-space: nowrap; letter-spacing: -4px;
+}
+.s2 .content { position: absolute; left: 46px; right: 24px; top: 50%; transform: translateY(-50%); }
+.s2 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold2); opacity: 0.8; margin-bottom: 10px; }
+.s2 .num { font-family: 'Anton'; font-size: 116px; line-height: 1; color: var(--gold); letter-spacing: -2px; }
+.s2 .num-sub { font-family: 'Oswald'; font-size: 24px; font-weight: 300;
+  color: rgba(242,235,217,0.6); margin-bottom: 16px; line-height: 1.3; }
+.s2 .divl { width: 44px; height: 2px; background: rgba(201,168,76,0.4); margin-bottom: 16px; }
+.s2 .body { font-size: 15px; font-weight: 300; line-height: 1.65; color: rgba(242,235,217,0.55); }
+.s2 .body b { color: var(--beige); font-weight: 500; }
+
+.s2 .brand-chip .bname { color: var(--gold2); }
+
+/* ══════════════════════
+   SLIDE 3 — MENTIRAS
+══════════════════════ */
+.s3 { background: var(--beige2); }
+
+.s3 .header { position: absolute; top: 24px; left: 28px; right: 28px; }
+.s3 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.s3 .title { font-family: 'Anton'; font-size: 28px; color: var(--navy); line-height: 1.1; }
+.s3 .title em { color: var(--gold); font-style: normal; }
+
+.s3 .myths { position: absolute; top: 90px; left: 22px; right: 22px; bottom: 54px;
+  display: flex; flex-direction: column; gap: 10px; }
+
+.s3 .myth {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(13,27,62,0.04); border: 1px solid rgba(13,27,62,0.1);
+  border-left: 3px solid var(--navy); padding: 14px 16px;
+}
+.s3 .x-badge {
+  width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%;
+  background: rgba(13,27,62,0.08); border: 1px solid rgba(13,27,62,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--navy); font-size: 12px; font-weight: 700; margin-top: 2px;
+}
+.s3 .myth-title { font-family: 'Oswald'; font-size: 14px; font-weight: 600;
+  color: var(--navy); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.s3 .myth-truth { font-size: 12px; font-weight: 300; line-height: 1.5; color: rgba(13,27,62,0.55); }
+.s3 .myth-truth b { color: var(--gold); font-weight: 600; }
+
+/* ══════════════════════
+   SLIDE 4 — NO vs SÍ
+══════════════════════ */
+.s4 { background: var(--beige); }
+
+.s4 .left {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 50%;
+  background: rgba(13,27,62,0.05); border-right: 2px solid rgba(13,27,62,0.12);
+  display: flex; flex-direction: column; justify-content: center; padding: 28px 22px;
+}
+.s4 .right {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+  background: rgba(201,168,76,0.08); border-left: 2px solid rgba(201,168,76,0.3);
+  display: flex; flex-direction: column; justify-content: center; padding: 28px 22px;
+}
+.s4 .side-tag {
+  font-family: 'Oswald'; font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; margin-bottom: 14px; padding: 5px 12px;
+  display: inline-block;
+}
+.s4 .tag-navy { background: var(--navy); color: var(--beige); }
+.s4 .tag-gold { background: var(--gold); color: var(--navy); }
+.s4 .side-title { font-family: 'Anton'; font-size: 42px; line-height: 0.9; letter-spacing: -1px; margin-bottom: 18px; }
+.s4 .navy-txt { color: rgba(13,27,62,0.3); }
+.s4 .gold-txt { color: var(--gold); }
+.s4 .items { display: flex; flex-direction: column; gap: 9px; }
+.s4 .it { display: flex; align-items: flex-start; gap: 8px;
+  font-size: 12px; font-weight: 300; line-height: 1.4; color: rgba(13,27,62,0.6); }
+.s4 .it b { color: var(--navy); font-weight: 600; }
+.s4 .dot-n { width: 5px; height: 5px; border-radius: 50%; background: rgba(13,27,62,0.3); flex-shrink: 0; margin-top: 5px; }
+.s4 .dot-g { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 5px; }
+
+/* ══════════════════════
+   SLIDE 5 — HISTORIA REAL
+══════════════════════ */
+.s5 { background: var(--navy); }
+
+.s5 .stripe { position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2), var(--gold)); }
+
+.s5 .content { position: absolute; left: 28px; right: 28px; top: 50%; transform: translateY(-50%); }
+.s5 .eyebrow { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: rgba(201,168,76,0.6); margin-bottom: 14px; }
+.s5 .l1 { font-family: 'Anton'; font-size: 66px; line-height: 0.9; color: var(--beige); letter-spacing: -1px; }
+.s5 .l2 { font-family: 'Anton'; font-size: 66px; line-height: 0.9; letter-spacing: -1px;
+  color: var(--gold); margin-bottom: 20px; }
+.s5 .bar { width: 44px; height: 3px; background: var(--gold); margin-bottom: 16px; }
+.s5 .quote-box { background: rgba(242,235,217,0.06); border-left: 3px solid var(--gold); padding: 14px 18px; margin-bottom: 14px; }
+.s5 .quote { font-size: 14px; font-weight: 300; line-height: 1.65; color: rgba(242,235,217,0.65); font-style: italic; }
+.s5 .quote b { color: var(--beige); font-weight: 500; font-style: normal; }
+.s5 .attr { font-family: 'Oswald'; font-size: 10px; letter-spacing: 2px; color: rgba(201,168,76,0.5); margin-top: 8px; }
+.s5 .body { font-size: 13px; font-weight: 300; line-height: 1.6; color: rgba(242,235,217,0.45); }
+.s5 .body b { color: rgba(242,235,217,0.8); font-weight: 500; }
+.s5 .brand-chip .bname { color: var(--gold2); }
+
+/* ══════════════════════
+   SLIDE 6 — 3 FRENTES
+══════════════════════ */
+.s6 { background: var(--beige2); }
+
+.s6 .header { position: absolute; top: 24px; left: 28px; right: 28px; }
+.s6 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.s6 .title { font-family: 'Anton'; font-size: 26px; color: var(--navy); line-height: 1.1; }
+.s6 .title em { color: var(--gold); font-style: normal; }
+
+.s6 .row { position: absolute; top: 90px; left: 18px; right: 18px; display: flex; gap: 10px; }
+
+.s6 .card {
+  flex: 1; background: var(--beige);
+  border: 1px solid rgba(13,27,62,0.1); border-top: 3px solid var(--navy);
+  padding: 14px 12px;
+}
+.s6 .c-num { font-family: 'Anton'; font-size: 32px; color: rgba(13,27,62,0.1); line-height: 1; }
+.s6 .c-icon { font-size: 20px; margin-bottom: 6px; }
+.s6 .c-title { font-family: 'Oswald'; font-size: 13px; font-weight: 700; color: var(--navy);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.s6 .c-desc { font-size: 11px; font-weight: 300; color: rgba(13,27,62,0.5); line-height: 1.5; }
+
+.s6 .connector { position: absolute; top: 256px; left: 18px; right: 18px;
+  display: flex; align-items: center; }
+.s6 .conn-line { flex: 1; height: 1px; background: rgba(13,27,62,0.15); }
+.s6 .conn-badge {
+  background: var(--navy); border-radius: 50%; width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue'; font-size: 9px; color: var(--gold2);
+  letter-spacing: 0.5px; text-align: center; line-height: 1.2; flex-shrink: 0; margin: 0 10px;
+}
+
+.s6 .bottom-note { position: absolute; bottom: 54px; left: 22px; right: 22px;
+  background: var(--navy); padding: 12px 18px; text-align: center; }
+.s6 .bottom-note p { font-size: 13px; font-weight: 300; color: rgba(242,235,217,0.7); }
+.s6 .bottom-note p b { color: var(--gold2); font-weight: 600; }
+
+/* ══════════════════════
+   SLIDE 7 — SEÑALES
+══════════════════════ */
+.s7 { background: var(--beige); }
+
+.s7 .header { position: absolute; top: 24px; left: 28px; right: 28px; }
+.s7 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.s7 .title { font-family: 'Anton'; font-size: 32px; color: var(--navy); }
+.s7 .title em { color: var(--gold); font-style: normal; }
+
+.s7 .list { position: absolute; top: 96px; left: 22px; right: 22px; bottom: 54px;
+  display: flex; flex-direction: column; gap: 9px; }
+
+.s7 .item { display: flex; align-items: flex-start; gap: 12px;
+  background: rgba(13,27,62,0.04); border: 1px solid rgba(13,27,62,0.08);
+  border-left: 3px solid var(--gold); padding: 11px 14px; }
+.s7 .chk { width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.6); background: rgba(201,168,76,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 10px; font-weight: 700; margin-top: 1px; }
+.s7 .txt { font-size: 13px; font-weight: 300; line-height: 1.4; color: rgba(13,27,62,0.6); }
+.s7 .txt b { color: var(--navy); font-weight: 600; }
+
+/* ══════════════════════
+   SLIDE 8 — MÉTODO
+══════════════════════ */
+.s8 { background: var(--navy2); }
+
+.s8 .gold-right { position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(180deg, transparent, var(--gold) 25%, var(--gold2) 50%, var(--gold) 75%, transparent); }
+
+.s8 .header { position: absolute; top: 24px; left: 28px; }
+.s8 .lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 4px; }
+.s8 .title { font-family: 'Anton'; font-size: 32px; color: var(--beige); }
+.s8 .title em { color: var(--gold); font-style: normal; }
+
+.s8 .steps { position: absolute; top: 100px; left: 22px; right: 28px; bottom: 54px;
+  display: flex; flex-direction: column; gap: 8px; }
+.s8 .step { display: flex; align-items: flex-start; gap: 14px; }
+.s8 .num { font-family: 'Anton'; font-size: 42px; color: rgba(201,168,76,0.2); line-height: 1; flex-shrink: 0; width: 34px; }
+.s8 .sc { flex: 1; }
+.s8 .st { font-family: 'Oswald'; font-size: 14px; font-weight: 600; color: var(--beige);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+.s8 .sd { font-size: 12px; font-weight: 300; line-height: 1.5; color: rgba(242,235,217,0.4); }
+.s8 .sd b { color: var(--gold2); font-weight: 500; }
+.s8 .divider { height: 1px; background: rgba(242,235,217,0.06); }
+.s8 .brand-chip .bname { color: var(--gold2); }
+
+/* ══════════════════════
+   SLIDE 9 — CTA
+══════════════════════ */
+.s9 { background: var(--beige); }
+
+.s9 .navy-frame { position: absolute; inset: 18px; border: 1px solid rgba(13,27,62,0.12); }
+.s9 .navy-frame::before { content: ''; position: absolute; top: -1px; left: 40px; right: 40px;
+  height: 3px; background: linear-gradient(90deg, transparent, var(--navy), transparent); }
+.s9 .navy-frame::after { content: ''; position: absolute; bottom: -1px; left: 40px; right: 40px;
+  height: 3px; background: linear-gradient(90deg, transparent, var(--navy), transparent); }
+
+.s9 .content { position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; padding: 36px; }
+
+.s9 .hl1 { font-family: 'Anton'; font-size: 50px; line-height: 0.9; color: var(--navy); letter-spacing: -1px; margin-bottom: 4px; }
+.s9 .hl2 { font-family: 'Anton'; font-size: 50px; line-height: 0.9; letter-spacing: -1px;
+  color: var(--gold); margin-bottom: 20px; }
+.s9 .sub { font-size: 14px; font-weight: 300; line-height: 1.6;
+  color: rgba(13,27,62,0.5); max-width: 340px; margin-bottom: 24px; }
+.s9 .sub b { color: var(--navy); font-weight: 600; }
+
+.s9 .cta-btn { background: var(--navy); padding: 16px 40px; margin-bottom: 24px;
+  font-family: 'Oswald'; font-size: 16px; font-weight: 700;
+  color: var(--gold2); letter-spacing: 2px; text-transform: uppercase; width: 100%; }
+
+.s9 .actions { display: flex; gap: 28px; align-items: center; margin-bottom: 20px; }
+.s9 .act { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.s9 .act-ico { font-size: 18px; }
+.s9 .act-lbl { font-family: 'Oswald'; font-size: 10px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase; color: rgba(13,27,62,0.35); }
+.s9 .act-div { width: 1px; height: 32px; background: rgba(13,27,62,0.12); }
+.s9 .tagline { font-size: 11px; font-style: italic; color: rgba(13,27,62,0.25); letter-spacing: 1px; }
+
+/* ── NAV ── */
+.nav { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
+.nav button { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.4);
+  color: #C9A84C; padding: 10px 22px; font-family: 'Oswald'; font-size: 14px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; border-radius: 2px; }
+.nav button:hover { background: rgba(201,168,76,0.2); }
+.nav .counter { font-family: 'Bebas Neue'; font-size: 22px; letter-spacing: 3px;
+  color: rgba(201,168,76,0.5); min-width: 60px; text-align: center; }
+.dots { display: flex; gap: 6px; margin-top: 14px; justify-content: center; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,168,76,0.2); transition: all 0.3s; cursor: pointer; }
+.dot.active { background: #C9A84C; width: 18px; border-radius: 3px; }
+.tip { margin-top: 14px; font-family: 'Inter'; font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,0.2); letter-spacing: 1px; text-transform: uppercase; text-align: center; }
+</style>
 </head>
 <body>
-    <!-- Auth Container -->
-    <div id="authContainer" class="auth-container">
-        <div class="auth-box">
-            <div id="authForm">
-                <input type="email" id="authEmail" class="auth-input" placeholder="Email" value="">
-                <input type="password" id="authPassword" class="auth-input" placeholder="Contraseña" value="">
-                <button class="auth-btn" onclick="handleAuth()">Iniciar Sesión</button>
-                <button class="auth-btn" style="background: rgba(201, 169, 98, 0.1); color: var(--text);" onclick="handleRegister()">Crear Cuenta</button>
-            </div>
-            <div id="authLoading" class="hidden" style="text-align: center; padding: 2rem;">
-                <div class="spinner"></div>
-                <p style="margin-top: 1rem; color: var(--text-muted);">Conectando...</p>
-            </div>
+<div class="viewer">
+  <div class="overflow-wrap">
+    <div class="track" id="track">
+
+      <!-- S1: PORTADA -->
+      <div class="slide s1">
+        <div class="noise"></div>
+        <div class="navy-bar"></div>
+        <div class="gold-dots">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
         </div>
-    </div>
+        <div class="corner-geo"></div>
+        <div class="tag">Lo que tu médico no te ha dicho</div>
 
-    <!-- Main App -->
-    <div id="appContainer" class="hidden">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-title">
-                     <h1>BraFit Coach</h1>
-                </div>
-                <div class="header-actions">
-                    <div class="user-info">
-                        👤 <span id="user-email">Cargando...</span>
-                    </div>
-                    <div class="sync-badge loading" id="syncBadge">
-                        <span>●</span>
-                        <span id="syncText">Cargando...</span>
-                    </div>
-                    <button class="logout-btn" onclick="logout()">Salir</button>
-                </div>
-            </div>
-        </header>
-
-        <!-- Navigation -->
-        <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="showSection('dashboard')">📊 Dashboard</button>
-            <button class="nav-tab" onclick="showSection('routines')">📝 Rutinas</button>
-            <button class="nav-tab" onclick="showSection('workout')">🔥 Entrenar</button>
-            <button class="nav-tab" onclick="showSection('exercises')">📚 Ejercicios</button>
-            <button class="nav-tab" onclick="showSection('progress')">📈 Progreso</button>
-        </nav>
-
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="section active">
-            <div class="card">
-                <div class="card-title">⚡ Acciones Rápidas</div>
-                <div class="quick-actions">
-                    <div class="action-btn" onclick="showSection('workout')">
-                        <div class="action-icon">🏃</div>
-                        <div>Entrenar</div>
-                    </div>
-                    <div class="action-btn" onclick="openModal('routineModal')">
-                        <div class="action-icon">➕</div>
-                        <div>Nueva Rutina</div>
-                    </div>
-                    <div class="action-btn" onclick="showSection('progress')">
-                        <div class="action-icon">📊</div>
-                        <div>Stats</div>
-                    </div>
-                    <div class="action-btn" onclick="openModal('exerciseModal')">
-                        <div class="action-icon">🎯</div>
-                        <div>Ejercicio</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">📅 Rutina de Hoy</div>
-                <div id="todayWorkout">
-                    <div class="empty-state">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
-                        <p>Cargando...</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">🔥 Volumen Semanal</div>
-                <div class="muscle-map" id="muscleVolume">
-                    <div class="muscle-item"><span>Cargando...</span></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Routines Section -->
-        <section id="routines" class="section">
-            <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <div class="card-title" style="margin: 0;">🗂️ Mis Rutinas</div>
-                    <button class="btn btn-primary" onclick="openModal('routineModal')">+ Crear</button>
-                </div>
-                <div id="routinesList">
-                    <p style="text-align: center; color: var(--text-muted);">Cargando rutinas...</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Workout Section -->
-        <section id="workout" class="section">
-            <div class="card">
-                <div class="card-title">🏋️ Selecciona Rutina</div>
-                <select id="workoutRoutineSelect" style="width: 100%; margin-bottom: 1rem; padding: 0.875rem; border-radius: 12px; border: 2px solid rgba(201, 169, 98, 0.2); background: rgba(0,0,0,0.3); color: white;">
-                    <option value="">-- Seleccionar --</option>
-                </select>
-                <button class="btn btn-primary btn-full" onclick="startSelectedRoutine()">Comenzar</button>
-            </div>
-        </section>
-
-        <!-- Exercises Section -->
-        <section id="exercises" class="section">
-            <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <div class="card-title" style="margin: 0;">📚 Ejercicios</div>
-                    <button class="btn btn-primary" onclick="openModal('exerciseModal')">+ Agregar</button>
-                </div>
-                
-                <input type="text" id="exerciseSearch" placeholder="🔍 Buscar ejercicios..." style="width: 100%; margin-bottom: 0.5rem; padding: 0.875rem; border-radius: 12px; border: 2px solid rgba(201, 169, 98, 0.2); background: rgba(0,0,0,0.3); color: white;" onkeyup="filterExercises()">
-                
-                <div class="filters-container">
-                    <select id="filterMuscle" class="filter-select" onchange="filterExercises()">
-                        <option value="">Todos los grupos</option>
-                        <option value="pecho">Pecho</option>
-                        <option value="espalda">Espalda</option>
-                        <option value="hombros">Hombros</option>
-                        <option value="biceps">Bíceps</option>
-                        <option value="triceps">Tríceps</option>
-                        <option value="piernas">Piernas</option>
-                        <option value="core">Core</option>
-                    </select>
-                    <select id="filterDifficulty" class="filter-select" onchange="filterExercises()">
-                        <option value="">Todas las dificultades</option>
-                        <option value="principiante">Principiante</option>
-                        <option value="intermedio">Intermedio</option>
-                        <option value="avanzado">Avanzado</option>
-                    </select>
-                </div>
-                
-                <div id="exercisesList">
-                    <p style="text-align: center; color: var(--text-muted);">Cargando ejercicios...</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Progress Section - MEJORADO CON HISTORIAL DE PESOS -->
-        <section id="progress" class="section">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-card-value" id="totalWorkouts">0</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Entrenos</div>
-                </div>
-                <div class="stat-card blue">
-                    <div class="stat-card-value" id="totalVolume">0</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Volumen (kg)</div>
-                </div>
-                <div class="stat-card green">
-                    <div class="stat-card-value" id="currentStreak">0</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Racha</div>
-                </div>
-                <div class="stat-card" style="background: linear-gradient(135deg, rgba(201, 169, 98, 0.25), rgba(201, 169, 98, 0.1)); border-color: rgba(201, 169, 98, 0.4);">
-                    <div class="stat-card-value" id="favoriteMuscle">-</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Favorito</div>
-                </div>
-            </div>
-
-            <!-- NUEVO: Selector de ejercicio para ver progreso -->
-            <div class="card">
-                <div class="card-title">📈 Progreso por Ejercicio</div>
-                <select id="progressExerciseSelect" onchange="showExerciseProgress()" style="width: 100%; margin-bottom: 1rem; padding: 0.875rem; border-radius: 12px; border: 2px solid rgba(201, 169, 98, 0.2); background: rgba(0,0,0,0.3); color: white;">
-                    <option value="">-- Seleccionar ejercicio --</option>
-                </select>
-                <div id="exerciseProgressContainer">
-                    <div class="empty-state">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
-                        <p>Selecciona un ejercicio para ver tu progreso</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">📅 Historial de Entrenamientos</div>
-                <div id="workoutHistory">
-                    <p style="text-align: center; color: var(--text-muted);">Cargando historial...</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Routine Modal -->
-    <div class="modal-overlay" id="routineModal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title">📝 Nueva Rutina</div>
-                <button class="close-btn" onclick="closeModal('routineModal')">&times;</button>
-            </div>
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" id="routineName" placeholder="Ej: Push Day">
-            </div>
-            <div class="form-group">
-                <label>Días (Ctrl+Click para varios)</label>
-                <select id="routineDays" multiple style="height: 100px; width: 100%; padding: 0.5rem; border-radius: 12px; border: 2px solid rgba(201, 169, 98, 0.2); background: rgba(0,0,0,0.3); color: white;">
-                    <option value="1">Lunes</option>
-                    <option value="2">Martes</option>
-                    <option value="3">Miércoles</option>
-                    <option value="4">Jueves</option>
-                    <option value="5">Viernes</option>
-                    <option value="6">Sábado</option>
-                    <option value="0">Domingo</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Ejercicios</label>
-                <div id="routineExercises"></div>
-                <button class="btn btn-secondary btn-full" style="margin-top: 0.5rem;" onclick="addRoutineExercise()">+ Agregar Ejercicio</button>
-            </div>
-            <button class="btn btn-primary btn-full" onclick="saveRoutine()">Guardar</button>
+        <div class="logo-area">
+          <!-- Logo 1: círculo navy con BF dorado + BRAFIT -->
+          <svg width="160" height="185" viewBox="0 0 160 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Círculo exterior con swirl -->
+            <circle cx="80" cy="80" r="72" fill="#0D1B3E"/>
+            <!-- Swirl lines -->
+            <path d="M80 10 C120 10 148 40 148 80 C148 118 120 148 80 148" stroke="white" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+            <path d="M80 14 C116 14 144 42 144 80 C144 116 116 144 80 144" stroke="white" stroke-width="1" fill="none" opacity="0.2" stroke-linecap="round"/>
+            <path d="M80 150 C40 150 12 120 12 80 C12 42 40 12 80 12" stroke="white" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+            <!-- Letra B -->
+            <text x="28" y="100" font-family="Georgia, serif" font-weight="700" font-size="62" fill="#C9A84C" letter-spacing="-2">BF</text>
+            <!-- BRAFIT text -->
+            <text x="80" y="172" font-family="'Oswald', sans-serif" font-weight="700" font-size="22" fill="#0D1B3E" text-anchor="middle" letter-spacing="4">BRAFIT</text>
+          </svg>
         </div>
-    </div>
 
-    <!-- Exercise Modal -->
-    <div class="modal-overlay" id="exerciseModal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title">🎯 Nuevo Ejercicio</div>
-                <button class="close-btn" onclick="closeModal('exerciseModal')">&times;</button>
-            </div>
-            
-            <div class="image-upload-container" id="imageUploadContainer" onclick="document.getElementById('exerciseImageInput').click()">
-                <div id="imageUploadContent">
-                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📷</div>
-                    <div class="image-upload-text">Haz clic para subir una imagen</div>
-                    <div class="image-upload-hint">JPG, PNG o GIF (máx. 2MB)</div>
-                </div>
-                <input type="file" id="exerciseImageInput" accept="image/*" onchange="handleImageSelect(event)">
-            </div>
-            
-            <div class="form-group">
-                <label>Nombre *</label>
-                <input type="text" id="exerciseName" placeholder="Ej: Press Banca">
-            </div>
-            
-            <div class="form-group">
-                <label>Grupo Muscular *</label>
-                <select id="muscleGroup" style="width: 100%; padding: 0.875rem; border-radius: 12px; border: 2px solid rgba(201, 169, 98, 0.2); background: rgba(0,0,0,0.3); color: white;">
-                    <option value="pecho">Pecho</option>
-                    <option value="espalda">Espalda</option>
-                    <option value="hombros">Hombros</option>
-                    <option value="biceps">Bíceps</option>
-                    <option value="triceps">Tríceps</option>
-                    <option value="piernas">Piernas</option>
-                    <option value="core">Core</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Dificultad</label>
-                <select id="exerciseDifficulty" style="width: 100%; padding: 0.875rem; border-radius: 12px; border: 2px solid rgba(201, 169, 98, 0.2); background: rgba(0,0,0,0.3); color: white;">
-                    <option value="principiante">Principiante</option>
-                    <option value="intermedio" selected>Intermedio</option>
-                    <option value="avanzado">Avanzado</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Descripción</label>
-                <textarea id="exerciseDescription" placeholder="Describe cómo realizar el ejercicio correctamente..."></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label>Equipo necesario (separado por comas)</label>
-                <input type="text" id="exerciseEquipment" placeholder="Ej: Barra, Banco, Discos">
-            </div>
-            
-            <button class="btn btn-primary btn-full" onclick="saveExercise()" id="saveExerciseBtn">Guardar Ejercicio</button>
+        <div class="main">
+          <div class="l1">NO ES</div>
+          <div class="l2">FALTA DE</div>
+          <div class="l3">VOLUNTAD.</div>
+          <div class="l4">Es biología.</div>
+          <div class="sep"></div>
+          <div class="sub">Si trabajas 10+ horas y <b>no bajas de peso sin importar lo que hagas</b>... hay una razón exacta.</div>
         </div>
-    </div>
-
-    <!-- Exercise Detail Modal -->
-    <div class="modal-overlay" id="exerciseDetailModal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title" id="detailExerciseName">Detalle del Ejercicio</div>
-                <button class="close-btn" onclick="closeModal('exerciseDetailModal')">&times;</button>
-            </div>
-            <div id="exerciseDetailContent"></div>
+        <div class="brand-chip">
+          <svg class="logo-mini" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <path d="M18 3 C28 3 34 10 34 18 C34 26 28 33 18 33" stroke="white" stroke-width="1.2" fill="none" opacity="0.4" stroke-linecap="round"/>
+            <path d="M18 33 C8 33 2 26 2 18 C2 10 8 3 18 3" stroke="white" stroke-width="1.2" fill="none" opacity="0.4" stroke-linecap="round"/>
+            <text x="6" y="24" font-family="Georgia, serif" font-weight="700" font-size="15" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
         </div>
-    </div>
+        <div class="swipe">Desliza →</div>
+      </div>
 
-    <!-- NUEVO: Exercise Progress Detail Modal -->
-    <div class="modal-overlay" id="exerciseProgressModal">
-        <div class="modal" style="max-width: 700px;">
-            <div class="modal-header">
-                <div class="modal-title" id="progressModalTitle">📈 Progreso</div>
-                <button class="close-btn" onclick="closeModal('exerciseProgressModal')">&times;</button>
-            </div>
-            <div id="exerciseProgressModalContent"></div>
+      <!-- S2: DATO (navy) -->
+      <div class="slide s2">
+        <div class="beige-bar"></div>
+        <div class="ghost">300</div>
+        <div class="content">
+          <div class="lbl">El dato que cambia todo</div>
+          <div class="num">+300%</div>
+          <div class="num-sub">más cortisol en un<br>día de estrés laboral</div>
+          <div class="divl"></div>
+          <div class="body">Ese cortisol le ordena a tu cuerpo <b>almacenar grasa abdominal.</b><br><br>No es tu culpa. Es química pura.</div>
         </div>
-    </div>
-
-    <!-- Active Workout Modal -->
-    <div class="modal-overlay" id="activeWorkoutModal" style="background: var(--dark);">
-        <div class="modal" style="max-width: 100%; height: 100%; max-height: 100vh; border-radius: 0;">
-            <div class="modal-header">
-                <div class="modal-title" id="activeWorkoutTitle">🔥 Entrenamiento</div>
-                <button class="close-btn" onclick="finishWorkout()">✓</button>
-            </div>
-            <div class="card" style="background: rgba(0,0,0,0.5);">
-                <div class="timer-display" id="restTimer">00:00</div>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn btn-secondary" onclick="startTimer(60)">1m</button>
-                    <button class="btn btn-secondary" onclick="startTimer(90)">1m30s</button>
-                    <button class="btn btn-secondary" onclick="startTimer(180)">3m</button>
-                    <button class="btn btn-danger" onclick="stopTimer()">⏹</button>
-                </div>
-            </div>
-            <div id="activeExercises" style="max-height: 60vh; overflow-y: auto;"></div>
-            <button class="btn btn-success btn-full" style="margin-top: 1rem;" onclick="finishWorkout()">✓ Finalizar</button>
+        <div class="brand-chip">
+          <svg class="logo-mini" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#C9A84C"/>
+            <text x="6" y="24" font-family="Georgia, serif" font-weight="700" font-size="15" fill="#0D1B3E">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
         </div>
+        <div class="pg">02 / 09</div>
+      </div>
+
+      <!-- S3: MENTIRAS (beige2) -->
+      <div class="slide s3">
+        <div class="noise"></div>
+        <div class="header">
+          <div class="lbl">Lo que te vendieron</div>
+          <div class="title">Las <em>3 mentiras</em> del gym tradicional</div>
+        </div>
+        <div class="myths">
+          <div class="myth">
+            <div class="x-badge">✕</div>
+            <div>
+              <div class="myth-title">"Entrena más y bajarás de peso"</div>
+              <div class="myth-truth">Con cortisol elevado, más gym intenso <b>aumenta el cortisol y bloquea la pérdida de grasa.</b></div>
+            </div>
+          </div>
+          <div class="myth">
+            <div class="x-badge">✕</div>
+            <div>
+              <div class="myth-title">"El cardio quema la grasa abdominal"</div>
+              <div class="myth-truth">El cardio excesivo en hombres estresados <b>eleva el cortisol todavía más.</b></div>
+            </div>
+          </div>
+          <div class="myth">
+            <div class="x-badge">✕</div>
+            <div>
+              <div class="myth-title">"Solo necesitas disciplina"</div>
+              <div class="myth-truth">La disciplina no regula hormonas. <b>Sin plan hormonal, la constancia no alcanza.</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-mini" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <text x="6" y="24" font-family="Georgia, serif" font-weight="700" font-size="15" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">03 / 09</div>
+      </div>
+
+      <!-- S4: NO vs SÍ -->
+      <div class="slide s4">
+        <div class="left">
+          <div class="side-tag tag-navy">✕ Sin plan</div>
+          <div class="side-title navy-txt">MAL<br>CICLO</div>
+          <div class="items">
+            <div class="it"><div class="dot-n"></div><div><b>Gym sin estrategia</b> → más cortisol</div></div>
+            <div class="it"><div class="dot-n"></div><div><b>Dieta restrictiva</b> → más ansiedad</div></div>
+            <div class="it"><div class="dot-n"></div><div><b>Cardio excesivo</b> → agotamiento</div></div>
+            <div class="it"><div class="dot-n"></div><div><b>Fuerza de voluntad</b> → sin resultados</div></div>
+            <div class="it"><div class="dot-n"></div><div><b>Mismo ciclo</b> → frustración</div></div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="side-tag tag-gold">✓ Con plan</div>
+          <div class="side-title gold-txt">BUEN<br>SISTEMA</div>
+          <div class="items">
+            <div class="it"><div class="dot-g"></div><div><b>Entrenamiento corto</b> + inteligente</div></div>
+            <div class="it"><div class="dot-g"></div><div><b>Nutrición adaptada</b> a tu estrés</div></div>
+            <div class="it"><div class="dot-g"></div><div><b>Descanso optimizado</b> para perder grasa</div></div>
+            <div class="it"><div class="dot-g"></div><div><b>Gestión del cortisol</b> primero</div></div>
+            <div class="it"><div class="dot-g"></div><div><b>Sistema sostenible</b> → resultados reales</div></div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-mini" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <text x="6" y="24" font-family="Georgia, serif" font-weight="700" font-size="15" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">04 / 09</div>
+      </div>
+
+      <!-- S5: HISTORIA (navy) -->
+      <div class="slide s5">
+        <div class="stripe"></div>
+        <div class="content">
+          <div class="eyebrow">Historia real — anónima</div>
+          <div class="l1">12 MESES</div>
+          <div class="l2">EN EL GYM.</div>
+          <div class="bar"></div>
+          <div class="quote-box">
+            <div class="quote">"Iba 4 veces por semana. Comía mejor que nunca. <b>Subí 3 kilos.</b> Mi médico me dijo que era normal a los 47."</div>
+            <div class="attr">— Ejecutivo, 47 años</div>
+          </div>
+          <div class="body">El problema: <b>nadie atacó el cortisol, el estrés y el descanso</b> al mismo tiempo.</div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-mini" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#C9A84C"/>
+            <text x="6" y="24" font-family="Georgia, serif" font-weight="700" font-size="15" fill="#0D1B3E">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">05 / 09</div>
+      </div>
+
+      <!-- S6: 3 FRENTES -->
+      <div class="slide s6">
+        <div class="noise"></div>
+        <div class="header">
+          <div class="lbl">El enfoque correcto</div>
+          <div class="title">Los <em>3 frentes</em> que hay<br>que atacar juntos</div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="c-num">01</div>
+            <div class="c-icon">💪</div>
+            <div class="c-title">Cuerpo</div>
+            <div class="c-desc">Entrenamiento corto adaptado a tu energía y tiempo real</div>
+          </div>
+          <div class="card">
+            <div class="c-num">02</div>
+            <div class="c-icon">⚗️</div>
+            <div class="c-title">Hormonas</div>
+            <div class="c-desc">Regular cortisol con nutrición, descanso y manejo del estrés</div>
+          </div>
+          <div class="card">
+            <div class="c-num">03</div>
+            <div class="c-icon">🧠</div>
+            <div class="c-title">Mente</div>
+            <div class="c-desc">Cambiar cómo te hablas y procesas el estrés diario</div>
+          </div>
+        </div>
+        <div class="connector">
+          <div class="conn-line"></div>
+          <div class="conn-badge">EL<br>PLAN</div>
+          <div class="conn-line"></div>
+        </div>
+        <div class="bottom-note">
+          <p>El gym toca <b>solo el 33%</b> del problema. BraFit ataca los tres.</p>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-mini" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <text x="6" y="24" font-family="Georgia, serif" font-weight="700" font-size="15" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">06 / 09</div>
+      </div>
+
+      <!-- S7: SEÑALES -->
+      <div class="slide s7">
+        <div class="noise"></div>
+        <div class="header">
+          <div class="lbl">¿Te identificas?</div>
+          <div class="title">Señales de que el gym <em>solo no basta</em></div>
+        </div>
+        <div class="list">
+          <div class="item"><div class="chk">✓</div><div class="txt"><b>Llevas meses en el gym</b> y la balanza no baja</div></div>
+          <div class="item"><div class="chk">✓</div><div class="txt"><b>Entrenar te deja más agotado</b> que energizado</div></div>
+          <div class="item"><div class="chk">✓</div><div class="txt"><b>Comes bien en semana</b> pero el fin de semana lo arruinas</div></div>
+          <div class="item"><div class="chk">✓</div><div class="txt"><b>Grasa abdominal que no cede</b> sin importar cuánto cardio</div></div>
+          <div class="item"><div class="chk">✓</div><div class="txt"><b>Ya pensaste</b> que simplemente "ya no es como antes"</div></div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-mini" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#0D1B3E"/>
+            <text x="6" y="24" font-family="Georgia, serif" font-weight="700" font-size="15" fill="#C9A84C">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">07 / 09</div>
+      </div>
+
+      <!-- S8: MÉTODO (navy) -->
+      <div class="slide s8">
+        <div class="gold-right"></div>
+        <div class="header">
+          <div class="lbl">El método BraFit</div>
+          <div class="title">Más allá del gym: <em>el sistema completo</em></div>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <div class="sc">
+              <div class="st">Evaluación real de tu vida</div>
+              <div class="sd">Horarios, estrés, historial. <b>Sin juicios, con soluciones.</b></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="step">
+            <div class="num">2</div>
+            <div class="sc">
+              <div class="st">Entrenamiento anti-cortisol</div>
+              <div class="sd">Corto, preciso. <b>Máximo 30 min.</b> Adaptado a tu energía.</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="step">
+            <div class="num">3</div>
+            <div class="sc">
+              <div class="st">Nutrición que regula, no restringe</div>
+              <div class="sd">Protocolos que <b>bajan el cortisol</b> y queman grasa real.</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="step">
+            <div class="num">4</div>
+            <div class="sc">
+              <div class="st">Acompañamiento semanal</div>
+              <div class="sd"><b>Ajustamos cada semana</b> según tu progreso real.</div>
+            </div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <svg class="logo-mini" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#C9A84C"/>
+            <text x="6" y="24" font-family="Georgia, serif" font-weight="700" font-size="15" fill="#0D1B3E">BF</text>
+          </svg>
+          <div class="bname">BraFit</div>
+        </div>
+        <div class="pg">08 / 09</div>
+      </div>
+
+      <!-- S9: CTA (beige) -->
+      <div class="slide s9">
+        <div class="noise"></div>
+        <div class="navy-frame"></div>
+        <div class="content">
+          <!-- Logo grande centrado -->
+          <svg width="90" height="104" viewBox="0 0 160 185" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:12px">
+            <circle cx="80" cy="80" r="72" fill="#0D1B3E"/>
+            <path d="M80 10 C120 10 148 40 148 80 C148 118 120 148 80 148" stroke="white" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+            <path d="M80 150 C40 150 12 120 12 80 C12 42 40 12 80 12" stroke="white" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+            <text x="28" y="100" font-family="Georgia, serif" font-weight="700" font-size="62" fill="#C9A84C" letter-spacing="-2">BF</text>
+            <text x="80" y="172" font-family="'Oswald', sans-serif" font-weight="700" font-size="22" fill="#0D1B3E" text-anchor="middle" letter-spacing="4">BRAFIT</text>
+          </svg>
+          <div class="hl1">¿LISTO PARA</div>
+          <div class="hl2">CAMBIAR TU CUERPO?</div>
+          <div class="sub">Escríbeme <b>"CORTISOL"</b> al DM y armamos un plan real para tu vida.</div>
+          <div class="cta-btn">💬 Escríbeme "CORTISOL" al DM</div>
+          <div class="actions">
+            <div class="act"><div class="act-ico">🔖</div><div class="act-lbl">Guarda</div></div>
+            <div class="act-div"></div>
+            <div class="act"><div class="act-ico">📤</div><div class="act-lbl">Comparte</div></div>
+            <div class="act-div"></div>
+            <div class="act"><div class="act-ico">👥</div><div class="act-lbl">Etiqueta</div></div>
+          </div>
+          <div class="tagline">No es azar, es estrategia. Alcánzalo.</div>
+        </div>
+      </div>
+
     </div>
+  </div>
 
-    <div class="toast" id="toast"></div>
+  <div class="dots" id="dots"></div>
+  <div class="nav">
+    <button onclick="prev()">← Ant</button>
+    <div class="counter" id="counter">1 / 9</div>
+    <button onclick="next()">Sig →</button>
+  </div>
+  <div class="tip">← → teclado · screenshot cada slide · 540×540px</div>
+</div>
 
-    <!-- Firebase -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { 
-            getAuth, 
-            onAuthStateChanged, 
-            signInWithEmailAndPassword,
-            createUserWithEmailAndPassword,
-            signOut 
-        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-        import { 
-            getFirestore, 
-            collection, 
-            addDoc, 
-            getDocs, 
-            query, 
-            where,
-            doc,
-            deleteDoc,
-            serverTimestamp
-        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-        import { 
-            getStorage, 
-            ref, 
-            uploadBytes, 
-            getDownloadURL,
-            deleteObject
-        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyB2nAwk1IlirsX7cpERSCgs-Jj9_Q_2LHM",
-            authDomain: "brafitcoach.firebaseapp.com",
-            projectId: "brafitcoach",
-            storageBucket: "brafitcoach.appspot.com"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const storage = getStorage(app);
-
-        let userId = null;
-        let selectedImageFile = null;
-        let data = {
-            exercises: [
-                { 
-                    id: 'default_1', 
-                    name: 'Press Banca', 
-                    muscle: 'pecho', 
-                    type: 'compound', 
-                    isDefault: true,
-                    difficulty: 'intermedio',
-                    description: 'Acuéstate en un banco plano, agarra la barra con las manos a la anchura de los hombros, baja controladamente hasta el pecho y empuja hacia arriba.',
-                    equipment: ['Barra', 'Banco'],
-                    imageUrl: ''
-                },
-                { 
-                    id: 'default_2', 
-                    name: 'Sentadilla', 
-                    muscle: 'piernas', 
-                    type: 'compound', 
-                    isDefault: true,
-                    difficulty: 'intermedio',
-                    description: 'Coloca la barra sobre los trapecios, baja flexionando rodillas y caderas hasta que los muslos estén paralelos al suelo, vuelve a subir.',
-                    equipment: ['Barra', 'Rack'],
-                    imageUrl: ''
-                },
-                { 
-                    id: 'default_3', 
-                    name: 'Peso Muerto', 
-                    muscle: 'espalda', 
-                    type: 'compound', 
-                    isDefault: true,
-                    difficulty: 'avanzado',
-                    description: 'Con la barra en el suelo, flexiona caderas y rodillas, agarra la barra con espalda recta y levántala extendiendo caderas y rodillas.',
-                    equipment: ['Barra', 'Discos'],
-                    imageUrl: ''
-                },
-                { 
-                    id: 'default_4', 
-                    name: 'Press Militar', 
-                    muscle: 'hombros', 
-                    type: 'compound', 
-                    isDefault: true,
-                    difficulty: 'intermedio',
-                    description: 'De pie, barra a la altura de los hombros, empuja hacia arriba hasta extender completamente los brazos.',
-                    equipment: ['Barra'],
-                    imageUrl: ''
-                },
-                { 
-                    id: 'default_5', 
-                    name: 'Dominadas', 
-                    muscle: 'espalda', 
-                    type: 'compound', 
-                    isDefault: true,
-                    difficulty: 'intermedio',
-                    description: 'Agarra la barra con las palmas hacia afuera, cuelga completamente y levánta hasta que la barbilla pase la barra.',
-                    equipment: ['Barra de dominadas'],
-                    imageUrl: ''
-                },
-                { 
-                    id: 'default_6', 
-                    name: 'Curl Bíceps', 
-                    muscle: 'biceps', 
-                    type: 'isolation', 
-                    isDefault: true,
-                    difficulty: 'principiante',
-                    description: 'Con mancuernas o barra, flexiona los codos elevando el peso hacia los hombros sin mover los codos.',
-                    equipment: ['Mancuernas'],
-                    imageUrl: ''
-                },
-                { 
-                    id: 'default_7', 
-                    name: 'Extensión Tríceps', 
-                    muscle: 'triceps', 
-                    type: 'isolation', 
-                    isDefault: true,
-                    difficulty: 'principiante',
-                    description: 'Sostén una mancuerna con ambas manos sobre la cabeza, flexiona los codos bajando el peso detrás de la cabeza y extiende.',
-                    equipment: ['Mancuerna'],
-                    imageUrl: ''
-                }
-            ],
-            routines: [],
-            workouts: [],
-            currentWorkout: null
-        };
-
-        // ============== FUNCIONES GLOBALES ==============
-
-        window.handleAuth = async () => {
-            const email = document.getElementById('authEmail').value;
-            const password = document.getElementById('authPassword').value;
-            
-            if (!email || !password) {
-                showToast('❌ Ingresa email y contraseña', true);
-                return;
-            }
-            
-            try {
-                document.getElementById('authForm').classList.add('hidden');
-                document.getElementById('authLoading').classList.remove('hidden');
-                await signInWithEmailAndPassword(auth, email, password);
-                document.getElementById("user-email").textContent = email;
-            } catch (error) {
-                console.error('Error login:', error);
-                showToast('❌ ' + error.message, true);
-                document.getElementById('authForm').classList.remove('hidden');
-                document.getElementById('authLoading').classList.add('hidden');
-            }
-        };
-
-        window.handleRegister = async () => {
-            const email = document.getElementById('authEmail').value;
-            const password = document.getElementById('authPassword').value;
-            
-            if (!email || !password) {
-                showToast('❌ Ingresa email y contraseña', true);
-                return;
-            }
-            
-            if (password.length < 6) {
-                showToast('❌ La contraseña debe tener al menos 6 caracteres', true);
-                return;
-            }
-            
-            try {
-                document.getElementById('authForm').classList.add('hidden');
-                document.getElementById('authLoading').classList.remove('hidden');
-                await createUserWithEmailAndPassword(auth, email, password);
-                document.getElementById("user-email").textContent = email;
-            } catch (error) {
-                console.error('Error registro:', error);
-                showToast('❌ ' + error.message, true);
-                document.getElementById('authForm').classList.remove('hidden');
-                document.getElementById('authLoading').classList.add('hidden');
-            }
-        };
-
-        window.logout = async () => {
-            try {
-                await signOut(auth);
-                showToast('👋 Sesión cerrada');
-            } catch (error) {
-                console.error('Error en logout:', error);
-                showToast('❌ Error al cerrar sesión', true);
-            }
-        };
-
-        window.showSection = (sectionId) => {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            
-            document.getElementById(sectionId).classList.add('active');
-            
-            const tabs = document.querySelectorAll('.nav-tab');
-            const sectionMap = {
-                'dashboard': 0,
-                'routines': 1,
-                'workout': 2,
-                'exercises': 3,
-                'progress': 4
-            };
-            if (tabs[sectionMap[sectionId]]) {
-                tabs[sectionMap[sectionId]].classList.add('active');
-            }
-            
-            if (sectionId === 'dashboard') renderDashboard();
-            if (sectionId === 'routines') renderRoutines();
-            if (sectionId === 'exercises') renderExercises();
-            if (sectionId === 'progress') {
-                renderProgress();
-                updateProgressExerciseSelect();
-            }
-            if (sectionId === 'workout') updateWorkoutSelect();
-        };
-
-        window.openModal = (modalId) => {
-            document.getElementById(modalId).classList.add('active');
-            if (modalId === 'routineModal') {
-                document.getElementById('routineExercises').innerHTML = '';
-                addRoutineExercise();
-            }
-            if (modalId === 'exerciseModal') {
-                resetExerciseForm();
-            }
-        };
-
-        window.closeModal = (modalId) => {
-            document.getElementById(modalId).classList.remove('active');
-        };
-
-        window.handleImageSelect = (event) => {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            if (file.size > 2 * 1024 * 1024) {
-                showToast('❌ La imagen debe ser menor a 2MB', true);
-                return;
-            }
-
-            if (!file.type.startsWith('image/')) {
-                showToast('❌ El archivo debe ser una imagen', true);
-                return;
-            }
-
-            selectedImageFile = file;
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const container = document.getElementById('imageUploadContainer');
-                const content = document.getElementById('imageUploadContent');
-                
-                container.classList.add('has-image');
-                content.innerHTML = `
-                    <img src="${e.target.result}" class="image-upload-preview" alt="Preview">
-                    <div class="image-upload-text" style="color: var(--secondary);">✓ Imagen seleccionada</div>
-                    <div class="image-upload-hint">Haz clic para cambiar</div>
-                `;
-            };
-            reader.readAsDataURL(file);
-        };
-
-        window.addRoutineExercise = () => {
-            const container = document.getElementById('routineExercises');
-            const div = document.createElement('div');
-            div.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 0.5rem; margin-bottom: 0.5rem;';
-            
-            const options = data.exercises.map(e => `<option value="${e.id}">${e.name}</option>`).join('');
-            
-            div.innerHTML = `
-                <select class="r-ex-select" style="padding: 0.5rem; border-radius: 8px; border: 2px solid rgba(201, 169, 98, 0.2); background: rgba(0,0,0,0.3); color: white;">${options}</select>
-                <input type="number" class="r-ex-sets" value="3" min="1" style="padding: 0.5rem; border-radius: 8px; border: 2px solid rgba(201, 169, 98, 0.2); background: rgba(0,0,0,0.3); color: white;">
-                <input type="number" class="r-ex-reps" value="10" min="1" style="padding: 0.5rem; border-radius: 8px; border: 2px solid rgba(201, 169, 98, 0.2); background: rgba(0,0,0,0.3); color: white;">
-                <button class="btn btn-danger" onclick="this.parentElement.remove()" style="padding: 0.5rem;">×</button>
-            `;
-            
-            container.appendChild(div);
-        };
-
-        window.saveRoutine = async () => {
-            const name = document.getElementById('routineName').value.trim();
-            const daysSelect = document.getElementById('routineDays');
-            const days = Array.from(daysSelect.selectedOptions).map(o => parseInt(o.value));
-            
-            if (!name || days.length === 0) {
-                showToast('❌ Completa nombre y días', true);
-                return;
-            }
-            
-            const exercises = [];
-            document.querySelectorAll('#routineExercises > div').forEach(div => {
-                const exId = div.querySelector('.r-ex-select').value;
-                const ex = data.exercises.find(e => e.id == exId);
-                if (ex) {
-                    exercises.push({
-                        exerciseId: exId,
-                        name: ex.name,
-                        muscle: ex.muscle,
-                        sets: parseInt(div.querySelector('.r-ex-sets').value) || 3,
-                        reps: parseInt(div.querySelector('.r-ex-reps').value) || 10
-                    });
-                }
-            });
-            
-            const routine = { name, days, exercises, createdAt: new Date().toISOString() };
-            const id = await saveToFirebase('routines', routine);
-            
-            if (id) {
-                routine.id = id;
-                data.routines.push(routine);
-                closeModal('routineModal');
-                renderRoutines();
-                renderDashboard();
-                showToast('✅ Rutina guardada');
-                document.getElementById('routineName').value = '';
-                daysSelect.selectedIndex = -1;
-            }
-        };
-
-        window.saveExercise = async () => {
-            const name = document.getElementById('exerciseName').value.trim();
-            const muscle = document.getElementById('muscleGroup').value;
-            const difficulty = document.getElementById('exerciseDifficulty').value;
-            const description = document.getElementById('exerciseDescription').value.trim();
-            const equipment = document.getElementById('exerciseEquipment').value
-                .split(',')
-                .map(e => e.trim())
-                .filter(e => e);
-            
-            if (!name) {
-                showToast('❌ Ingresa un nombre para el ejercicio', true);
-                return;
-            }
-            
-            const btn = document.getElementById('saveExerciseBtn');
-            btn.disabled = true;
-            btn.textContent = 'Guardando...';
-            
-            try {
-                let imageUrl = '';
-                if (selectedImageFile) {
-                    imageUrl = await uploadExerciseImage(selectedImageFile);
-                }
-                
-                const exercise = { 
-                    name, 
-                    muscle, 
-                    type: 'custom',
-                    difficulty,
-                    description,
-                    equipment,
-                    imageUrl,
-                    isDefault: false 
-                };
-                
-                const id = await saveToFirebase('exercises', exercise);
-                
-                if (id) {
-                    exercise.id = id;
-                    data.exercises.push(exercise);
-                    closeModal('exerciseModal');
-                    renderExercises();
-                    showToast('✅ Ejercicio guardado correctamente');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showToast('❌ Error al guardar', true);
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Guardar Ejercicio';
-            }
-        };
-
-        window.deleteExercise = async (id) => {
-            if (!confirm('¿Eliminar este ejercicio?')) return;
-            
-            const exercise = data.exercises.find(e => e.id === id);
-            if (!exercise) return;
-            
-            if (exercise.imageUrl && !exercise.isDefault) {
-                try {
-                    const imageRef = ref(storage, exercise.imageUrl);
-                    await deleteObject(imageRef);
-                } catch (e) {
-                    console.log('No se pudo eliminar la imagen:', e);
-                }
-            }
-            
-            if (await deleteFromFirebase('exercises', id)) {
-                data.exercises = data.exercises.filter(e => e.id !== id);
-                renderExercises();
-                showToast('🗑️ Ejercicio eliminado');
-            }
-        };
-
-        window.deleteRoutine = async (id) => {
-            if (!confirm('¿Eliminar esta rutina?')) return;
-            if (await deleteFromFirebase('routines', id)) {
-                data.routines = data.routines.filter(r => r.id !== id);
-                renderRoutines();
-                renderDashboard();
-                showToast('🗑️ Rutina eliminada');
-            }
-        };
-
-        window.startSelectedRoutine = () => {
-            const id = document.getElementById('workoutRoutineSelect').value;
-            if (!id) {
-                showToast('❌ Selecciona una rutina', true);
-                return;
-            }
-            const routine = data.routines.find(r => r.id === id);
-            if (routine) startWorkout(routine);
-        };
-
-        window.updateSet = (exIdx, setIdx, field, value) => {
-            data.currentWorkout.exercises[exIdx].setsCompleted[setIdx][field] = value;
-        };
-
-        window.toggleSet = (exIdx, setIdx, completed) => {
-            data.currentWorkout.exercises[exIdx].setsCompleted[setIdx].completed = completed;
-            
-            let volume = 0;
-            data.currentWorkout.exercises.forEach(ex => {
-                ex.setsCompleted.forEach(set => {
-                    if (set.completed && set.weight && set.reps) {
-                        volume += parseFloat(set.weight) * parseFloat(set.reps);
-                    }
-                });
-            });
-            data.currentWorkout.totalVolume = volume;
-        };
-
-        window.finishWorkout = async () => {
-            if (!data.currentWorkout) return;
-            
-            const duration = Math.round((new Date() - new Date(data.currentWorkout.startTime)) / 60000);
-            const workout = {
-                ...data.currentWorkout,
-                endTime: new Date().toISOString(),
-                duration
-            };
-            
-            const id = await saveToFirebase('workouts', workout);
-            if (id) {
-                workout.id = id;
-                data.workouts.unshift(workout);
-                data.currentWorkout = null;
-                closeModal('activeWorkoutModal');
-                renderProgress();
-                renderDashboard();
-                showToast(`✅ Entreno guardado: ${duration}min, ${workout.totalVolume.toLocaleString()}kg`);
-            }
-        };
-
-        let timerInterval;
-        window.startTimer = (secs) => {
-            clearInterval(timerInterval);
-            let remaining = secs;
-            const display = document.getElementById('restTimer');
-            
-            timerInterval = setInterval(() => {
-                const m = Math.floor(remaining / 60).toString().padStart(2, '0');
-                const s = (remaining % 60).toString().padStart(2, '0');
-                display.textContent = `${m}:${s}`;
-                if (--remaining < 0) {
-                    clearInterval(timerInterval);
-                    showToast('⏰ ¡Descanso terminado!');
-                }
-            }, 1000);
-        };
-
-        window.stopTimer = () => {
-            clearInterval(timerInterval);
-            document.getElementById('restTimer').textContent = '00:00';
-        };
-
-        window.filterExercises = () => renderExercises();
-
-        window.showExerciseDetail = (id) => {
-            const exercise = data.exercises.find(e => e.id === id);
-            if (!exercise) return;
-            
-            const modal = document.getElementById('exerciseDetailModal');
-            const content = document.getElementById('exerciseDetailContent');
-            const nameEl = document.getElementById('detailExerciseName');
-            
-            nameEl.textContent = exercise.name;
-            
-            const imageHtml = exercise.imageUrl 
-                ? `<img src="${exercise.imageUrl}" class="exercise-detail-image" alt="${exercise.name}">`
-                : `<div style="width: 100%; height: 200px; background: rgba(201, 169, 98, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: 1rem;">🏋️</div>`;
-            
-            const equipment = exercise.equipment || [];
-            const difficulty = exercise.difficulty || 'intermedio';
-            const description = exercise.description || 'Sin descripción disponible';
-            
-            content.innerHTML = `
-                ${imageHtml}
-                <div style="margin-bottom: 1rem;">
-                    <span class="difficulty-badge difficulty-${difficulty}">${difficulty}</span>
-                    <span class="exercise-muscle" style="margin-left: 0.5rem;">${exercise.muscle}</span>
-                </div>
-                <div class="form-group">
-                    <label>Descripción</label>
-                    <p style="color: var(--text); line-height: 1.6;">${description}</p>
-                </div>
-                ${equipment.length > 0 ? `
-                    <div class="form-group">
-                        <label>Equipo necesario</label>
-                        <div class="equipment-tags">
-                            ${equipment.map(eq => `<span class="equipment-tag">${eq}</span>`).join('')}
-                        </div>
-                    </div>
-                ` : ''}
-                ${exercise.isDefault ? `
-                    <div style="background: rgba(201, 169, 98, 0.1); padding: 1rem; border-radius: 12px; margin-top: 1rem;">
-                        <span style="color: var(--secondary); font-size: 0.9rem;">📌 Ejercicio predefinido del sistema</span>
-                    </div>
-                ` : `
-                    <div style="background: rgba(76, 175, 80, 0.1); padding: 1rem; border-radius: 12px; margin-top: 1rem;">
-                        <span style="color: #4caf50; font-size: 0.9rem;">✓ Ejercicio personalizado creado por ti</span>
-                    </div>
-                `}
-                <button class="btn btn-primary btn-full" onclick="showExerciseProgressDetail('${exercise.id}')" style="margin-top: 1rem;">
-                    📈 Ver Progreso de Pesos
-                </button>
-            `;
-            
-            modal.classList.add('active');
-        };
-
-        // NUEVA FUNCIÓN: Mostrar progreso en el modal de detalle
-        window.showExerciseProgressDetail = (exerciseId) => {
-            closeModal('exerciseDetailModal');
-            showExerciseProgressModal(exerciseId);
-        };
-
-        // NUEVA FUNCIÓN: Mostrar progreso desde el selector de progreso
-        window.showExerciseProgress = () => {
-            const exerciseId = document.getElementById('progressExerciseSelect').value;
-            if (!exerciseId) {
-                document.getElementById('exerciseProgressContainer').innerHTML = `
-                    <div class="empty-state">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
-                        <p>Selecciona un ejercicio para ver tu progreso</p>
-                    </div>
-                `;
-                return;
-            }
-            showExerciseProgressModal(exerciseId);
-        };
-
-        // NUEVA FUNCIÓN: Mostrar modal de progreso completo
-        function showExerciseProgressModal(exerciseId) {
-            const exercise = data.exercises.find(e => e.id === exerciseId);
-            if (!exercise) return;
-
-            // Buscar todos los registros de este ejercicio en todos los workouts
-            const history = [];
-            data.workouts.forEach(workout => {
-                workout.exercises.forEach(ex => {
-                    if (ex.name === exercise.name) {
-                        ex.setsCompleted.forEach(set => {
-                            if (set.completed && set.weight && set.reps) {
-                                history.push({
-                                    date: new Date(workout.startTime),
-                                    weight: parseFloat(set.weight),
-                                    reps: parseInt(set.reps),
-                                    volume: parseFloat(set.weight) * parseInt(set.reps),
-                                    workoutId: workout.id
-                                });
-                            }
-                        });
-                    }
-                });
-            });
-
-            // Ordenar por fecha (más reciente primero)
-            history.sort((a, b) => b.date - a.date);
-
-            // Calcular PR (máximo peso levantado)
-            const pr = history.length > 0 ? Math.max(...history.map(h => h
+<script>
+let cur=0; const total=9;
+const track=document.getElementById('track');
+const counter=document.getElementById('counter');
+const dotsEl=document.getElementById('dots');
+for(let i=0;i<total;i++){
+  const d=document.createElement('div');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i); dotsEl.appendChild(d);
+}
+function goTo(n){
+  cur=Math.max(0,Math.min(total-1,n));
+  track.style.transform=`translateX(-${cur*540}px)`;
+  counter.textContent=`${cur+1} / ${total}`;
+  document.querySelectorAll('.dot').forEach((d,i)=>{d.className='dot'+(i===cur?' active':'');});
+}
+function next(){goTo(cur+1);} function prev(){goTo(cur-1);}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev();});
+</script>
+</body>
+</html>
