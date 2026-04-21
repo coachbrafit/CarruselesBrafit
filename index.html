@@ -75,7 +75,25 @@ body {
   letter-spacing: 4px;
   text-transform: uppercase;
 }
-  
+
+  .bg-logo {
+  position: absolute;
+  inset: 0;                    /* top:0 right:0 bottom:0 left:0 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-logo svg,
+.bg-logo img {
+  width: 80%;                  /* Ocupa 80% del slide */
+  max-width: 500px;
+  height: auto;
+  filter: grayscale(100%);     /* Opcional: sin color */
+}
 
 /* ── BRAND CHIP (esquina inferior izquierda) ── */
 .brand-chip {
@@ -416,8 +434,8 @@ body {
 .s9 .content { position: absolute; inset: 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center; text-align: center; padding: 36px; }
 
-.s9 .hl1 { font-family: 'Anton'; font-size: 50px; line-height: 0.9; color: var(--navy); letter-spacing: -1px; margin-bottom: 4px; }
-.s9 .hl2 { font-family: 'Anton'; font-size: 50px; line-height: 0.9; letter-spacing: -1px;
+.s9 .hl1 { font-family: 'Anton'; font-size: 40px; line-height: 0.9; color: var(--navy); letter-spacing: -1px; margin-bottom: 4px; }
+.s9 .hl2 { font-family: 'Anton'; font-size: 40px; line-height: 0.9; letter-spacing: -1px;
   color: var(--gold); margin-bottom: 20px; }
 .s9 .hl3 { font-family: 'Anton'; font-size: 30px; line-height: 0.9; color: var(--navy); letter-spacing: -1px; margin-bottom: 4px; }
 .s9 .sub { font-size: 14px; font-weight: 300; line-height: 1.6;
@@ -472,6 +490,9 @@ body {
         </div>
 
         <div class="main">
+          <div class="bg-logo">
+            <div class="logo-main"></div>
+          </div>
           <div class="l1">5 SEÑALES</div>
           <div class="l2">DE QUE</div>
           <div class="l3">TU CUERPO</div>
