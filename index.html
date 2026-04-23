@@ -2481,9 +2481,7 @@
 </div>
 
 <!-- Navigation -->
-<div class="slide-counter">
-    <span id="current-slide">1</span> / <span id="total-slides">13</span>
-</div>
+
 
 <div class="nav-buttons">
     <button class="nav-btn" onclick="prevSlide()" title="Anterior">←</button>
@@ -2508,7 +2506,7 @@
 
     function nextSlide() {
         currentSlide++;
-       /*showSlide(currentSlide);*/
+        showSlide(currentSlide);
     }
 
     function prevSlide() {
