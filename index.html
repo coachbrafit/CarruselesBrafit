@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentación - Alto Rendimiento</title>
+    <title>Presentación - BTP95 Alto Rendimiento</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -499,6 +499,406 @@
             line-height: 1.6;
         }
 
+        /* SLIDE 5 - POR QUÉ FUNCIONA */
+        .slide-5 .slide-title {
+            position: relative;
+            padding-left: 20px;
+            font-size: 44px;
+        }
+
+        .slide-5 .slide-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 6px;
+            background: #0f172a;
+            border-radius: 3px;
+        }
+
+        .slide-5 .slide-subtitle {
+            color: #475569;
+            font-size: 17px;
+        }
+
+        .slide-5-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .slide-5-left {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .slide-5-right {
+            flex: 0 0 420px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .reason-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .reason-icon {
+            width: 48px;
+            height: 48px;
+            background: #0f172a;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fbbf24;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .reason-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .reason-text {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .reason-text .accent {
+            color: #d97706;
+            font-weight: 600;
+        }
+
+        .chart-container {
+            margin-bottom: 16px;
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-area {
+            position: relative;
+            height: 280px;
+            width: 100%;
+        }
+
+        .chart-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-caption {
+            font-size: 13px;
+            color: #94a3b8;
+            font-style: italic;
+            text-align: center;
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        /* SLIDE 6 - TESTIMONIOS */
+        .slide-6 .slide-title {
+            position: relative;
+            padding-left: 20px;
+            font-size: 44px;
+        }
+
+        .slide-6 .slide-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 6px;
+            background: #3b82f6;
+            border-radius: 3px;
+        }
+
+        .slide-6 .slide-subtitle {
+            color: #475569;
+            font-size: 17px;
+        }
+
+        .slide-6-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .slide-6-left {
+            flex: 0 0 380px;
+        }
+
+        .before-after-container {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .before-after-container img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .disclaimer {
+            font-size: 12px;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .slide-6-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .testimonial-badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .testimonial-icon {
+            width: 48px;
+            height: 48px;
+            background: #3b82f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .testimonial-content {
+            flex: 1;
+        }
+
+        .testimonial-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        /* SLIDE 7 - CTA FINAL */
+        .slide-7 .slide-title {
+            position: relative;
+            padding-left: 20px;
+            font-size: 44px;
+        }
+
+        .slide-7 .slide-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 6px;
+            background: #0f172a;
+            border-radius: 3px;
+        }
+
+        .slide-7 .slide-subtitle {
+            color: #475569;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .cta-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .cta-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .cta-icon {
+            width: 44px;
+            height: 44px;
+            background: #eff6ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            font-size: 20px;
+        }
+
+        .cta-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .cta-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .cta-list li {
+            font-size: 15px;
+            color: #475569;
+            line-height: 1.5;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .cta-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .cta-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .cta-btn-primary {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        .cta-btn-dark {
+            background: #0f172a;
+            color: #fff;
+        }
+
+        .urgency-bar {
+            background: #0f172a;
+            border-radius: 16px;
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .urgency-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+        }
+
+        .urgency-icon {
+            font-size: 24px;
+        }
+
+        .urgency-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .urgency-label {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .urgency-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .urgency-divider {
+            width: 1px;
+            height: 40px;
+            background: #334155;
+        }
+
+        .final-quote {
+            text-align: center;
+            font-size: 16px;
+            color: #64748b;
+            font-style: italic;
+        }
+
         /* Navigation */
         .nav-buttons {
             position: fixed;
@@ -546,18 +946,25 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .slide-1-layout, .slide-3-layout, .slide-4-layout {
+            .slide-1-layout, .slide-3-layout, .slide-4-layout, .slide-5-layout, .slide-6-layout {
                 flex-direction: column;
             }
-            .slide-1-right, .slide-3-right, .slide-4-right {
+            .slide-1-right, .slide-3-right, .slide-4-right, .slide-5-right, .slide-6-left {
                 flex: none;
                 width: 100%;
             }
             .slide-title {
                 font-size: 32px;
             }
-            .cards-grid-4, .cards-grid-2x2, .mini-cards-grid {
+            .cards-grid-4, .cards-grid-2x2, .mini-cards-grid, .slide-5-left, .cta-grid {
                 grid-template-columns: 1fr;
+            }
+            .urgency-bar {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .urgency-divider {
+                display: none;
             }
         }
     </style>
@@ -782,11 +1189,208 @@
         </div>
     </div>
 
+    <!-- SLIDE 5: POR QUÉ FUNCIONA EL BTP95 -->
+    <div class="slide" id="slide-5">
+        <div class="slide-content slide-5">
+            <h1 class="slide-title">Por Qué Funciona el BTP95</h1>
+            <p class="slide-subtitle">Sistema personalizado con progresión semanal que fomenta hábitos sostenibles de por vida y evita el efecto rebote mediante un abordaje integral de cuatro vectores.</p>
+            
+            <div class="slide-5-layout">
+                <div class="slide-5-left">
+                    <div class="reason-card">
+                        <div class="reason-icon">⚖</div>
+                        <h3 class="reason-title">Personalización 100%</h3>
+                        <p class="reason-text">Cada plan es único, diseñado específicamente según tu metabolismo basal y tu <span class="accent">agenda real</span> de empresario.</p>
+                    </div>
+                    
+                    <div class="reason-card">
+                        <div class="reason-icon">📈</div>
+                        <h3 class="reason-title">Progresión Real</h3>
+                        <p class="reason-text">El programa evoluciona cada semana con el cliente, ajustando intensidades para asegurar un <span class="accent">avance constante.</span></p>
+                    </div>
+                    
+                    <div class="reason-card">
+                        <div class="reason-icon">♾</div>
+                        <h3 class="reason-title">Hábitos de Por Vida</h3>
+                        <p class="reason-text">No buscamos resultados temporales; te enseñamos a comer y entrenar de forma <span class="accent">autónoma</span> para siempre.</p>
+                    </div>
+                    
+                    <div class="reason-card">
+                        <div class="reason-icon">🛡</div>
+                        <h3 class="reason-title">Sin Efecto Rebote</h3>
+                        <p class="reason-text">Abordamos nutrición, entrenamiento, estrés y soporte para garantizar una <span class="accent">transformación definitiva.</span></p>
+                    </div>
+                </div>
+                
+                <div class="slide-5-right">
+                    <div class="chart-container">
+                        <div class="chart-title">Progresión de Rendimiento BTP95</div>
+                        <div class="chart-area">
+                            <svg class="chart-svg" viewBox="0 0 400 250">
+                                <!-- Grid lines -->
+                                <line x1="50" y1="20" x2="50" y2="220" stroke="#e2e8f0" stroke-width="1"/>
+                                <line x1="50" y1="220" x2="380" y2="220" stroke="#e2e8f0" stroke-width="1"/>
+                                
+                                <!-- Y-axis labels -->
+                                <text x="35" y="225" text-anchor="end" fill="#94a3b8" font-size="11">0</text>
+                                <text x="35" y="180" text-anchor="end" fill="#94a3b8" font-size="11">20</text>
+                                <text x="35" y="135" text-anchor="end" fill="#94a3b8" font-size="11">40</text>
+                                <text x="35" y="90" text-anchor="end" fill="#94a3b8" font-size="11">60</text>
+                                <text x="35" y="45" text-anchor="end" fill="#94a3b8" font-size="11">80</text>
+                                <text x="35" y="20" text-anchor="end" fill="#94a3b8" font-size="11">100</text>
+                                <text x="20" y="15" text-anchor="middle" fill="#94a3b8" font-size="11">% Mejora</text>
+                                
+                                <!-- X-axis labels -->
+                                <text x="50" y="240" text-anchor="middle" fill="#94a3b8" font-size="11">Inic</text>
+                                <text x="100" y="240" text-anchor="middle" fill="#94a3b8" font-size="11">S2</text>
+                                <text x="150" y="240" text-anchor="middle" fill="#94a3b8" font-size="11">S4</text>
+                                <text x="200" y="240" text-anchor="middle" fill="#94a3b8" font-size="11">S6</text>
+                                <text x="250" y="240" text-anchor="middle" fill="#94a3b8" font-size="11">S8</text>
+                                <text x="300" y="240" text-anchor="middle" fill="#94a3b8" font-size="11">S10</text>
+                                <text x="350" y="240" text-anchor="middle" fill="#94a3b8" font-size="11">S12</text>
+                                
+                                <!-- Area fill -->
+                                <path d="M 50,220 L 50,210 Q 75,180 100,140 Q 125,100 150,80 Q 175,60 200,50 Q 225,40 250,35 Q 275,30 300,25 Q 325,20 350,15 L 350,220 Z" fill="#f1f5f9" opacity="0.6"/>
+                                
+                                <!-- Line -->
+                                <path d="M 50,210 Q 75,180 100,140 Q 125,100 150,80 Q 175,60 200,50 Q 225,40 250,35 Q 275,30 300,25 Q 325,20 350,15" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/>
+                                
+                                <!-- Data points -->
+                                <circle cx="50" cy="210" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+                                <circle cx="100" cy="140" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+                                <circle cx="150" cy="80" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+                                <circle cx="200" cy="50" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+                                <circle cx="250" cy="35" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+                                <circle cx="300" cy="25" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+                                <circle cx="350" cy="15" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+                                
+                                <!-- Inicio cultura badge -->
+                                <rect x="65" y="125" width="70" height="24" rx="12" fill="#d97706" opacity="0.9"/>
+                                <text x="100" y="141" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Inicio cultura</text>
+                            </svg>
+                        </div>
+                        <div class="chart-caption">Niveles de energía y capacidad cognitiva medibles desde la semana 2.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: TESTIMONIOS REALES -->
+    <div class="slide" id="slide-6">
+        <div class="slide-content slide-6">
+            <h1 class="slide-title">Testimonios Reales</h1>
+            <p class="slide-subtitle">Casos de éxito que incluyen pérdida de peso significativa, ganancia de definición muscular y eliminación de dolores crónicos, mejorando la energía y confianza de los clientes.</p>
+            
+            <div class="slide-6-layout">
+                <div class="slide-6-left">
+                    <div class="before-after-container">
+                        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=350&fit=crop" alt="Transformación física">
+                    </div>
+                    <p class="disclaimer">*Los resultados individuales pueden variar según la adherencia al plan.</p>
+                </div>
+                
+                <div class="slide-6-right">
+                    <div class="testimonial-card">
+                        <div class="testimonial-icon">📈</div>
+                        <div class="testimonial-content">
+                            <div class="testimonial-badge">EMPRESARIO (54 AÑOS)</div>
+                            <h3 class="testimonial-name">Jorge</h3>
+                            <p class="testimonial-text">Perdió 12 kg en 95 días y recuperó la energía necesaria para liderar su empresa con máxima claridad.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-icon">🏋</div>
+                        <div class="testimonial-content">
+                            <div class="testimonial-badge">EJECUTIVO (32 AÑOS)</div>
+                            <h3 class="testimonial-name">Andrés</h3>
+                            <p class="testimonial-text">Logró una definición muscular notable y recuperó la confianza personal que había perdido hace años.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-icon">🛏</div>
+                        <div class="testimonial-content">
+                            <div class="testimonial-badge">DIRECTOR (39 AÑOS)</div>
+                            <h3 class="testimonial-name">Manuel</h3>
+                            <p class="testimonial-text">Eliminó el dolor lumbar crónico que sufría desde hace 5 años y optimizó su calidad de sueño a 7 horas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: TU PRÓXIMO PASO -->
+    <div class="slide" id="slide-7">
+        <div class="slide-content slide-7">
+            <h1 class="slide-title">TU PRÓXIMO PASO</h1>
+            <p class="slide-subtitle">Invitación a agendar una consulta gratuita o acceder a una clase de prueba, con plazas limitadas para iniciar la transformación en 24 horas.</p>
+            
+            <div class="cta-grid">
+                <div class="cta-card">
+                    <div class="cta-header">
+                        <div class="cta-icon">📅</div>
+                        <h3 class="cta-title">Consulta de Claridad</h3>
+                    </div>
+                    <ul class="cta-list">
+                        <li>Sesión 1:1 de 30 minutos sin compromiso.</li>
+                        <li>Evaluación personalizada de tu caso actual.</li>
+                        <li>Hoja de ruta estratégica inmediata.</li>
+                    </ul>
+                    <button class="cta-btn cta-btn-primary">AGENDAR GRATIS HOY</button>
+                </div>
+                
+                <div class="cta-card">
+                    <div class="cta-header">
+                        <div class="cta-icon">🚀</div>
+                        <h3 class="cta-title">Experiencia BTP95</h3>
+                    </div>
+                    <ul class="cta-list">
+                        <li>Primera clase online desde solo $10 USD.</li>
+                        <li>Acceso de prueba a nuestra metodología.</li>
+                        <li>Sin riesgo y con resultados inmediatos.</li>
+                    </ul>
+                    <button class="cta-btn cta-btn-dark">COMENZAR PRUEBA</button>
+                </div>
+            </div>
+            
+            <div class="urgency-bar">
+                <div class="urgency-item">
+                    <div class="urgency-icon">🎗</div>
+                    <div class="urgency-text">
+                        <div class="urgency-label">EXCLUSIVIDAD</div>
+                        <div class="urgency-value">Solo 10 plazas/mes</div>
+                    </div>
+                </div>
+                <div class="urgency-divider"></div>
+                <div class="urgency-item">
+                    <div class="urgency-icon">⚡</div>
+                    <div class="urgency-text">
+                        <div class="urgency-label">VELOCIDAD</div>
+                        <div class="urgency-value">Plan listo en 24 horas</div>
+                    </div>
+                </div>
+                <div class="urgency-divider"></div>
+                <div class="urgency-item">
+                    <div class="urgency-icon">🕐</div>
+                    <div class="urgency-text">
+                        <div class="urgency-label">ESTADO</div>
+                        <div class="urgency-value">Inscripciones Abiertas</div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="final-quote">"Cada mes que esperas es un mes más lejos de tu mejor versión."</p>
+        </div>
+    </div>
+
 </div>
 
 <!-- Navigation -->
 <div class="slide-counter">
-    <span id="current-slide">1</span> / <span id="total-slides">4</span>
+    <span id="current-slide">1</span> / <span id="total-slides">7</span>
 </div>
 
 <div class="nav-buttons">
@@ -796,7 +1400,7 @@
 
 <script>
     let currentSlide = 1;
-    const totalSlides = 4;
+    const totalSlides = 7;
 
     function showSlide(n) {
         const slides = document.querySelectorAll('.slide');
