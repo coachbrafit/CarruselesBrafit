@@ -185,7 +185,7 @@
             letter-spacing: 3px;
         }
 
-        /* ==================== SLIDE -1: CLIENTE IDEAL ==================== */
+        /* ==================== SLIDE 1: CLIENTE IDEAL ==================== */
         .slide-cliente {
             background: #f0eeeb;
         }
@@ -316,7 +316,7 @@
             border-radius: 12px;
         }
 
-        /* ==================== SLIDE -2: 4 PILARES ==================== */
+        /* ==================== SLIDE 2: 4 PILARES ==================== */
         .slide-pilares {
             background: #f0eeeb;
         }
@@ -418,9 +418,433 @@
             font-weight: 700;
         }
 
-        /* ==================== SLIDES 1-7 (ORIGINALES) ==================== */
-        /* SLIDE 1 - PILAR 1 */
-        .slide-1 .slide-subtitle {
+        /* ==================== SLIDE 3: MÉTODOS CONVENCIONALES ==================== */
+        .slide-falla {
+            background: #fff;
+        }
+
+        .slide-falla .slide-content {
+            max-width: 1100px;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .section-label-dot {
+            width: 12px;
+            height: 12px;
+            background: #ea580c;
+            border-radius: 2px;
+        }
+
+        .section-label-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .falla-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 30px;
+        }
+
+        .falla-layout {
+            display: flex;
+            gap: 30px;
+        }
+
+        .falla-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .falla-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .falla-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-left: 4px solid #cbd5e1;
+        }
+
+        .falla-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .falla-card-icon {
+            font-size: 20px;
+        }
+
+        .falla-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .falla-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .falla-list li {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.5;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .falla-list li::before {
+            content: '✕';
+            position: absolute;
+            left: 0;
+            color: #94a3b8;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .falla-list li strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .problema-box {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 28px;
+            color: #fff;
+        }
+
+        .problema-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .problema-icon {
+            font-size: 20px;
+            color: #f97316;
+        }
+
+        .problema-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f97316;
+        }
+
+        .problema-text {
+            font-size: 15px;
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .problema-text .accent {
+            color: #f97316;
+            font-weight: 600;
+        }
+
+        .problema-quote {
+            font-size: 14px;
+            color: #94a3b8;
+            font-style: italic;
+            line-height: 1.5;
+            border-top: 1px solid #334155;
+            padding-top: 14px;
+        }
+
+        /* ==================== SLIDE 4: LA BRECHA ==================== */
+        .slide-brecha {
+            background: #fff;
+        }
+
+        .slide-brecha .slide-content {
+            max-width: 1100px;
+        }
+
+        .brecha-title {
+            font-size: 34px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 30px;
+        }
+
+        .brecha-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .brecha-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .brecha-card.actual {
+            border-top: 4px solid #94a3b8;
+        }
+
+        .brecha-card.necesitas {
+            border: 2px solid #fed7aa;
+            border-top: 4px solid #f97316;
+        }
+
+        .brecha-card.deseado {
+            border-top: 4px solid #f97316;
+        }
+
+        .brecha-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .brecha-card-icon {
+            font-size: 20px;
+        }
+
+        .brecha-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .brecha-card.actual .brecha-card-title {
+            color: #94a3b8;
+        }
+
+        .brecha-card.deseado .brecha-card-title {
+            color: #f97316;
+        }
+
+        .brecha-card.necesitas .brecha-card-title {
+            color: #f97316;
+        }
+
+        .brecha-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .brecha-list li {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.5;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .brecha-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: #94a3b8;
+        }
+
+        .brecha-list.check li::before {
+            content: '✓';
+            color: #f97316;
+            font-weight: 700;
+        }
+
+        .brecha-table {
+            margin-top: 10px;
+        }
+
+        .brecha-table-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .brecha-table-header span {
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .brecha-table-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .brecha-table-row span:first-child {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .brecha-table-row span:last-child {
+            font-size: 13px;
+            color: #f97316;
+            font-weight: 600;
+        }
+
+        .brecha-footer {
+            background: #1e293b;
+            border-radius: 50px;
+            padding: 18px 40px;
+            text-align: center;
+            display: inline-block;
+            margin: 0 auto;
+            display: block;
+            max-width: 600px;
+        }
+
+        .brecha-footer-text {
+            font-size: 18px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .brecha-footer-text .accent {
+            color: #f97316;
+            font-weight: 700;
+        }
+
+        /* ==================== SLIDE 5: RESULTADOS 95 DÍAS ==================== */
+        .slide-resultados {
+            background: #fff;
+        }
+
+        .slide-resultados .slide-content {
+            max-width: 1100px;
+        }
+
+        .resultados-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 30px;
+        }
+
+        .resultados-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .resultado-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-top: 4px solid #f97316;
+        }
+
+        .resultado-icon {
+            width: 48px;
+            height: 48px;
+            background: #fff7ed;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .resultado-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+        }
+
+        .resultado-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .resultado-list li {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.5;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .resultado-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #f97316;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .resultado-list li strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .resultados-footer {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px 32px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .resultados-footer-icon {
+            font-size: 24px;
+            color: #f97316;
+        }
+
+        .resultados-footer-text {
+            font-size: 18px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .resultados-footer-text .accent {
+            color: #f97316;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* ==================== SLIDES 6-9: PILARES DETALLADOS ==================== */
+        /* SLIDE 6 - PILAR 1 */
+        .slide-1-detalle .slide-subtitle {
             color: #3b82f6;
             font-size: 20px;
         }
@@ -492,13 +916,13 @@
             object-fit: cover;
         }
 
-        /* SLIDE 2 - PILAR 2 */
-        .slide-2 .slide-title {
+        /* SLIDE 7 - PILAR 2 */
+        .slide-2-detalle .slide-title {
             position: relative;
             padding-left: 20px;
         }
 
-        .slide-2 .slide-title::before {
+        .slide-2-detalle .slide-title::before {
             content: '';
             position: absolute;
             left: 0;
@@ -509,7 +933,7 @@
             border-radius: 3px;
         }
 
-        .slide-2 .slide-subtitle {
+        .slide-2-detalle .slide-subtitle {
             color: #475569;
         }
 
@@ -573,14 +997,14 @@
             font-weight: 700;
         }
 
-        /* SLIDE 3 - PILAR 3 */
-        .slide-3 .slide-title {
+        /* SLIDE 8 - PILAR 3 */
+        .slide-3-detalle .slide-title {
             position: relative;
             padding-left: 20px;
             font-size: 44px;
         }
 
-        .slide-3 .slide-title::before {
+        .slide-3-detalle .slide-title::before {
             content: '';
             position: absolute;
             left: 0;
@@ -591,7 +1015,7 @@
             border-radius: 3px;
         }
 
-        .slide-3 .slide-subtitle {
+        .slide-3-detalle .slide-subtitle {
             color: #475569;
             font-size: 17px;
         }
@@ -712,14 +1136,14 @@
             letter-spacing: 0.5px;
         }
 
-        /* SLIDE 4 - PILAR 4 */
-        .slide-4 .slide-title {
+        /* SLIDE 9 - PILAR 4 */
+        .slide-4-detalle .slide-title {
             color: #1e3a5f;
             font-size: 52px;
             margin-bottom: 16px;
         }
 
-        .slide-4 .slide-subtitle {
+        .slide-4-detalle .slide-subtitle {
             color: #475569;
             font-size: 17px;
             margin-bottom: 30px;
@@ -826,14 +1250,14 @@
             line-height: 1.6;
         }
 
-        /* SLIDE 5 - POR QUÉ FUNCIONA */
-        .slide-5 .slide-title {
+        /* ==================== SLIDE 10: POR QUÉ FUNCIONA ==================== */
+        .slide-porque .slide-title {
             position: relative;
             padding-left: 20px;
             font-size: 44px;
         }
 
-        .slide-5 .slide-title::before {
+        .slide-porque .slide-title::before {
             content: '';
             position: absolute;
             left: 0;
@@ -844,25 +1268,25 @@
             border-radius: 3px;
         }
 
-        .slide-5 .slide-subtitle {
+        .slide-porque .slide-subtitle {
             color: #475569;
             font-size: 17px;
         }
 
-        .slide-5-layout {
+        .slide-porque-layout {
             display: flex;
             gap: 40px;
             align-items: flex-start;
         }
 
-        .slide-5-left {
+        .slide-porque-left {
             flex: 1;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
-        .slide-5-right {
+        .slide-porque-right {
             flex: 0 0 420px;
             background: #fff;
             border-radius: 16px;
@@ -942,14 +1366,14 @@
             line-height: 1.5;
         }
 
-        /* SLIDE 6 - TESTIMONIOS */
-        .slide-6 .slide-title {
+        /* ==================== SLIDE 11: TESTIMONIOS ==================== */
+        .slide-testimonios .slide-title {
             position: relative;
             padding-left: 20px;
             font-size: 44px;
         }
 
-        .slide-6 .slide-title::before {
+        .slide-testimonios .slide-title::before {
             content: '';
             position: absolute;
             left: 0;
@@ -960,18 +1384,18 @@
             border-radius: 3px;
         }
 
-        .slide-6 .slide-subtitle {
+        .slide-testimonios .slide-subtitle {
             color: #475569;
             font-size: 17px;
         }
 
-        .slide-6-layout {
+        .slide-testimonios-layout {
             display: flex;
             gap: 40px;
             align-items: flex-start;
         }
 
-        .slide-6-left {
+        .slide-testimonios-left {
             flex: 0 0 380px;
         }
 
@@ -995,7 +1419,7 @@
             font-style: italic;
         }
 
-        .slide-6-right {
+        .slide-testimonios-right {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -1056,14 +1480,14 @@
             line-height: 1.5;
         }
 
-        /* SLIDE 7 - CTA FINAL */
-        .slide-7 .slide-title {
+        /* ==================== SLIDE 12: CTA FINAL ==================== */
+        .slide-cta .slide-title {
             position: relative;
             padding-left: 20px;
             font-size: 44px;
         }
 
-        .slide-7 .slide-title::before {
+        .slide-cta .slide-title::before {
             content: '';
             position: absolute;
             left: 0;
@@ -1074,7 +1498,7 @@
             border-radius: 3px;
         }
 
-        .slide-7 .slide-subtitle {
+        .slide-cta .slide-subtitle {
             color: #475569;
             font-size: 17px;
             margin-bottom: 30px;
@@ -1282,21 +1706,21 @@
             .portada-right {
                 display: none;
             }
-            .cliente-grid, .cliente-bottom, .pilares-grid {
+            .cliente-grid, .cliente-bottom, .pilares-grid, .falla-layout, .brecha-grid, .resultados-grid {
                 grid-template-columns: 1fr;
                 flex-direction: column;
             }
-            .slide-1-layout, .slide-3-layout, .slide-4-layout, .slide-5-layout, .slide-6-layout {
+            .slide-1-layout, .slide-3-layout, .slide-4-layout, .slide-porque-layout, .slide-testimonios-layout {
                 flex-direction: column;
             }
-            .slide-1-right, .slide-3-right, .slide-4-right, .slide-5-right, .slide-6-left, .cliente-bottom-right {
+            .slide-1-right, .slide-3-right, .slide-4-right, .slide-porque-right, .slide-testimonios-left, .cliente-bottom-right {
                 flex: none;
                 width: 100%;
             }
             .slide-title {
                 font-size: 32px;
             }
-            .cards-grid-4, .cards-grid-2x2, .mini-cards-grid, .slide-5-left, .cta-grid {
+            .cards-grid-4, .cards-grid-2x2, .mini-cards-grid, .slide-porque-left, .cta-grid {
                 grid-template-columns: 1fr;
             }
             .urgency-bar {
@@ -1448,9 +1872,196 @@
         </div>
     </div>
 
-    <!-- ==================== SLIDE 3: PILAR 1 - ALIMENTACIÓN FLEXIBLE ==================== -->
-    <div class="slide" id="slide-3">
-        <div class="slide-content slide-1">
+    <!-- ==================== SLIDE 3: MÉTODOS CONVENCIONALES ==================== -->
+    <div class="slide slide-falla" id="slide-3">
+        <div class="slide-content">
+            <div class="section-label">
+                <div class="section-label-dot"></div>
+                <div class="section-label-text">BTP95 / METODOLOGÍA</div>
+            </div>
+            
+            <h1 class="falla-title">¿Por Qué Fallan los Métodos Convencionales?</h1>
+            
+            <div class="falla-layout">
+                <div class="falla-left">
+                    <div class="falla-card">
+                        <div class="falla-card-header">
+                            <div class="falla-card-icon">🍎</div>
+                            <h3 class="falla-card-title">Enfoques Genéricos</h3>
+                        </div>
+                        <ul class="falla-list">
+                            <li><strong>Dietas Milagro:</strong> Restricciones extremas que provocan efecto rebote y frustración.</li>
+                            <li><strong>Rutinas Estándar:</strong> Aplicaciones sin progresión real que causan lesiones y agotamiento.</li>
+                            <li><strong>Suplementos:</strong> Inversión en "quemagrasas" sin cambiar los hábitos de base.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="falla-card">
+                        <div class="falla-card-header">
+                            <div class="falla-card-icon">🚫</div>
+                            <h3 class="falla-card-title">Falta de Guía Estructurada</h3>
+                        </div>
+                        <ul class="falla-list">
+                            <li><strong>Influencers Fitness:</strong> Sistemas extremos sin experiencia real ni adaptación al usuario.</li>
+                            <li><strong>Entrenar Solo:</strong> Invertir tiempo sin saber por dónde empezar ni cómo progresar.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="falla-right">
+                    <div class="falla-card">
+                        <div class="falla-card-header">
+                            <div class="falla-card-icon">🏥</div>
+                            <h3 class="falla-card-title">Soluciones Superficiales</h3>
+                        </div>
+                        <ul class="falla-list">
+                            <li><strong>Gimnasios Abandonados:</strong> Falta de un sistema de objetivos y seguimiento externo.</li>
+                            <li><strong>Cirugías Estéticas:</strong> Solución temporal que no ataca la raíz del problema conductual.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="problema-box">
+                        <div class="problema-header">
+                            <div class="problema-icon">⚠</div>
+                            <h3 class="problema-title">El Problema Real</h3>
+                        </div>
+                        <p class="problema-text">Ninguno de estos métodos ataca la raíz: la <span class="accent">falta de personalización</span>, la ausencia de <span class="accent">acompañamiento constante</span> y el descuido del <span class="accent">estilo de vida</span> del empresario ocupado.</p>
+                        <p class="problema-quote">"¿Cuántas de estas soluciones has intentado y por qué crees que no funcionaron?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 4: LA BRECHA ==================== -->
+    <div class="slide slide-brecha" id="slide-4">
+        <div class="slide-content">
+            <div class="section-label">
+                <div class="section-label-dot"></div>
+                <div class="section-label-text">BTP95 / TRANSFORMACIÓN ESTRATÉGICA</div>
+            </div>
+            
+            <h1 class="brecha-title">La Brecha Actual: Dónde Están vs. Dónde Quieren Estar</h1>
+            
+            <div class="brecha-grid">
+                <div class="brecha-card actual">
+                    <div class="brecha-card-header">
+                        <div class="brecha-card-icon">😞</div>
+                        <h3 class="brecha-card-title">Situación Actual</h3>
+                    </div>
+                    <ul class="brecha-list">
+                        <li>Improvisación constante sin plan ni estructura definida.</li>
+                        <li>Entrenamiento dependiente de las emociones del día.</li>
+                        <li>Disciplina limitada e inconsistente por falta de guía.</li>
+                        <li>Ciclo repetitivo de frustración, cansancio y abandono.</li>
+                    </ul>
+                </div>
+                
+                <div class="brecha-card necesitas">
+                    <div class="brecha-card-header">
+                        <div class="brecha-card-icon">🎯</div>
+                        <h3 class="brecha-card-title">Lo que Necesitas</h3>
+                    </div>
+                    <div class="brecha-table">
+                        <div class="brecha-table-header">
+                            <span>LO QUE TIENEN</span>
+                            <span>LO QUE NECESITAN</span>
+                        </div>
+                        <div class="brecha-table-row">
+                            <span>Motivación fugaz</span>
+                            <span>Sistema estructurado</span>
+                        </div>
+                        <div class="brecha-table-row">
+                            <span>Intentos aislados</span>
+                            <span>Rutina con progresión</span>
+                        </div>
+                        <div class="brecha-table-row">
+                            <span>Soledad</span>
+                            <span>Acompañamiento 1 a 1</span>
+                        </div>
+                        <div class="brecha-table-row">
+                            <span>Info genérica</span>
+                            <span>Educación práctica</span>
+                        </div>
+                        <div class="brecha-table-row">
+                            <span>Estancamiento</span>
+                            <span>Resultados semanales</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brecha-card deseado">
+                    <div class="brecha-card-header">
+                        <div class="brecha-card-icon">✅</div>
+                        <h3 class="brecha-card-title">Situación Deseada</h3>
+                    </div>
+                    <ul class="brecha-list check">
+                        <li>Cuerpo en forma, con alta energía y vitalidad diaria.</li>
+                        <li>Hábitos saludables integrados a tu vida empresarial.</li>
+                        <li>Seguridad, confianza y control total de tu salud.</li>
+                        <li>Tiempo de calidad real con familia y amigos.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="brecha-footer">
+                <p class="brecha-footer-text">El Método BTP95 cierra esa brecha <span class="accent">— en solo 95 días.</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 5: RESULTADOS 95 DÍAS ==================== -->
+    <div class="slide slide-resultados" id="slide-5">
+        <div class="slide-content">
+            <div class="section-label">
+                <div class="section-label-dot"></div>
+                <div class="section-label-text">BTP95 / METODOLOGÍA</div>
+            </div>
+            
+            <h1 class="resultados-title">Resultados que Alcanzarás en 95 Días</h1>
+            
+            <div class="resultados-grid">
+                <div class="resultado-card">
+                    <div class="resultado-icon">⚖</div>
+                    <h3 class="resultado-title">Transformación Física</h3>
+                    <ul class="resultado-list">
+                        <li>Pérdida de <strong>10 a 15 kg</strong> en los primeros meses.</li>
+                        <li>Reducción visible de <strong>grasa abdominal</strong> (mes 1).</li>
+                        <li>Eliminación de <strong>molestias físicas</strong> en 8 semanas.</li>
+                    </ul>
+                </div>
+                
+                <div class="resultado-card">
+                    <div class="resultado-icon">⚡</div>
+                    <h3 class="resultado-title">Energía y Enfoque</h3>
+                    <ul class="resultado-list">
+                        <li>Recuperación de <strong>energía vital</strong> desde la semana 2.</li>
+                        <li>Mejora drástica en la <strong>calidad del sueño</strong> y descanso.</li>
+                        <li>Mayor <strong>claridad mental</strong> para la toma de decisiones.</li>
+                    </ul>
+                </div>
+                
+                <div class="resultado-card">
+                    <div class="resultado-icon">🛡</div>
+                    <h3 class="resultado-title">Confianza y Vida</h3>
+                    <ul class="resultado-list">
+                        <li>Recuperación de la <strong>seguridad personal</strong> y autoestima.</li>
+                        <li>Sentirse en <strong>control total</strong> de su salud y disciplina.</li>
+                        <li>Volver a la <strong>talla de ropa</strong> de tu mejor época.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resultados-footer">
+                <div class="resultados-footer-icon">♾</div>
+                <p class="resultados-footer-text">El valor real: construyes <span class="accent">HÁBITOS SOSTENIBLES DE POR VIDA.</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 6: PILAR 1 - ALIMENTACIÓN FLEXIBLE ==================== -->
+    <div class="slide" id="slide-6">
+        <div class="slide-content slide-1-detalle">
             <div class="badge">ALTO RENDIMIENTO</div>
             <div class="slide-1-layout">
                 <div class="slide-1-left">
@@ -1499,9 +2110,9 @@
         </div>
     </div>
 
-    <!-- ==================== SLIDE 4: PILAR 2 - ENTRENAMIENTO INTELIGENTE ==================== -->
-    <div class="slide" id="slide-4">
-        <div class="slide-content slide-2">
+    <!-- ==================== SLIDE 7: PILAR 2 - ENTRENAMIENTO INTELIGENTE ==================== -->
+    <div class="slide" id="slide-7">
+        <div class="slide-content slide-2-detalle">
             <h1 class="slide-title">PILAR 2: ENTRENAMIENTO INTELIGENTE</h1>
             <p class="slide-subtitle">Tres sesiones semanales de 60 minutos combinando fuerza y HIIT, gestionadas mediante la app Harbiz para una progresión real sin horas excesivas en el gimnasio.</p>
             
@@ -1559,9 +2170,9 @@
         </div>
     </div>
 
-    <!-- ==================== SLIDE 5: PILAR 3 - GESTIÓN DEL ESTRÉS ==================== -->
-    <div class="slide" id="slide-5">
-        <div class="slide-content slide-3">
+    <!-- ==================== SLIDE 8: PILAR 3 - GESTIÓN DEL ESTRÉS ==================== -->
+    <div class="slide" id="slide-8">
+        <div class="slide-content slide-3-detalle">
             <h1 class="slide-title">PILAR 3: GESTIÓN DEL ESTRÉS Y RECUPERACIÓN</h1>
             <p class="slide-subtitle">Enfoque en el control del cortisol para optimizar la pérdida de grasa mediante técnicas de sueño, mindfulness y recuperación activa para mejorar el rendimiento.</p>
             
@@ -1621,9 +2232,9 @@
         </div>
     </div>
 
-    <!-- ==================== SLIDE 6: PILAR 4 - ACOMPAÑAMIENTO REAL ==================== -->
-    <div class="slide" id="slide-6">
-        <div class="slide-content slide-4">
+    <!-- ==================== SLIDE 9: PILAR 4 - ACOMPAÑAMIENTO REAL ==================== -->
+    <div class="slide" id="slide-9">
+        <div class="slide-content slide-4-detalle">
             <h1 class="slide-title">PILAR 4: ACOMPAÑAMIENTO REAL</h1>
             <p class="slide-subtitle">Soporte continuo mediante asesorías individuales, sesiones grupales y contacto directo por WhatsApp para asegurar que el cliente nunca se sienta solo en el proceso.</p>
             
@@ -1664,14 +2275,14 @@
         </div>
     </div>
 
-    <!-- ==================== SLIDE 7: POR QUÉ FUNCIONA EL BTP95 ==================== -->
-    <div class="slide" id="slide-7">
-        <div class="slide-content slide-5">
+    <!-- ==================== SLIDE 10: POR QUÉ FUNCIONA EL BTP95 ==================== -->
+    <div class="slide" id="slide-10">
+        <div class="slide-content slide-porque">
             <h1 class="slide-title">Por Qué Funciona el BTP95</h1>
             <p class="slide-subtitle">Sistema personalizado con progresión semanal que fomenta hábitos sostenibles de por vida y evita el efecto rebote mediante un abordaje integral de cuatro vectores.</p>
             
-            <div class="slide-5-layout">
-                <div class="slide-5-left">
+            <div class="slide-porque-layout">
+                <div class="slide-porque-left">
                     <div class="reason-card">
                         <div class="reason-icon">⚖</div>
                         <h3 class="reason-title">Personalización 100%</h3>
@@ -1697,7 +2308,7 @@
                     </div>
                 </div>
                 
-                <div class="slide-5-right">
+                <div class="slide-porque-right">
                     <div class="chart-container">
                         <div class="chart-title">Progresión de Rendimiento BTP95</div>
                         <div class="chart-area">
@@ -1751,21 +2362,21 @@
         </div>
     </div>
 
-    <!-- ==================== SLIDE 8: TESTIMONIOS REALES ==================== -->
-    <div class="slide" id="slide-8">
-        <div class="slide-content slide-6">
+    <!-- ==================== SLIDE 11: TESTIMONIOS REALES ==================== -->
+    <div class="slide" id="slide-11">
+        <div class="slide-content slide-testimonios">
             <h1 class="slide-title">Testimonios Reales</h1>
             <p class="slide-subtitle">Casos de éxito que incluyen pérdida de peso significativa, ganancia de definición muscular y eliminación de dolores crónicos, mejorando la energía y confianza de los clientes.</p>
             
-            <div class="slide-6-layout">
-                <div class="slide-6-left">
+            <div class="slide-testimonios-layout">
+                <div class="slide-testimonios-left">
                     <div class="before-after-container">
                         <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=350&fit=crop" alt="Transformación física">
                     </div>
                     <p class="disclaimer">*Los resultados individuales pueden variar según la adherencia al plan.</p>
                 </div>
                 
-                <div class="slide-6-right">
+                <div class="slide-testimonios-right">
                     <div class="testimonial-card">
                         <div class="testimonial-icon">📈</div>
                         <div class="testimonial-content">
@@ -1797,9 +2408,9 @@
         </div>
     </div>
 
-    <!-- ==================== SLIDE 9: TU PRÓXIMO PASO ==================== -->
-    <div class="slide" id="slide-9">
-        <div class="slide-content slide-7">
+    <!-- ==================== SLIDE 12: TU PRÓXIMO PASO ==================== -->
+    <div class="slide" id="slide-12">
+        <div class="slide-content slide-cta">
             <h1 class="slide-title">TU PRÓXIMO PASO</h1>
             <p class="slide-subtitle">Invitación a agendar una consulta gratuita o acceder a una clase de prueba, con plazas limitadas para iniciar la transformación en 24 horas.</p>
             
@@ -1865,7 +2476,7 @@
 
 <!-- Navigation -->
 <div class="slide-counter">
-    <span id="current-slide">1</span> / <span id="total-slides">10</span>
+    <span id="current-slide">1</span> / <span id="total-slides">13</span>
 </div>
 
 <div class="nav-buttons">
@@ -1875,7 +2486,7 @@
 
 <script>
     let currentSlide = 0;
-    const totalSlides = 10;
+    const totalSlides = 13;
 
     function showSlide(n) {
         const slides = document.querySelectorAll('.slide');
